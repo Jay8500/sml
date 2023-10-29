@@ -1,0 +1,75 @@
+{
+    "apiHostUrl": "http://localhost:2300/",
+    "timer": 120,
+    "usersignin": {
+        "postEndPoint": "sml/smlsignin"
+    },
+    "caders": {
+        "postEndPoint": "sml/post-get-caders"
+    },
+    "smlusers": {
+        "postEndPoint": "sml/smlcreateuser"
+    },
+    "smlgetusers": {
+        "postEndPoint": "sml/smlGetUsers"
+    },
+    "getDash": {
+        "getEndPoint": "sml/get-moduleslist"
+    },
+    "moduleCaderMapping": {
+        "getEndPoint": "sml/get-modules-caders-mapping-list",
+        "postEndPoint": "sml/create-modules-access-permission"
+    },
+    "genders": {
+        "postEndPoint": "sml/create-gender"
+    },
+    "getGenders": {
+        "postEndPoint": "sml/genderlist"
+    },
+    "createTitle": {
+        "postEndPoint": "sml/create-title"
+    },
+    "getTitle": {
+        "postEndPoint": "sml/titlelist"
+    },
+    "createDepartment": {
+        "postEndPoint": "sml/create-department"
+    },
+    "getDepartments": {
+        "postEndPoint": "sml/departmentlist"
+    },
+    "createBranch": {
+        "postEndPoint": "sml/create-branch"
+    },
+    "getBranch": {
+        "postEndPoint": "sml/branchlist"
+    },
+    "createAddress": {
+        "postEndPoint": "sml/create-address-master"
+    },
+    "getCompany": {
+        "postEndPoint": "sml/companylist"
+    },
+    "createCompany": {
+        "postEndPoint": "sml/create-company"
+    },
+    "getUnitslist": {
+        "postEndPoint": "sml/unitslist"
+    },
+    "createUnits": {
+        "postEndPoint": "sml/create-units"
+    },
+    "getTerm": {
+        "postEndPoint": "sml/termlist"
+    },
+    "createTerm": {
+        "postEndPoint": "sml/create-term"
+    },
+    "getMaster": {
+        "postEndPoint": "sml/getMastersList"
+    },
+    "createMaster": {
+        "postEndPoint": "sml/create-master"
+    },
+    "tokenSecretKey": "smlsecret"
+}

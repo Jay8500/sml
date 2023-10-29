@@ -1,0 +1,46 @@
+<div class="grid">
+    <crudgrid [headerName]="'Manage Branches'" [masterApiKey]="'caders'" [cols]="caderCols"
+        (isEnabled)="isEnabled($event)"></crudgrid>
+</div>
+
+<p-dialog [(visible)]="isClicked" [style]="{ width: '50rem',height : '50rem' }" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-divider align="center">
+            <span class="p-tag p-1">Create Branch</span>
+        </p-divider>
+        <div class="flex flex-colum align-items-center justify-content-center">
+            <div class="m-3">
+                <div class="field">
+                    <label for="firstname2">Branch Name</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.master_name"
+                        class="text-base text-color surface-overlay p-2
+                     border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
+                    <label for="firstname2">Description</label>
+                    <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="createMaster.description"></textarea>
+                </div>
+                <div class="field">
+
+                    <input type="checkbox" name="master" id="1" [(ngModel)]="createMaster.active" [disabled]="true">
+                    <label for="lastname2" class="ml-2">Active</label>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="flex align-items-center justify-content-center m-2 ">
+            <div class="p-1">
+                <button pButton pRipple icon="pi pi-times" label="Cancel" class="w-10rem p-1  text-xl"
+                    styleClass="p-button-rounded " (click)="hideDialog()"></button>
+            </div>
+
+            <div class="p-1">
+                <button pButton pRipple label="Save" icon="pi pi-check" class="w-10rem p-1  text-xl"
+                    styleClass="p-button-rounded " (click)="saveProduct()"></button>
+            </div>
+
+        </div>
+    </ng-template>
+</p-dialog>

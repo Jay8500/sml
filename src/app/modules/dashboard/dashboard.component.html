@@ -1,0 +1,40 @@
+<div class="layout-wrapper surface-100" #p>
+    <app-header></app-header>
+    <div class="layout-sidebar">
+        <ul class="layout-menu">
+
+            <ng-container *ngFor="let item of model; let mi = index;">
+                <li class="cursor-pointer text-bluegray-400">
+                    {{ item.label }}
+                    <ul *ngFor="let child of item.items; let ci = index" class="ml-1" routerLink="{{child.routerLink}}">
+                        <li class="cursor-pointer text-blue-700 " (click)="toggle(mi,ci)">
+
+                            <!-- <p-chip> -->
+
+                            <!-- </p-chip> -->
+
+                            <span for="" class="m-1">
+                                <!-- <span class="w-1 font-bold text-center">{{ child.code }}</span> -->
+                                {{
+                                child.label
+                                }}
+                            </span>
+                            <i *ngIf="child.isToggle" class="pi pi-angle-right ml-1"></i>
+                        </li>
+                    </ul>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    <div class="layout-main-container">
+        <div class="layout-menu">
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+        </div>
+
+    </div>
+    <!-- <div class="layout-mask"></div> -->
+</div>
+
+
+<blockui [showBlockui]="blocUI" [target]="'p'"></blockui>

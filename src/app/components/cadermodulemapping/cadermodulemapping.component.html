@@ -1,0 +1,91 @@
+<div class=" flex align-items-center surface-100
+ justify-content-center overflow-hidden mt-1">
+    <div class="flex flex-column align-items-center justify-content-center ">
+        <div class="text-900 text-1s font-bold justify-content-start">
+            Create Module Access Permission to Caders
+
+        </div>
+
+        <div style="border-radius:6px;
+             padding:0.3rem; 
+             ">
+            <!-- <div class="w-50rem surface-card py-4 px2 sm:px-8" style="border-radius:20px"> -->
+            <table>
+                <thead>
+                    <th style="width: 150rem; text-align: center;">Modules</th>
+                    <th style="width: 400rem;text-align: center;">Caders</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let md of caderMpngMdles; let mdIn=index;">
+                        <td style="width: 150rem;">
+                            <ul style="list-style-type: none;">
+                                <li class="cursor-pointer text-bluegray-400">
+                                    <input type="checkbox" name="{{mdIn}}" id="{{mdIn}}" [(ngModel)]="md['isParent']"
+                                        (change)="onParentModuleClick($event,mdIn)"> {{md.mdname}}
+
+                                    <ul style="list-style-type: none;">
+                                        <li *ngFor="let mdc of md.mdchild;let mdcIn=index;"
+                                            class="cursor-pointer text-blue-700 ">
+                                            <input type="checkbox" name="{{mdIn}}" id="{{mdIn}}"
+                                                (change)="onChildModuleClick($event,mdIn,mdcIn)"
+                                                [(ngModel)]="mdc['isChild']">
+                                            <span class="text">
+                                                {{mdc.mdname}}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                        <td style="width: 400rem;">
+                            <ul class="formgroup-inline m-1">
+                                <li class="field-checkbox" *ngFor="let caders of md.getCaders;let cdIn=index">
+                                    <input type="checkbox"  name="checkbox-{{md}}-{{cdIn}}"
+                                        [(ngModel)]="caders['isCdCkd']">
+                                    <label [pTooltip]="caders['cdname']"
+                                        class="border-round border-orange-500 surface-overlay w-2.1rem h-1rem m-1 p-1 font-bold flex align-items-center justify-content-center">
+                                        {{caders['code']}}
+                                    </label>
+                                </li>
+
+                            </ul>
+                            <!-- <ul style="list-style-type: none;" class="formgroup-inline">
+                                    <li class="field-checkbox" *ngFor="let caders of getCaders;let cdIn=index">
+                                        <input type="checkbox" name="{{cdIn}}" id="{{cdIn}}" checked>
+                                        <span [pTooltip]="caders['cdname']" class="text-base m-1">
+                                            {{caders['code']}}
+                                        </span>
+                                    </li>
+                                </ul> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="formgroup-inline">
+    <div class="field-checkbox">
+        <input type="checkbox" id="city3"></input>
+        <label for="city3">Chicago</label>
+    </div>
+    <div class="field-checkbox">
+        <input type="checkbox" id="city4"></input>
+        <label for="city4">Los Angeles</label>
+    </div>
+</div> -->
+<!-- background: linear-gradient(8000deg, var(--primary-color) 10%, rgba(97, 100, 102, 0) 30%); -->
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+<p-toast></p-toast>

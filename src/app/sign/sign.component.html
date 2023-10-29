@@ -1,0 +1,59 @@
+<div class="surface-ground flex align-items-center surface-100 ld:justify-content-center
+ md:justify-content-end min-h-screen min-w-screen p-input-filled overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center md:p-3 ">
+        <div style="border-radius:10px;
+             padding:0.4rem; 
+             background: linear-gradient(50deg, var(--primary-color) 0%, rgba(133, 184, 218, 0) 20%);">
+            <div class="w-25rem surface-card py-3 px-5 sm:px-8" style="border-radius:76px">
+                <div class="text-center mb-3">
+                    <img src="assets/layout/images/sml" alt="Sakai logo" class=" w-6rem flex-shrink-0" height="50">
+                    <div class="text-blue-500 text-3xl font-bold mb-4">
+                        {{ comptSettings.cmpnyName}}
+
+                    </div>
+                    <span class="text-600 font-semibold text-blue-400">Sign in to continue</span>
+                </div>
+                <div class="flex flex-column align-items-center">
+                    <div class="m-2">
+                        <label for="email1" class="block text-900 text-xl font-medium mb-1">Employee ID</label>
+                        <input id="email1" type="text" placeholder="Enter Employee ID" pInputText p
+                            [(ngModel)]="siginJson.uname" class="w-20rem md:w-20rem h-1rem" style="padding:1rem ">
+
+                        <small *ngIf="isValidUname" class="text-red-600" id="username-help">
+                            {{errorMessages.uname}}
+                        </small>
+                    </div>
+
+                    <div class="m-2">
+                        <label for="password1" class="block text-900 font-medium text-xl mb-1">Password</label>
+                        <input id="email2" type="password" placeholder="Enter Password" pInputText
+                            [(ngModel)]="siginJson.password" class="w-20rem md:w-20rem h-1rem" style="padding:1rem ">
+                        <small *ngIf="isValidPwd" class="text-red-600" id="username-help">{{
+                            errorMessages.pwd
+                            }}
+                        </small>
+                    </div>
+                    <div class="m-2" *ngIf="false">
+                        <div class="flex align-items-center justify-content-between mt-1 gap-2">
+                            <div class="flex align-items-center">
+                                <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2" [disabled]="true"
+                                    [(ngModel)]="checked"></p-checkbox>
+                                <label for="rememberme1">Remember me</label>
+                            </div>
+                            <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                                routerLink="/sml-request-on-forgot-passowrd" style="color: var(--primary-color)">Forgot
+                                password?</a>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <button pButton pRipple label="Sign In" class="w-20rem p-1 mt-4  text-xl" [loading]="loading"
+                            styleClass="p-button-rounded " (click)="signUpClick()"></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>
