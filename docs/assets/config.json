@@ -1,5 +1,5 @@
 {
-    "apiHostUrl": "http://localhost:2300/",
+    "apiHostUrl": "http://smlservices.onrender.com/",
     "timer": 120,
     "usersignin": {
         "postEndPoint": "sml/smlsignin"
