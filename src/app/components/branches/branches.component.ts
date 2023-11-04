@@ -8,22 +8,30 @@ import { Component } from '@angular/core';
 export class BranchesComponent {
   public caderCols: any = [
     {
-      header: 'Name',
-      style: 'width:30rem',
-      showSort: true,
-      field: 'cdname'
+      "header": 'Name',
+      "style": { "width": '30rem' },
+      "showSort": true,
+      "field": 'cdname'
     },
     {
-      header: 'Code',
-      style: 'width:30rem',
-      showSort: true,
-      field: 'code'
+      "header": 'Code',
+      "style": { "width": '30rem' },
+      "showSort": true,
+      "field": 'code'
     },
     {
-      header: 'Status',
-      style: 'width:30rem',
-      showSort: false,
-      field: 'cdname'
+      "header": 'Status',
+      "style": { "width": '10rem' },
+      "showSort": false,
+      "field": 'active',
+      "color": [
+        {
+          "width": '10rem', "color": '#FF0000'
+        },
+        {
+          "width": '10rem', "color": '#00FF00'
+        }
+      ],
     },
   ]
   public isClicked = false;

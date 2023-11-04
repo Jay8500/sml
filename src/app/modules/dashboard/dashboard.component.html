@@ -1,7 +1,16 @@
-<div class="layout-wrapper surface-100" #p>
-    <app-header></app-header>
-    <div class="layout-sidebar">
-        <ul class="layout-menu">
+<div class="layout-wrapper surface-300" #p>
+    <app-header (sideBarClicks)="sidebarClick($event)"></app-header>
+    <div class="layout-main-container">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- <app-footer></app-footer> -->
+</div>
+
+<blockui [showBlockui]="blocUI" [target]="'p'"></blockui>
+
+<p-sidebar [(visible)]="sidebarVisible" styleClass="w-15rem" [showCloseIcon]="false">
+    <div class="flex flex-column align-items-center m-4">
+        <ul>
 
             <ng-container *ngFor="let item of model; let mi = index;">
                 <li class="cursor-pointer text-bluegray-400">
@@ -26,15 +35,4 @@
             </ng-container>
         </ul>
     </div>
-    <div class="layout-main-container">
-        <div class="layout-menu">
-            <router-outlet></router-outlet>
-            <app-footer></app-footer>
-        </div>
-
-    </div>
-    <!-- <div class="layout-mask"></div> -->
-</div>
-
-
-<blockui [showBlockui]="blocUI" [target]="'p'"></blockui>
+</p-sidebar>

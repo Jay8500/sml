@@ -1,7 +1,7 @@
-<div class="grid">
-    <crudgrid [headerName]="'Manage Masters'" [masterApiKey]="'getMaster'" [cols]="caderCols"
-        (isEnabled)="isEnabled($event)" [onlyGenderProps]="onlyGenderProps"></crudgrid>
-</div>
+<!-- <div class="grid"> -->
+<crudgrid [headerName]="'Manage Masters'" [masterApiKey]="'getMaster'" [cols]="caderCols"
+    (isEnabled)="isEnabled($event)" [onlyGenderProps]="onlyGenderProps"></crudgrid>
+<!-- </div> -->
 
 <p-dialog [(visible)]="isClicked" [style]="{ width: '50rem',height : '50rem' }" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">

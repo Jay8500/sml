@@ -1,4 +1,5 @@
-<p-blockUI [target]="target" [blocked]="showBlockui" [baseZIndex]="11" [autoZIndex]="true">
-    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="10" fill="var(--surface-ground)" *ngIf="showBlockui"
-        animationDuration=".5s"></p-progressSpinner>
+<p-blockUI [target]="target" [blocked]="showBlockui" [baseZIndex]="9999999" [autoZIndex]="true">
+    <div class="card w-10rem h-2rem text-center text-primary">
+        ...Please Wait
+    </div>
 </p-blockUI>

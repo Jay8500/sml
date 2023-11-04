@@ -48,26 +48,34 @@ export class CreatemoduleComponent {
   public caderCols: any = [
     {
       header: 'Name',
-      style: 'width:6rem',
+      style: { width: '10rem' },
       showSort: true,
       field: 'submdname'
     },
     {
       header: 'Code',
-      style: 'width:2rem',
+      style: { width: '10rem' },
       showSort: true,
       field: 'code'
     },
     {
       header: 'Link',
-      style: 'width:2rem',
+      style: { width: '10rem' },
       showSort: true,
       field: 'routerLink'
     },
     {
       header: 'Status',
-      style: 'width:2rem',
+      style: { width: '10rem' },
       showSort: false,
+      color: [
+        {
+          width: '10rem', color: '#FF0000'
+        },
+        {
+          width: '10rem', color: '#00FF00'
+        }
+      ],
       field: 'active'
     }
   ];

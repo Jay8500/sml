@@ -39,13 +39,13 @@ export class UsersComponent implements OnInit {
   public userCols: any = [
     {
       header: 'Name',
-      style: 'width:30rem',
+      style: { 'width': '30rem' },
       showSort: true,
       field: 'uname'
     },
     {
       header: 'Cader',
-      style: 'width:30rem',
+      style: { 'width': '30rem' },
       showSort: true,
       field: 'cader'
     },
@@ -53,7 +53,15 @@ export class UsersComponent implements OnInit {
       header: 'Status',
       style: 'width:30rem',
       showSort: false,
-      field: 'active'
+      field: 'active',
+      "color": [
+        {
+          "width": '10rem', "color": '#FF0000'
+        },
+        {
+          "width": '10rem', "color": '#00FF00'
+        }
+      ],
     },
   ]
   public isClicked = false;

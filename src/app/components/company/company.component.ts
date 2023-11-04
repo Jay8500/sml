@@ -27,33 +27,41 @@ export class CompanyComponent {
   public caderCols: any = [
     {
       header: 'Name',
-      style: 'width:30rem',
+      style: { "width": '10rem' },
       showSort: true,
       field: 'cname'
     },
     {
       header: 'Code',
-      style: 'width:30rem',
+      style: { "width": '10rem' },
       showSort: true,
       field: 'ccode'
     },
     {
       header: 'Address',
-      style: 'width:30rem',
+      style: { "width": '10rem' },
       showSort: false,
       field: 'cadress'
     },
     {
       header: 'Description',
-      style: 'width:30rem',
+      style: { "width": '10rem' },
       showSort: false,
       field: 'decs'
     },
     {
       header: 'Status',
-      style: 'width:30rem',
+      style: { "width": '10rem' },
       showSort: false,
-      field: 'active'
+      field: 'active',
+      "color": [
+        {
+          "width": '10rem', "color": '#FF0000'
+        },
+        {
+          "width": '10rem', "color": '#00FF00'
+        }
+      ],
     },
   ]
   public isClicked = false;

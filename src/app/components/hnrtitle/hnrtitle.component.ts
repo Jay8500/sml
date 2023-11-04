@@ -24,21 +24,29 @@ export class HnrtitleComponent {
   public caderCols: any = [
     {
       header: 'Name',
-      style: 'width:30rem',
+      style: { 'width': '30rem' },
       showSort: true,
       field: 'name'
     },
     {
       header: 'Code',
-      style: 'width:30rem',
+      style: { 'width': '30rem' },
       showSort: true,
       field: 'code'
     },
     {
       header: 'Status',
-      style: 'width:30rem',
+      style: { 'width': '30rem' },
       showSort: false,
-      field: 'active'
+      field: 'active',
+      "color": [
+        {
+          "width": '10rem', "color": '#FF0000'
+        },
+        {
+          "width": '10rem', "color": '#00FF00'
+        }
+      ],
     },
   ];
 

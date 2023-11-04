@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   model: any = [];
   public blocUI = true;
+  public sidebarVisible = false;
   public _service = inject(ServicesService);
   private destroy$: Subject<void> = new Subject<void>();
   public myModels: any;
@@ -107,4 +108,8 @@ export class DashboardComponent implements OnInit {
     this.model[mi]['items'][ci]['isToggle'] = !this.model[mi]['items'][ci]['isToggle']
   }
 
+
+  sidebarClick(event: boolean) {
+    this.sidebarVisible = true
+  }
 }

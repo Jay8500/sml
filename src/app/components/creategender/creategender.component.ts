@@ -24,7 +24,7 @@ export class CreategenderComponent {
   public genderCols: any = [
     {
       header: 'Name',
-      style: 'width:30rem',
+      style: { 'width': '30rem' },
       showSort: true,
       field: 'gname'
     },
@@ -32,37 +32,15 @@ export class CreategenderComponent {
       header: 'Status',
       style: 'width:30rem',
       showSort: false,
-      field: 'active'
-    },
-    {
-      header: 'Created Date',
-      style: 'width:30rem',
-      showSort: false,
-      field: 'create_dt'
-    },
-    {
-      header: 'Modify By',
-      style: 'width:30rem',
-      showSort: false,
-      field: 'modify_by'
-    },
-    {
-      header: 'Modify Date',
-      style: 'width:30rem',
-      showSort: false,
-      field: 'modify_dt'
-    },
-    {
-      header: 'DB CODE',
-      style: 'width:30rem',
-      showSort: false,
-      field: '__v'
-    },
-    {
-      header: 'DB ID',
-      style: 'width:30rem',
-      showSort: false,
-      field: '_id'
+      field: 'active',
+      "color": [
+        {
+          "width": '10rem', "color": '#FF0000'
+        },
+        {
+          "width": '10rem', "color": '#00FF00'
+        }
+      ],
     },
   ];
 

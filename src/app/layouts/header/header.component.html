@@ -1,43 +1,61 @@
-<div class="layout-topbar">
-    <a class="layout-topbar-logo">
-        <span class="font-semibold text-blue-500 text-1xl">{{companyName}}</span>
-    </a>
-    <div #topbarmenu class="layout-topbar-menu">
-        <div class="text-xs font-semibold w-1.2rem ">
-            <span class="mt-1 mr-1 ">
-                Signed In <br>
-                {{userInfo['loggedInTime']}}
-            </span>
-        </div>
-        <div class="cursor-pointer" (click)="op.toggle($event)">
-            <div class="border-left-3 border-primary-500">
-                <div class="m-1 p-1 text-blue-800 font-bold  border border-round border-yellow-400">
-                    Mr. {{userInfo['uname'] | uppercase}}
+<div class="grid layout-topbar">
+    <div class="col-12">
+        <div class="grid">
+            <div class="col-2">
+                <div class="text-left ml-1 mt-2">
+                    <i class="pi pi-bars cursor-pointer ml-1" (click)="onBarClick()"></i>
+                </div>
+
+            </div>
+            <div class="col-8">
+                <div class="text-center font-bold text-blue-500  mt-2">
+                    {{companyName}}
+                </div>
+            </div>
+            <div class="col-2" (click)="op.show($event, targetEl)">
+                <div class="mt-2 ml-4">
+                    <i class="pi pi-user cursor-pointer" #targetEl></i>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- 
+pTooltip="{{userInfo['uname'] | uppercase}}"
+tooltipPosition="left" -->
 
-<p-overlayPanel #op [style]="{'width': '13rem'}" [showCloseIcon]="false">
+<!-- [style]="{'width': '11rem', 'margin':'12px'}" -->
+
+<p-overlayPanel #op [showCloseIcon]="false" [style]="{'margin':'10px'}">
     <ng-template pTemplate="content">
         <div class="flex flex-column m-2 pb-0">
-            <div class="card m-1 cursor-pointer" style="background-color: orange;">
-                <div class="p-3">
-                    <span [pTooltip]="userInfo['cader']"
-                        class="font-bold m-1 flex align-items-center justify-content-center"
-                        style="min-width: 1rem; min-height: 1rem">{{userInfo['caderCode'] }}
-                    </span>
+            <div class="card m-1 cursor-pointer shadow-7">
+                <div class="text-center font-bold uppercase">
+                    Mr. {{userInfo['uname']}}
+                </div>
+                <div class="text-center text-yellow-600">
+                    {{userInfo['cader']}}
+                    <!-- {{userInfo['caderCode']
+                    }} -->
+                    <!-- <div class="border-circle" style="background-color: orange;"> -->
+                    <!-- <span [pTooltip]="userInfo['cader']"
+                        class="font-bold m-1 flex align-items-center justify-content-center">{{userInfo['caderCode']
+                        }}
+                    </span> -->
+                    <!-- </div> -->
                 </div>
             </div>
-            <!-- <div class="card m-1 cursor-pointer" style="background-color: orange;">
-                <div class="p-3">
-                    <span [pTooltip]="userInfo['cader']"
-                        class="font-bold m-1 flex align-items-center justify-content-center"
-                        style="min-width: 1rem; min-height: 1rem">{{userInfo['caderCode'] }}
-                    </span>
-                </div>
-            </div> -->
+
+            <!-- <div class="card m-1 cursor-pointer"> -->
+            <div class="p-1 w-full text-center">
+                <!-- <div class="font-light "> -->
+                Signed In <br>
+                {{userInfo['loggedInTime']}}
+                <!-- </div> -->
+            </div>
+
+            <!-- </div> -->
+
             <div class="card m-1 cursor-pointer">
                 <div class="p-3">
                     <i class="pi pi-cog mr-2"></i> Settings

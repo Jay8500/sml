@@ -52,24 +52,30 @@ export class CrudgridviewComponent implements OnInit {
   }
 
   gridData() {
-    this._service.postApi(this.masterApiKey, 'postEndPoint', null)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          if (data['S_CODE'] == 200) {
-            this.products = [];
-            data['DATA'].forEach((pros: any, prdIn: number) => {
-              let getObjects = { ...this.onlyGenderProps, ...pros };
-              this.products.push(getObjects);
-            });
-          };
-        },
-        error: (err) => {
-          this.blocUI = false;
-          // this.myModels = [];
-          // console.log('error')
-        }
-      });
+    try {
+      this._service.postApi(this.masterApiKey, 'postEndPoint', null)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (data) => {
+            if (data['S_CODE'] == 200) {
+              this.products = [];
+              data['DATA'].forEach((pros: any, prdIn: number) => {
+                pros.active = pros.active == true ? 'Active' : 'Inactive';
+                let getObjects = { ...this.onlyGenderProps, ...pros };
+                this.products.push(getObjects);
+              });
+            };
+          },
+          error: (err) => {
+            this.blocUI = false;
+            // this.myModels = [];
+            // console.log('error')
+          }
+        });
+    } catch (e) {
+
+    }
+
 
   }
 
