@@ -1,5 +1,5 @@
 {
-    "apiHostUrl": "http://localhost:2300/",
+    "apiHostUrl": "https://smlservices.onrender.com/",
     "timer": 120,
     "usersignin": {
         "postEndPoint": "sml/smlsignin"
@@ -70,6 +70,12 @@
     },
     "createMaster": {
         "postEndPoint": "sml/create-master"
+    },
+    "createBorrowers": {
+        "postEndPoint": "sml/create-borrower"
+    },
+    "getBorrowers": {
+        "postEndPoint": "sml/borrowerlist"
     },
     "tokenSecretKey": "smlsecret"
 }
