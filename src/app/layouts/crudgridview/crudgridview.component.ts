@@ -59,11 +59,12 @@ export class CrudgridviewComponent implements OnInit {
           next: (data) => {
             if (data['S_CODE'] == 200) {
               this.products = [];
-              data['DATA'].forEach((pros: any, prdIn: number) => {
+              data['DATA'].forEach(async (pros: any, prdIn: number) => {
                 pros.active = pros.active == true ? 'Active' : 'Inactive';
                 let getObjects = { ...this.onlyGenderProps, ...pros };
                 this.products.push(getObjects);
               });
+              // console.log(this.products)
             };
           },
           error: (err) => {
@@ -75,9 +76,8 @@ export class CrudgridviewComponent implements OnInit {
     } catch (e) {
 
     }
-
-
   }
+
 
   openNew() {
     this.product = {};

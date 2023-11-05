@@ -28,6 +28,7 @@ import { BadgeModule } from 'primeng/badge';
 import { ChipModule } from 'primeng/chip';
 import { SidebarModule } from 'primeng/sidebar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { HeaderComponent } from 'src/app/layouts/header/header.component';
 import { SidebarComponent } from 'src/app/layouts/sidebar/sidebar.component';
@@ -73,7 +74,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     BadgeModule,
     ChipModule,
     SidebarModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    KeyFilterModule
   ],
   exports: [
     ButtonModule,
@@ -109,7 +111,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ChipModule,
     SidebarModule,
     FormsModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    KeyFilterModule
   ]
 })
 export class SharedModule { }

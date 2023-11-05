@@ -12,19 +12,19 @@ export class DepartmentsComponent implements OnInit {
   public caderCols: any = [
     {
       header: 'Name',
-      style: { 'width': '30rem' },
+      style: { 'width': '10rem' },
       showSort: true,
       field: 'cdname'
     },
     {
       header: 'Code',
-      style: { 'width': '30rem' },
+      style: { 'width': '10rem' },
       showSort: true,
       field: 'code'
     },
     {
       header: 'Status',
-      style: { 'width': '30rem' },
+      style: { 'width': '10rem' },
       showSort: false,
       field: 'cdname',
       "color": [

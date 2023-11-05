@@ -118,11 +118,11 @@ export class CreatemoduleComponent {
           }
         },
         error: (err) => {
-          console.log('error', err);
+          // console.log('error', err);
           this.loading = false;
         }
       });
-
+      this.loading = false;
 
   }
 }

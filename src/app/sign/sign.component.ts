@@ -78,7 +78,7 @@ export class SignComponent implements OnInit, OnDestroy {
             }
           },
           error: (err) => {
-            console.log('error', err);
+            // console.log('error', err);
             this.loading = false;
           }
         });

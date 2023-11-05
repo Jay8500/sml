@@ -1,29 +1,32 @@
-<button pButton pRipple label="Create" class="p-button-primary p-1 m-2" (click)="openNew()"></button>
-<!-- [tableStyle]="{ 'min-height' : '30rem'}" -->
-<div *ngIf="products.length > 0" #t>
-    <p-table [value]="products" [columns]="cols" [paginator]="true" [rows]="products.length"
-        [showCurrentPageReport]="false" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-striped " scrollHeight="flex"
-        [tableStyle]="{'min-width': '55rem','min-height': '22rem'}">
-        <ng-template pTemplate="caption">
-            <div class="flex  justify-content-center p-1">
-                {{ headerName}}
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th class="text-left p-1" *ngFor="let col of cols; let colIn=index;" [pSortableColumn]="col.field">
-                    {{col.header}}
-                    <p-sortIcon *ngIf="col.showSort" [field]="col.field"></p-sortIcon>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex" let-columns="columns">
-            <tr>
-                <td class="m-1" *ngFor="let col of columns;let colIn=index" [ngStyle]="columns[colIn]['field'] == 'active' ? (product[col.field] == 'Active' ? columns[colIn]['color'][1] : columns[colIn]['color'][0]) 
+<button pButton pRipple label="Create" class="p-button-primary m-1" (click)="openNew()"></button>
+<div class="grid">
+    <div class="col-12">
+        <div *ngIf="products.length > 0" #t>
+            <p-table [value]="products" [columns]="cols" [paginator]="true" [rows]="products.length"
+                [showCurrentPageReport]="false"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-striped "
+                [tableStyle]="{'min-width': '45rem','min-height': '30rem'}" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="caption">
+                    <div class="flex  justify-content-center p-1">
+                        {{ headerName}}
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-left p-1" *ngFor="let col of cols; let colIn=index;"
+                            [pSortableColumn]="col.field">
+                            {{col.header}}
+                            <p-sortIcon *ngIf="col.showSort" [field]="col.field"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex" let-columns="columns">
+                    <tr>
+                        <td class="m-1" *ngFor="let col of columns;let colIn=index" [ngStyle]="columns[colIn]['field'] == 'active' ? (product[col.field] == 'Active' ? columns[colIn]['color'][1] : columns[colIn]['color'][0]) 
                    :  columns[colIn]['style'] ">
-                    {{product[col.field]}}
-                    <!-- <p-cellEditor>
+                            {{product[col.field]}}
+                            <!-- <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="product[col.field]" required>
                         </ng-template>
@@ -31,8 +34,8 @@
                             {{product[col.field]}}
                         </ng-template>
                     </p-cellEditor> -->
-                </td>
-                <!-- 
+                        </td>
+                        <!-- 
             <td>
                 <div class="flex align-items-center justify-content-center gap-2">
                     <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
@@ -45,8 +48,8 @@
                         class="p-button-rounded p-button-text p-button-danger"></button>
                 </div>
             </td> -->
-            </tr>
-            <!-- <tr [pEditableRow]="product">
+                    </tr>
+                    <!-- <tr [pEditableRow]="product">
             <td>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
@@ -92,9 +95,11 @@
                 </div>
             </td>
         </tr> -->
-        </ng-template>
+                </ng-template>
 
-    </p-table>
+            </p-table>
+        </div>
+    </div>
 </div>
 
 <blockui [showBlockui]="blocUI" [target]="'t'"></blockui>

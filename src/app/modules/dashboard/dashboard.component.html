@@ -1,14 +1,18 @@
-<div class="layout-wrapper surface-300" #p>
+<div class="layout-wrapper" #p>
     <app-header (sideBarClicks)="sidebarClick($event)"></app-header>
-    <div class="layout-main-container">
-        <router-outlet></router-outlet>
+    <div class="layout-main-container shadow-7">
+        <!-- <div class="grid">
+            <div class="col-12"> -->
+                <router-outlet></router-outlet>
+            <!-- </div>
+        </div> -->
     </div>
-    <!-- <app-footer></app-footer> -->
+    <app-footer></app-footer>
 </div>
 
 <blockui [showBlockui]="blocUI" [target]="'p'"></blockui>
 
-<p-sidebar [(visible)]="sidebarVisible" styleClass="w-15rem" [showCloseIcon]="false">
+<p-sidebar [(visible)]="sidebarVisible" styleClass="w-17rem" [showCloseIcon]="false">
     <div class="flex flex-column align-items-center m-4">
         <ul>
 

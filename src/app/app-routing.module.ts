@@ -89,6 +89,34 @@ const routes: Routes = [
             loadChildren: () => import('src/app/components/company/company.module').then(m => m.CompanyModule),
           },
           {
+            path: 'sgt',
+            loadChildren: () => import('src/app/components/sgt/sgt.module').then(m => m.SgtModule),
+          },
+          {
+            path: 'gl',
+            loadChildren: () => import('src/app/components/gl/gl.module').then(m => m.GlModule),
+          },
+          {
+            path: 'rcpostings',
+            loadChildren: () => import('src/app/components/rcpostings/rcpostings.module').then(m => m.RcpostingsModule),
+          },
+          {
+            path: 'mappingstaffs',
+            loadChildren: () => import('src/app/components/mstaffs/mstaffs.module').then(m => m.MstaffsModule),
+          },
+          {
+            path: 'mn',
+            loadChildren: () => import('src/app/components/mclients/mclients.module').then(m => m.MclientsModule),
+          },
+          {
+            path: 'ssmb',
+            loadChildren: () => import('src/app/components/searchstaffborrowers/searchstaffborrowers.module').then(m => m.SearchstaffborrowersModule),
+          },
+          {
+            path: 'cdepartment',
+            loadChildren: () => import('src/app/components/cdeps/cdeps.module').then(m => m.CdepsModule),
+          },
+          {
             path: "**",
             redirectTo: "sml-signin",
             pathMatch: 'full'

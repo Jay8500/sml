@@ -1,9 +1,10 @@
 <div class="grid" #g>
-    <crudgrid [headerName]="'Manage Users'" [masterApiKey]="'smlgetusers'" [cols]="userCols" [onlyGenderProps]="onlyGenderProps"
-        (isEnabled)="isEnabled($event)"></crudgrid>
+    <crudgrid [headerName]="'Manage Users'" [masterApiKey]="'smlgetusers'" [cols]="userCols"
+        [onlyGenderProps]="onlyGenderProps" (isEnabled)="isEnabled($event)"></crudgrid>
 </div>
 
-<p-dialog [(visible)]="isClicked" appendTo="'body" [baseZIndex]="999999" [style]="{ width: '50rem',height : '30rem' }" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="isClicked" [modal]="true" styleClass="p-fluid" [breakpoints]="{ '960px': '75vw' }"
+    [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <ng-template pTemplate="content">
         <p-divider align="center">
             <span class="p-tag p-1">Create User</span>
@@ -33,6 +34,11 @@
                         styleClass="h-2.2rem w-full"></p-dropdown>
                 </div>
                 <div class="field">
+                    <label for="firstname2">Department</label>
+                    <p-dropdown [options]="departments" [(ngModel)]="createMaster.dep_id"
+                        styleClass="h-2.2rem w-full"></p-dropdown>
+                </div>
+                <div class="field">
                     <label for="firstname2">Description</label>
                     <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="createMaster.description"></textarea>
                 </div>
@@ -48,15 +54,11 @@
     <ng-template pTemplate="footer">
         <div class="flex align-items-center justify-content-center m-2 ">
             <div class="p-1">
-                <button pButton pRipple icon="pi pi-times" label="Cancel" class="w-10rem p-1  text-xl"
-                    styleClass="p-button-rounded " (click)="hideDialog()"></button>
+                <button pButton pRipple label="Cancel" class="p-button-info p-1 m-2" (click)="hideDialog()"></button>
             </div>
-
             <div class="p-1">
-                <button pButton pRipple label="Save" icon="pi pi-check" class="w-10rem p-1  text-xl" [loading]="loading"
-                    styleClass="p-button-rounded " (click)="saveProduct()"></button>
+                <button pButton pRipple label="Save" class="p-button-primary p-1 m-2" (click)="saveProduct()"></button>
             </div>
-
         </div>
     </ng-template>
 </p-dialog>

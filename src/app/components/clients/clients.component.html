@@ -1,9 +1,10 @@
 <div class="grid">
-    <crudgrid [headerName]="'Manage Clients'" [masterApiKey]="'caders'" [cols]="caderCols"
+    <crudgrid [headerName]="'Manage Borrowers'" [masterApiKey]="'getBorrowers'" [cols]="caderCols"
         (isEnabled)="isEnabled($event)"></crudgrid>
 </div>
 
-<p-dialog [(visible)]="isClicked" [style]="{ width: '50rem',height : '50rem' }" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="isClicked" [modal]="true" styleClass="p-fluid" [breakpoints]="{ '960px': '75vw' }"
+    [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <ng-template pTemplate="content">
         <p-divider align="center">
             <span class="p-tag p-1">Create Client</span>
@@ -12,7 +13,20 @@
             <div class="m-3">
                 <div class="field">
                     <label for="firstname2">Name</label>
-                    <input id="firstname2" type="text" [(ngModel)]="createMaster.master_name"
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.name"
+                        class="text-base text-color surface-overlay p-2
+                     border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
+                    <label for="firstname2">Aadhar</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.aadhar" maxlength="12"
+                        [pKeyFilter]="'num'"
+                        class="text-base text-color surface-overlay p-2
+                     border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
+                    <label for="firstname2">Code</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.ccode" maxlength="10"
                         class="text-base text-color surface-overlay p-2
                      border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
                 </div>
@@ -22,9 +36,36 @@
                         styleClass="h-2.2rem w-full"></p-dropdown>
                 </div>
                 <div class="field">
+                    <label for="firstname2">District</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.district"
+                        class="text-base text-color surface-overlay p-2
+                 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
+                    <label for="firstname2">State</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.state"
+                        class="text-base text-color surface-overlay p-2
+                 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
+                    <label for="firstname2">Pincode</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.pincode" [pKeyFilter]="'num'"
+                        maxlength="6"
+                        class="text-base text-color surface-overlay p-2
+                 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
+                    <label for="firstname2">Contact No.</label>
+                    <input id="firstname2" type="text" [(ngModel)]="createMaster.contact_no" maxlength="10"
+                        [pKeyFilter]="'num'"
+                        class="text-base text-color surface-overlay p-2
+                 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+                <div class="field">
                     <label for="firstname2">Description</label>
                     <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="createMaster.description"></textarea>
                 </div>
+
                 <div class="field">
 
                     <input type="checkbox" name="master" id="1" [(ngModel)]="createMaster.active" [disabled]="true">
@@ -33,19 +74,16 @@
             </div>
         </div>
     </ng-template>
-
     <ng-template pTemplate="footer">
         <div class="flex align-items-center justify-content-center m-2 ">
             <div class="p-1">
-                <button pButton pRipple icon="pi pi-times" label="Cancel" class="w-10rem p-1  text-xl"
-                    styleClass="p-button-rounded " (click)="hideDialog()"></button>
+                <button pButton pRipple label="Cancel" class="p-button-info p-1 m-2" (click)="hideDialog()"></button>
             </div>
-
             <div class="p-1">
-                <button pButton pRipple label="Save" icon="pi pi-check" class="w-10rem p-1  text-xl"
-                    styleClass="p-button-rounded " (click)="saveProduct()"></button>
+                <button pButton pRipple label="Save" class="p-button-primary p-1 m-2" (click)="saveProduct()"></button>
             </div>
-
         </div>
     </ng-template>
 </p-dialog>
+
+<p-toast position="center"></p-toast>

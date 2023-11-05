@@ -17,6 +17,9 @@ export class UsersComponent implements OnInit {
     cader
       :
       null,
+    department
+      :
+      null,
     create_by
       :
       null,
@@ -39,19 +42,25 @@ export class UsersComponent implements OnInit {
   public userCols: any = [
     {
       header: 'Name',
-      style: { 'width': '30rem' },
+      style: { 'width': '10rem' },
       showSort: true,
       field: 'uname'
     },
     {
       header: 'Cader',
-      style: { 'width': '30rem' },
+      style: { 'width': '10rem' },
       showSort: true,
       field: 'cader'
     },
     {
+      header: 'Department',
+      style: { 'width': '10rem' },
+      showSort: true,
+      field: 'department'
+    },
+    {
       header: 'Status',
-      style: 'width:30rem',
+      style: 'width:10rem',
       showSort: false,
       field: 'active',
       "color": [
@@ -71,6 +80,7 @@ export class UsersComponent implements OnInit {
     description: "",
     branch_id: null,
     cader_id: null,
+    dep_id: null,
     active: true
   };
   public branches = [
@@ -82,6 +92,12 @@ export class UsersComponent implements OnInit {
   public caders = [
     {
       label: "Select Caders",
+      value: null
+    }
+  ];
+  public departments = [
+    {
+      label: "Select Department",
       value: null
     }
   ];
@@ -137,6 +153,7 @@ export class UsersComponent implements OnInit {
     savePayload['uname'] = this.createMaster.master_name;
     savePayload['password'] = this.createMaster.password;
     savePayload['cader'] = this.createMaster.cader_id;
+    savePayload['department'] = this.createMaster.dep_id;
 
     delete savePayload.master_name;
     delete savePayload.branch_id;

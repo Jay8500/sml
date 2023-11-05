@@ -20,6 +20,6 @@ export class EmployeeregistrationComponent implements OnInit {
   }
 
   onUpload(event:any) {
-    console.log("test",event)
+    // console.log("test",event)
   }
 }
