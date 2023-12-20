@@ -98,7 +98,7 @@ export class ServicesService {
     let appendPath: string = "";
     switch (ctlPath) {
       case "DASH":
-        appendPath = (this._configClone['isBuild'] == 'Y' ? '/home/sml-dashboard' : '/home/sml-dashboard');
+        appendPath = (this._configClone['isBuild'] == 'Y' ? 'sml/home/sml-dashboard' : 'sml/home/sml-dashboard');
         break;
       case "REDIRECTLOGIN":
         appendPath = (this._configClone['isBuild'] == 'Y' ? '/sml-signin' : '/sml-signin');
