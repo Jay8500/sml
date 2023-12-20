@@ -94,20 +94,19 @@ export class ServicesService {
     return getUserInfo;
   }
 
-  method(){
+  method() {
     console.log("hello")
   }
-  
+
   setPreRoutes(ctlPath: string) {
     let appendPath: string = "";;
     let appednded;
     switch (ctlPath) {
       case "DASH": // new change of routes
-
-        appendPath = (this._configClone['isBuild'] == 'Y' ? '/home/sml-dashboard' :  '/home/sml-dashboard');
+        appendPath = (this._configClone['isBuild'] == 'N' ? '/home/sml-dashboard' : '/sml/home/sml-dashboard');
         break;
       case "REDIRECTLOGIN":
-        appendPath = (this._configClone['isBuild'] == 'Y' ? '/sml/sml-signin' : '/sml-signin');
+        appendPath = (this._configClone['isBuild'] == 'N' ? '/sml-signin' : '/sml/sml-signin');
         break;
 
     }
