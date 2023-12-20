@@ -1,0 +1,421 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between flex-wrap">
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    Branches List
+                </div>
+                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
+                    <!-- 2 -->
+                </div>
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
+                        (click)="onClick(null,'NEW')"></button>
+                </div>
+            </div>
+
+
+            <p-table #dt1 [value]="crudGrid" dataKey="dataKey" [rows]="10" [loading]="loading" [rowHover]="true"
+                styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+                <!-- <ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template> -->
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width: 5rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Action
+                                <!-- <p-columnFilter type="text" field="name" display="menu"
+                                    placeholder="Search by name"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <th style="min-width: 20rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Company
+                                <p-columnFilter type="text" field="cname" display="menu"
+                                    placeholder="Search by company"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 20rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Branch
+                                <p-columnFilter type="text" field="bname" display="menu"
+                                    placeholder="Search by branch"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Branch Code
+                                <p-columnFilter type="text" field="bcode" display="menu"
+                                    placeholder="Search by branch code"></p-columnFilter>
+                            </div>
+                        </th>
+                      
+
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Branch Opened On
+                                <p-columnFilter type="text" field="b_opn_dt" display="menu"
+                                    placeholder="Search by branch Opening on"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 10rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Contact No.
+                                <p-columnFilter type="text" field="contact_no" display="menu"
+                                    placeholder="Search by contact no."></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 9rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Country
+                                <p-columnFilter type="text" field="countryname" display="menu"
+                                    placeholder="Search by country"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                State
+                                <p-columnFilter type="text" field="state" display="menu"
+                                    placeholder="Search by state"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                City
+                                <p-columnFilter type="text" field="cityname" display="menu"
+                                    placeholder="Search by city"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 10rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Pincode
+                                <p-columnFilter type="text" field="pincode" display="menu"
+                                    placeholder="Search by pincode"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Description
+                                <!-- <p-columnFilter type="text" field="country.name" display="menu"
+                                    placeholder="Search by country"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <!-- <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Created By
+                                <p-columnFilter type="text" field="create_by" display="menu"
+                                    placeholder="Search by create by"></p-columnFilter>
+                            </div>
+                        </th> -->
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Status
+                                <p-columnFilter type="text" field="active" display="menu"
+                                    placeholder="Search by Status"></p-columnFilter>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td>
+                            <div class="flex justify-content-center flex-wrap">
+                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
+                                    <i class="pi pi-eye"></i>
+                                </div>
+                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'EDIT')">
+                                    <i class="pi pi-file-edit"></i>
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            {{customer.cname}}
+                        </td>
+
+                        <td>
+                            {{customer.bname}}
+                        </td>
+                        <td>
+                            {{customer.bcode}}
+                        </td>
+
+                        <td>
+                            {{customer.b_opn_dt}}
+                        </td>
+                        <td>
+                            {{customer.contact_no}}
+                        </td>
+                        <td>
+                            {{customer.countryname}}
+                        </td>
+                        <td>
+                            {{customer.state}}
+                        </td>
+
+                        <td>
+                            {{customer.cityname}}
+                        </td>
+                        <td>
+                            {{customer.pincode}}
+                        </td>
+                        <td>
+                            {{customer.desc}}
+                        </td>
+                        <!-- <td>
+                            {{customer.create_by}}
+                        </td> -->
+                        <td>
+
+                            <span *ngIf="customer.active == true"
+                                [class]="'customer-badge status-qualified'">Active</span>
+                            <span *ngIf="customer.active == false"
+                                [class]="'customer-badge status-unqualified'">Inactive</span>
+
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="13">No Branches found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="13">Loading Branches data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+
+<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"
+    [closeOnEscape]="isCloseOnEscape">
+    <div class="grid">
+        <div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
+            <div class="card  p-fluid">
+                <div class="grid">
+                    <h5>Create Borrower </h5>
+
+                    <!-- <div class="col-12">
+                   <label htmlFor="name1">Country/ State/ City</label>
+                   <div class="w-5">
+                       
+                       <p-cascadeSelect [(ngModel)]="selectedCity" [options]="countries" optionLabel="cname" optionGroupLabel="name" [optionGroupChildren]="['states', 'cities']" [style]="{ minWidth: '14rem' }" placeholder="Select a City"></p-cascadeSelect>
+                       <small>Country/ State/ City is required.</small>
+                   </div>
+                   
+               </div> -->
+                    <div class="col-12">
+                        <label for="firstname2">Company</label>
+                        <p-dropdown [options]="companyList" [(ngModel)]="createMaster.cId" optionLabel="label"
+                            optionValue="value" (onChange)="onCompanies($event)" [filter]="true"
+                            [disabled]="mode=='VIEW' "></p-dropdown>
+                        <small *ngIf="errorMessages.cId != ''">{{ errorMessages.cId}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label for="firstname2">Branch Name</label>
+                        <input id="firstname2" type="text" [(ngModel)]="createMaster.bname" [disabled]="mode=='VIEW'"
+                            pInputText class="ng-invalid ng-dirty" (blur)="generateCode(createMaster)">
+                        <small *ngIf="errorMessages.bname != ''">{{ errorMessages.bname}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="name1">Branch Code</label>
+                        <input id="firstname2" type="text" pInputText [disabled]="true"
+                            [(ngModel)]="createMaster.bcode">
+                        <!-- 
+                        <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                            [(ngModel)]="createMaster.contact_no" class="p-2"> -->
+                        <!-- <small *ngIf="errorMessages.contact_no != ''">{{ errorMessages.contact_no}}</small> -->
+                        <!-- <small>Enter your username to reset your password.</small> -->
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="name1">Contact No.</label>
+                        <p-inputNumber [(ngModel)]="createMaster.contact_no" mode="decimal" inputId="withoutgrouping"
+                            [disabled]="mode=='VIEW'" class="ng-invalid ng-dirty" [maxlength]="10"
+                            [useGrouping]="false"> </p-inputNumber>
+                        <!-- 
+                        <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                            [(ngModel)]="createMaster.contact_no" class="p-2"> -->
+                        <small *ngIf="errorMessages.contact_no != ''">{{ errorMessages.contact_no}}</small>
+                    </div>
+                    <div>
+                        <label for="firstname2">Branch Opened On.</label>
+                        <p-inputMask mask="99/99/9999" [(ngModel)]="createMaster.b_opn_dt" [disabled]="mode=='VIEW'"
+                            class="ng-invalid ng-dirty" placeholder="01/11/2023"></p-inputMask>
+                        <small *ngIf="errorMessages.b_opn_dt != ''">{{ errorMessages.b_opn_dt}}</small>
+                    </div>
+                    <div class="col-6">
+                        <label htmlFor="state">Country / State/ City</label>
+                        <p-cascadeSelect [(ngModel)]="createMaster.city" [options]="addressList" [optionLabel]="'cname'"
+                            [disabled]="mode=='VIEW'" [optionGroupLabel]="'name'"
+                            [optionGroupChildren]="['states', 'cities']" class="ng-invalid ng-dirty"
+                            placeholder="Select a City" [style]="{ minWidth: '14rem' }"
+                            placeholder="Select a City"></p-cascadeSelect>
+                        <small *ngIf="errorMessages.city != ''">{{ errorMessages.city}}</small>
+
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="state">Pincode</label>
+                        <p-inputNumber [(ngModel)]="createMaster.pincode" mode="decimal" inputId="withoutgrouping"
+                            [disabled]="mode=='VIEW'" class="ng-invalid ng-dirty" [maxlength]="6" [useGrouping]="false">
+                        </p-inputNumber>
+
+                        <!-- <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                            [(ngModel)]="createMaster.pincode" class="p-2"> -->
+                        <small *ngIf="errorMessages.pincode != ''">{{ errorMessages.pincode}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="state">Description </label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.desc"></textarea>
+                        <!-- <small>Loan amount is required.</small> -->
+                    </div>
+
+                    <div class="col-12">
+                        <input type="checkbox" name="master" id="1" [(ngModel)]="createMaster.active"
+                            [disabled]="mode=='VIEW' || mode == 'NEW'">
+                        <label for="lastname2" class="ml-2">Active</label>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="grid">
+                            <div class="col-6">
+                                <button pButton [disabled]="mode=='VIEW'" pRipple label="Clear" (click)="hideDialog()"
+                                    class="p-button-outlined"></button>
+
+                            </div>
+                            <div class="col-6">
+                                <button pButton pRipple label="Submit" [disabled]="mode=='VIEW'" (click)="saveProduct()"
+                                    [loading]="submitloading" class="p-button-success"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 		
+           <div class="card p-fluid">
+               <h5>Vertical Grid</h5>
+               <div class="p-formgrid grid">
+                   <div class="field col">
+                       <label htmlFor="name2">Name</label>
+                       <input pInputText id="name2" type="text" />
+                   </div>
+                   <div class="field col">
+                       <label htmlFor="email2">Email</label>
+                       <input pInputText id="email2" type="text" />
+                   </div>
+                   <div class="field col">
+                       <label htmlFor="name2">Name</label>
+                       <input pInputText id="name2" type="text" />
+                   </div>
+                   <div class="field col">
+                       <label htmlFor="email2">Email</label>
+                       <input pInputText id="email2" type="text" />
+                   </div>
+               </div>
+           </div> -->
+            <!-- </div> -->
+
+            <!-- <div class="col-12 md:col-6"> -->
+            <!-- <div class="card p-fluid">
+               <h5>Horizontal</h5>
+               <div class="field grid">
+                   <label htmlFor="name3" class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+                   <div class="col-12 md:col-10">
+                       <input pInputText id="name3" type="text" />
+                   </div>
+               </div>
+               <div class="field grid">
+                   <label htmlFor="email3" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
+                   <div class="col-12 md:col-10">
+                       <input pInputText id="email3" type="text" />
+                   </div>
+               </div>
+           </div> -->
+
+            <!-- <div class="card">
+               <h5>Inline</h5>
+               <div class="formgroup-inline">
+                   <div class="field">
+                       <label htmlFor="firstname1" class="p-sr-only">Firstname</label>
+                       <input pInputText id="firstname1" type="text" placeholder="Firstname" />
+                   </div>
+                   <div class="field">
+                       <label htmlFor="lastname1" class="p-sr-only">Lastname</label>
+                       <input pInputText id="lastname1" type="text" placeholder="Lastname" />
+                   </div>
+                   <button pButton label="Submit"></button>
+               </div>
+           </div> -->
+
+            <!-- <div class="card">
+               <h5>Help Text</h5>
+               <div class="field p-fluid">
+                   <label htmlFor="username">Username</label>
+                   <input pInputText id="username" type="text" />
+                   <small>Enter your username to reset your password.</small>
+               </div>
+           </div> -->
+            <!-- </div>  -->
+
+            <!-- <div class="col-12">
+           <div class="card">
+               <h5>Advanced</h5>
+               <div class="p-fluid p-formgrid grid">
+                   <div class="field col-12 md:col-6">
+                       <label htmlFor="firstname2">Firstname</label>
+                       <input pInputText id="firstname2" type="text" />
+                   </div>
+                   <div class="field col-12 md:col-6">
+                       <label htmlFor="lastname2">Lastname</label>
+                       <input pInputText id="lastname2" type="text" />
+                   </div>
+                   <div class="field col-12">
+                       <label htmlFor="address">Address</label>
+                       <input pInputTextarea id="address" rows="4" />
+                   </div>
+                   <div class="field col-12 md:col-6">
+                       <label htmlFor="city">City</label>
+                       <input pInputText id="city" type="text" />
+                   </div>
+                   <div class="field col-12 md:col-3">
+                       <label htmlFor="state">State</label>
+                       <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+                   </div>
+    
+                   <div class="field col-12 md:col-3">
+                       <label htmlFor="zip">Zip</label>
+                       <input pInputText id="zip" type="text" />
+                   </div>
+               </div>
+           </div>
+       </div> -->
+        </div>
+    </div>
+
+</p-sidebar>
+
+
+
+
+<style>
+    :host ::ng-deep .p-cascadeselect-items {
+        max-height: 100px;
+        overflow: auto;
+    }
+</style>
+
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+    (onClose)="onMessageClose()"></p-toast>

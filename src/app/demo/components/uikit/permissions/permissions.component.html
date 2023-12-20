@@ -1,0 +1,97 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between flex-wrap">
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    Alter Permissions
+                </div>
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <!-- <p-dropdown [options]="genderList" [(ngModel)]="createMaster.branch_id" [filter]="true"
+                        class="ng-invalid ng-dirty" (onChange)="onBranchChange($event)"></p-dropdown> -->
+                    <!-- <div *ngIf="[null,undefined,''].includes(createMaster.branch_id)">
+                        <small class="text-red-600" id="username-help">
+                            Branch is required
+                        </small>
+                    </div> -->
+                </div>
+                <!-- *ngIf="![undefined,null,''].includes(this.createMaster.branch_id)" -->
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="" [disabled]="showSubmit"
+                        [loading]="loading" styleClass="p-button-rounded " (click)="saveProduct()"></button>
+                </div>
+            </div>
+
+            <!-- <div class="card flex justify-content-center"> -->
+
+            <p-accordion [multiple]="false">
+                <p-accordionTab header="Module Access">
+                    <div class="main_crt_mstrs">
+                        <div class="crt_mstrs" *ngFor="let team of permissionJSON;">
+
+                            <div class="crt_mstrs_pstn text-xl">
+                                {{team.cader}}
+                            </div>
+
+                            <ul class="crt_mstrs_lst" style="list-style-type: none; margin: 0;">
+                                <li *ngFor="let user of team['modules']; let userId=index;" class="p-2">
+                                    {{user['name']}}
+
+                                    <div class="field-radiobutton m-1">
+                                        <p-radioButton name="city" value="Y" [(ngModel)]="user.isCanDo" id="city1"
+                                            [disabled]="team.code == 'AD'" (onClick)="onPermissionClick($event,user)">
+                                        </p-radioButton>
+                                        <label for="city1" class="mr-1">Yes</label>
+
+                                        <p-radioButton name="city" value="N" [(ngModel)]="user.isCanDo" id="city2"
+                                            [disabled]="team.code == 'AD'" (onClick)="onPermissionClick($event,user)">
+                                        </p-radioButton>
+                                        <label for="city2">No</label>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+
+
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+    (onClose)="onMessageClose()"></p-toast>
+
+<style>
+    .main_crt_mstrs {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .crt_mstrs {
+        border-radius: 3px;
+        position: relative;
+        padding-top: 5px;
+        font-weight: bold;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    .crt_mstrs_pstn {
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background-color: #fff;
+        padding: 0 5px;
+        color: #033fa0;
+    }
+
+    .crt_mstrs_lst {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+</style>
