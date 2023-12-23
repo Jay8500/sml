@@ -28,6 +28,7 @@ export class TeamComponent implements OnInit {
   constructor() { }
   async ngOnInit() {
     this.showSubmit = true;
+    this.loading = false;
     this._service.postApi('getBranch', 'postEndPoint', {})
       .pipe(takeUntil(this.destroy$))
       .subscribe({

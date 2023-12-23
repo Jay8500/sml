@@ -279,44 +279,45 @@ export class BranchComponent {
           // console.log('error')
         }
       });
-    this._service.postApi('getCompany', 'postEndPoint', { "filter": 'Drop' })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
-          if (data['S_CODE'] == 200) {
-            this.companyList = [{
-              label: "Select Company",
-              value: null,
-              branchCount: 0
-            }];
-            data['DATA'].forEach((prodcuts: any, prdIn: number) => {
-              let products = {
-                label
-                  :
-                  prodcuts.cname,
-                value
-                  :
-                  prodcuts.id,
-                branchCount: prodcuts.branchCount
-              };
-              this.companyList.push(products)
-            });
-          };
-        },
-        error: (err) => {
-          // this.blocUI = false;
-          // this.myModels = [];
-          // console.log('error')
-        }
-      });
     this.gridData();
   }
-
 
   gridData() {
     try {
       this.loading = true;
+
+      this._service.postApi('getCompany', 'postEndPoint', { "filter": 'Drop' })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (data) => {
+            data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+            if (data['S_CODE'] == 200) {
+              this.companyList = [{
+                label: "Select Company",
+                value: null,
+                branchCount: 0
+              }];
+              data['DATA'].forEach((prodcuts: any, prdIn: number) => {
+                let products = {
+                  label
+                    :
+                    prodcuts.cname,
+                  value
+                    :
+                    prodcuts.id,
+                  branchCount: prodcuts.branchCount
+                };
+                this.companyList.push(products)
+              });
+            };
+          },
+          error: (err) => {
+            // this.blocUI = false;
+            // this.myModels = [];
+            // console.log('error')
+          }
+        });
+
       let cader = this._service.getUserInfo('userCader');
 
       if (cader['code'] == 'DA') {
@@ -582,6 +583,7 @@ export class BranchComponent {
       this.isShowSidebarClose = true;
       this.gridData();
       this.hideDialog();
+      // this.ngOnInit();
     }
   }
 
