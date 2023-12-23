@@ -1,11 +1,11 @@
 {
-    "apiHostUrl": "http://localhost:2300/",
+    "apiHostUrl": "https://nodeservice-mx3q.onrender.com/",
     "apiHostUrllocal": "http://localhost:2300/",
     "apiHostUrlServerlocal": "https://nodeservice-mx3q.onrender.com/",
     "nodePortNumber": 2300,
     "autoCode": 3,
     "timer": 120,
-    "isBuild": "N",
+    "isBuild": "Y",
     "isCrypto": "N",
     "fileUploadSize": "1024mb",
     "usersignin": {
