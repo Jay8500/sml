@@ -14,6 +14,7 @@ import { ServicesService } from 'src/app/services.service';
 })
 export class AppTopBarComponent implements OnInit {
     @Input() companyName: string = "SML";
+    @Input() branchName: string = "";
 
     items!: MenuItem[];
 
@@ -26,8 +27,6 @@ export class AppTopBarComponent implements OnInit {
     constructor(public layoutService: LayoutService) { }
 
     @Output() sideBarClicks = new EventEmitter();
-
-    @Input() branchName: string = "SML";
     @Input() sidebarVisible: boolean = false;
     public service = inject(ServicesService);
     public datePipe = inject(DatePipe)

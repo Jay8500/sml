@@ -15,7 +15,7 @@
 			</div>
 
 
-			<p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="5" [loading]="false" [rowHover]="true"
+			<p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
 				styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="true"
 				responsiveLayout="scroll">
 				<ng-template pTemplate="header">
@@ -26,6 +26,7 @@
 
 							</div>
 						</th>
+
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
 								Approval Status
@@ -35,12 +36,11 @@
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								Borrower Name
-								<p-columnFilter type="text" field="borrower" display="menu"
-									placeholder="Search by name"></p-columnFilter>
+								SMT CODE
+								<p-columnFilter type="text" field="smtcode" display="menu"
+									placeholder="Search by SML CODE"></p-columnFilter>
 							</div>
 						</th>
-
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
 								Branch
@@ -48,23 +48,23 @@
 									placeholder="Search by Branches"></p-columnFilter>
 							</div>
 						</th>
-						<th style="min-width: 12rem">
+						<th style="min-width: 22rem">
 							<div class="flex justify-content-between align-items-center">
-								SML CODE
-								<p-columnFilter type="text" field="smtcode" display="menu"
-									placeholder="Search by SML CODE"></p-columnFilter>
+								Borrower Name
+								<p-columnFilter type="text" field="borrower" display="menu"
+									placeholder="Search by name"></p-columnFilter>
 							</div>
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								House type
+								House Type
 								<p-columnFilter type="text" field="housetypeName" display="menu"
 									placeholder="Search by House type"></p-columnFilter>
 							</div>
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								Product type
+								Product Type
 								<p-columnFilter type="text" field="prodtypeName" display="menu"
 									placeholder="Search by Product type"></p-columnFilter>
 							</div>
@@ -78,21 +78,21 @@
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								Loan amount
+								Loan Amount
 								<p-columnFilter type="text" field="loanamount" display="menu"
 									placeholder="Search by Loan amount"></p-columnFilter>
 							</div>
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								Loan schedule
+								Repay Mode
 								<p-columnFilter type="text" field="country.name" display="menu"
 									placeholder="Search by Loan loanscheduleName"></p-columnFilter>
 							</div>
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								Loan tenure
+								Loan Tenure
 								<p-columnFilter type="text" field="tenureName" display="menu"
 									placeholder="Search by Loan tenure "></p-columnFilter>
 							</div>
@@ -106,7 +106,7 @@
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
-								Account no
+								Account No
 								<p-columnFilter type="text" field="accountno" display="menu"
 									placeholder="Search by Account no"></p-columnFilter>
 							</div>
@@ -197,16 +197,16 @@
 							<span *ngIf="customer.approvalstatus == 'R'"
 								[class]="'order-badge order-cancelled'">Reject</span>
 						</td>
-
-						<td>
-							{{customer.borrower}}
-						</td>
-						<td>
-							{{customer.branch}}
-						</td>
 						<td>
 							{{customer.smtcode}}
 						</td>
+						<td>
+							{{customer.branchName}}
+						</td>
+						<td>
+							{{customer.borrower}}
+						</td>
+
 						<td>
 							{{customer.housetypeName}}
 						</td>
@@ -217,7 +217,8 @@
 							{{customer.depositName}}
 						</td>
 						<td>
-							{{customer.loanamount}}
+							{{customer.loanAmountName}}
+							<!-- {{customer.loanamount}} -->
 						</td>
 						<td>
 							{{customer.loanscheduleName}}
@@ -300,15 +301,12 @@
 							{{ errorMessages.borrowername}}
 						</small>
 					</div>
-					<div class="col-12">
+					<!-- <div class="col-12">
 						<label htmlFor="state">Branches</label>
 						<p-dropdown [options]="branches" [(ngModel)]="createMaster.branch" placeholder="Select Branches"
 							[disabled]="true" optionLabel="label" optionValue="value" [filter]="true"></p-dropdown>
-						<!-- class="ng-invalid ng-dirty" -->
-						<!-- <small *ngIf="createMaster.branch != ''">
-							Borrower is required.
-						</small> -->
-					</div>
+					
+					</div> -->
 					<div class="col-12">
 						<label htmlFor="state">SML CODE </label>
 						<input pInputText id="age1" type="text" [disabled]="true" [(ngModel)]="createMaster.smtcode" />
@@ -335,18 +333,22 @@
 						<small *ngIf="errorMessages.deposit != ''">{{ errorMessages.deposit}}</small>
 					</div>
 					<div class="col-12">
-						<label htmlFor="state">Loan amount </label>
-						<p-inputNumber [(ngModel)]="createMaster.loanamount" mode="decimal" inputId="withoutgrouping"
+						<label htmlFor="state">Loan Amount </label>
+						<p-dropdown [options]="loanAmountList" [(ngModel)]="createMaster.loanamount" optionLabel="label"
+							optionValue="value" class="ng-invalid ng-dirty" [filter]="true"
+							placeholder="Select Loan Amount" [disabled]="mode=='VIEW' "></p-dropdown>
+
+						<!-- <p-inputNumber [(ngModel)]="createMaster.loanamount" mode="decimal" inputId="withoutgrouping"
 							class="ng-invalid ng-dirty" [disabled]="mode=='VIEW'" class="ng-invalid ng-dirty"
-							[maxlength]="20" [useGrouping]="false"> </p-inputNumber>
+							[maxlength]="20" [useGrouping]="false"> </p-inputNumber> -->
 
 						<small *ngIf="errorMessages.loanamount != ''">{{ errorMessages.loanamount}}</small>
 					</div>
 					<div class="col-12">
-						<label htmlFor="state">Loan schedule </label>
+						<label htmlFor="state">Repay Mode </label>
 						<p-dropdown [options]="loanShedule" [(ngModel)]="createMaster.loanschedule" optionLabel="label"
 							optionValue="value" class="ng-invalid ng-dirty" [filter]="true"
-							placeholder="Select Loan Schedule" [disabled]="mode=='VIEW' "></p-dropdown>
+							placeholder="Select Repay Mode" [disabled]="mode=='VIEW' "></p-dropdown>
 						<small *ngIf="errorMessages.loanschedule != ''">{{ errorMessages.loanschedule}}</small>
 					</div>
 					<div class="col-12">
@@ -358,61 +360,66 @@
 					</div>
 					<div class="col-12">
 						<label htmlFor="age1">Bank</label>
-						<input pInputText id="age1" type="text" [(ngModel)]="createMaster.bankname"
-							class="ng-invalid ng-dirty" />
+						<input pInputText id="age1" type="text" [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.bankname" class="ng-invalid ng-dirty" />
 						<small *ngIf="errorMessages.bankname != ''">{{ errorMessages.bankname}}</small>
 					</div>
 					<div class="col-12">
 						<label htmlFor="age1">Account no</label>
-						<input pInputText id="age1" type="text" [(ngModel)]="createMaster.accountno" [maxLength]="18"
-							class="ng-invalid ng-dirty" />
+						<input pInputText id="age1" type="text" [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.accountno" [maxLength]="18" class="ng-invalid ng-dirty" />
 						<small *ngIf="errorMessages.accountno != ''">{{ errorMessages.accountno}}</small>
 					</div>
 					<div class="col-12">
 						<label htmlFor="age1">Bank Account Name</label>
-						<input pInputText id="age1" type="text" [(ngModel)]="createMaster.accountname"
-							class="ng-invalid ng-dirty" />
+						<input pInputText id="age1" type="text" [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.accountname" class="ng-invalid ng-dirty" />
 						<small *ngIf="errorMessages.accountname != ''">{{ errorMessages.accountname}}</small>
 					</div>
 					<div class="col-12">
 						<label htmlFor="age1">IFSC Code</label>
-						<input pInputText id="age1" type="text" [(ngModel)]="createMaster.ifsc"
-							class="ng-invalid ng-dirty" />
+						<input pInputText id="age1" type="text" [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.ifsc" class="ng-invalid ng-dirty" />
 						<small *ngIf="errorMessages.ifsc != ''">{{ errorMessages.ifsc}}</small>
 					</div>
 					<div class="col-12">
 						<label htmlFor="name1">Surity Name</label>
-						<input pInputText id="name1" type="text" [(ngModel)]="createMaster.surityname"
-							class="ng-invalid ng-dirty" />
+						<input pInputText id="name1" type="text" [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.surityname" class="ng-invalid ng-dirty" />
 						<small *ngIf="errorMessages.surityname != ''">{{ errorMessages.surityname}}</small>
 					</div>
 					<div class="col-12">
-						<label htmlFor="name1">Suriy Aadhar</label>
-						<p-inputMask mask="9999-9999-9999" [(ngModel)]="createMaster.surityaadhar"
-							[disabled]="mode=='VIEW'" class="ng-invalid ng-dirty" [pKeyFilter]="'num'"
-							placeholder="2222-2222-2222"></p-inputMask>
+						<label htmlFor="name1">Surity Aadhar</label>
+						<p-inputMask mask="9999-9999-9999" [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.surityaadhar" [disabled]="mode=='VIEW'"
+							class="ng-invalid ng-dirty" [pKeyFilter]="'num'" placeholder="2222-2222-2222"></p-inputMask>
 						<small *ngIf="errorMessages.surityaadhar != ''">{{ errorMessages.surityaadhar}}</small>
 
 					</div>
 					<div class="col-12">
-						<label htmlFor="name1">House type</label>
+						<label htmlFor="name1">Surity House type</label>
 						<p-dropdown [options]="houseTypeList" [(ngModel)]="createMaster.surityhousetype"
 							class="ng-invalid ng-dirty" optionLabel="label" optionValue="value" [filter]="true"
 							[disabled]="mode=='VIEW' " placeholder="Select House Type"></p-dropdown>
 						<small *ngIf="errorMessages.surityhousetype != ''">House type is required.</small>
 					</div>
 					<div class="col-12">
-						<label htmlFor="name1">Contact no</label>
-						<p-inputNumber [(ngModel)]="createMaster.contactnumber" mode="decimal" inputId="withoutgrouping"
+						<label htmlFor="name1">Surity Contact no</label>
+						<input pInputText id="age1" type="text" [(ngModel)]="createMaster.contactnumber"
+							placeholder="999999999" [disabled]="mode=='VIEW' " [minlength]="10" [maxlength]="10"
+							class="ng-invalid ng-dirty" />
+
+						<!-- <p-inputNumber [(ngModel)]="createMaster.contactnumber" mode="decimal" inputId="withoutgrouping"
 							[useGrouping]="false" class="ng-invalid ng-dirty" [disabled]="mode=='VIEW'"
-							class="ng-invalid ng-dirty" [minlength]="10" [maxlength]="10" [useGrouping]="false">
-						</p-inputNumber>
+							placeholder="9999999999" class="ng-invalid ng-dirty" [useGrouping]="false">
+						</p-inputNumber> -->
 						<small *ngIf="errorMessages.contactnumber != ''">{{ errorMessages.contactnumber}}</small>
 					</div>
 					<div class="col-12">
 						<label htmlFor="name1">Description</label>
 						<!-- [(ngModel)]="value" -->
-						<textarea rows="5" cols="30" pInputTextarea [(ngModel)]="createMaster.description"></textarea>
+						<textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW' "
+							[(ngModel)]="createMaster.description"></textarea>
 						<!-- <small>Description is required.</small> -->
 					</div>
 					<div class="col-12">

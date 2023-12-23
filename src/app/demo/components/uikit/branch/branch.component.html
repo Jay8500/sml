@@ -35,11 +35,11 @@
                                     placeholder="Search by name"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 20rem">
+                        <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
-                                Company
-                                <p-columnFilter type="text" field="cname" display="menu"
-                                    placeholder="Search by company"></p-columnFilter>
+                                Branch Code
+                                <p-columnFilter type="text" field="bcode" display="menu"
+                                    placeholder="Search by branch code"></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 20rem">
@@ -49,14 +49,14 @@
                                     placeholder="Search by branch"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+
+                        <th style="min-width: 20rem">
                             <div class="flex justify-content-between align-items-center">
-                                Branch Code
-                                <p-columnFilter type="text" field="bcode" display="menu"
-                                    placeholder="Search by branch code"></p-columnFilter>
+                                Company
+                                <p-columnFilter type="text" field="cname" display="menu"
+                                    placeholder="Search by company"></p-columnFilter>
                             </div>
                         </th>
-                      
 
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
@@ -137,16 +137,14 @@
                             </div>
                         </td>
                         <td>
-                            {{customer.cname}}
+                            {{customer.bcode}}
                         </td>
-
                         <td>
                             {{customer.bname}}
                         </td>
                         <td>
-                            {{customer.bcode}}
+                            {{customer.cname}}
                         </td>
-
                         <td>
                             {{customer.b_opn_dt}}
                         </td>

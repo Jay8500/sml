@@ -155,6 +155,86 @@ export class GenerateloansComponent implements OnInit {
             value: 3
         },
     ];
+
+    public loanAmountList = [
+        {
+            label: "Rs.5,000",
+            value: 5000
+        },
+        {
+            label: "Rs.6,000",
+            value: 6000
+        },
+        {
+            label: "Rs.7,000",
+            value: 7000
+        },
+        {
+            label: "Rs.8,000",
+            value: 8000
+        },
+        {
+            label: "Rs.9,000",
+            value: 9000
+        },
+        {
+            label: "Rs.10,000",
+            value: 10000
+        },
+        {
+            label: "Rs.15,000",
+            value: 15000
+        },
+        {
+            label: "Rs.20,000",
+            value: 20000
+        },
+        {
+            label: "Rs.25,000",
+            value: 25000
+        },
+        {
+            label: "Rs.30,000",
+            value: 30000
+        },
+        {
+            label: "Rs.35,000",
+            value: 35000
+        },
+        {
+            label: "Rs.40,000",
+            value: 40000
+        },
+        {
+            label: "Rs.45,000",
+            value: 40000
+        },
+        {
+            label: "Rs.50,000",
+            value: 50000
+        },
+        {
+            label: "Rs.60,000",
+            value: 60000
+        },
+        {
+            label: "Rs.70,000",
+            value: 70000
+        },
+        {
+            label: "Rs.80,000",
+            value: 80000
+        },
+        {
+            label: "Rs.90,000",
+            value: 90000
+        },
+        {
+            label: "Rs.100,000",
+            value: 100000
+        },
+    ]
+
     public despositList = [
         {
             label: "Daily",
@@ -206,7 +286,7 @@ export class GenerateloansComponent implements OnInit {
         borrowername: "",
         housetype: "",
         prodtype: "",
-        loanamount: 0,
+        loanamount: "",
         loanschedule: "",
         tenure: "",
         bankname: "",
@@ -289,7 +369,7 @@ export class GenerateloansComponent implements OnInit {
                 this.errorMessages.surityhousetype = [undefined, null, ''].includes(this.createMaster.surityhousetype) ? 'Surity House Type is required' : "";
                 break;
             case "contactnumber":
-                this.errorMessages.contactnumber = [undefined, null, ''].includes(this.createMaster.contactnumber) ? 'Suiry Contact no. is required' : "";
+                this.errorMessages.contactnumber = [undefined, null, ''].includes(this.createMaster.contactnumber) ? 'Surity Contact no. is required' : "";
                 break;
             case "deposit":
                 if (this.createMaster.prodtype == 1) {
@@ -442,18 +522,19 @@ export class GenerateloansComponent implements OnInit {
                                     borrower: pros.borrower,
                                     borrowername: pros.borrowername,
                                     branch: pros.branch,
+                                    // branchName: pros.branchname,
                                     branchName: pros.branchname,
-                                    // branchName: ![undefined, null].includes(pros.branch) ? _.filter(this.branches, { value: pros.branch })[0]['label'] : "",
                                     contactnumber: pros.contactnumber,
                                     create_by: pros.create_by,
                                     create_dt: pros.create_dt,
                                     deposit: pros.deposit,
-                                    depositName: ![undefined, null, ""].includes(pros.deposit) ? _.filter(this.despositList, { value: parseInt(pros.deposit) })[0]['label'] : 'Not Selected',
+                                    depositName: ![undefined, null, "","0"].includes(pros.deposit) ? _.filter(this.despositList, { value: parseInt(pros.deposit) })[0]['label'] : 'Not Selected',
                                     description: pros.description,
                                     housetype: pros.housetype,
                                     housetypeName: ![undefined, null, ""].includes(pros.housetype) ? _.filter(this.houseTypeList, { value: parseInt(pros.housetype) })[0]['label'] : "",
                                     ifsc: pros.ifsc,
                                     loanamount: pros.loanamount,
+                                    loanAmountName: pros.loanamount, // ![undefined, null, ""].includes(pros.loanamount) ? _.filter(this.loanAmountList, { value: parseInt(pros.loanamount) })[0]['label'] : "",
                                     loanschedule: pros.loanschedule,
                                     loanscheduleName: ![undefined, null, ""].includes(pros.loanschedule) ? _.filter(this.tenureList, { value: parseInt(pros.loanschedule) })[0]['label'] : "",
                                     modify_by: pros.modify_by,
@@ -543,23 +624,26 @@ export class GenerateloansComponent implements OnInit {
             this.createMaster = {
                 smtcode: event.smtcode,
                 borrowername: event.borrowername,
-                housetype: event.housetype,
-                prodtype: event.prodtype,
-                loanamount: event.loanamount,
-                loanschedule: event.loanschedule,
-                tenure: event.tenure,
+                housetype: parseInt(event.housetype),
+                prodtype: parseInt(event.prodtype),
+                loanamount: parseInt(event.loanamount),
+                loanschedule: parseInt(event.loanschedule),
+                tenure: parseInt(event.tenure),
+                branch : event.branch,
                 bankname: event.bankname,
                 accountno: event.accountno,
                 accountname: event.accountname,
                 ifsc: event.ifsc,
                 surityname: event.surityname,
                 surityaadhar: event.surityaadhar,
-                surityhousetype: event.surityhousetype,
+                surityhousetype: parseInt(event.surityhousetype),
                 contactnumber: event.contactnumber,
-                deposit: event.deposit,
+                deposit: parseInt(event.deposit || "0"),
                 approvalstatus: event.approvalstatus,
                 approvalremarks: event.approvalremarks,
                 approvalby: event.approvalby,
+                description : event.description,
+                id: event._id,
                 active: event.active ? true : false,
             };
         };

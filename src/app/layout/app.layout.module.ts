@@ -18,6 +18,7 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         OverlayPanelModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        ButtonModule
     ],
     exports: [AppLayoutComponent]
 })

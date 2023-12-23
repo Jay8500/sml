@@ -15,6 +15,7 @@ import { ServicesService } from 'src/app/services.service';
 })
 export class DashboardComponent implements OnInit {
     private _service = inject(ServicesService);
+    public showSkeleton = true;
     private destroy$: Subject<void> = new Subject<void>();
     public dashboardData: any = [
     ];
@@ -54,5 +55,5 @@ export class DashboardComponent implements OnInit {
         } catch (e) { this.blocUI = false; }
         // setTimeout(() => this.blocUI = false, 1400);
     }
- 
+
 }
