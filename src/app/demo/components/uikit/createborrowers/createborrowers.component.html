@@ -217,9 +217,11 @@
                </div> -->
                     <div class="col-12">
                         <label htmlFor="name1">Name</label>
-                        <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                        <input id="firstname2" type="text"
+                         pInputText [autocomplete]="'off'" 
+                        
                             (blur)="getErrorMessages('name')" [(ngModel)]="createMaster.name" [disabled]="mode=='VIEW'"
-                            class="p-2 ng-invalid ng-dirty">
+                            class="p-2 ng-invalid ng-dirty"  [pKeyFilter]="'alpha'">
                         <small *ngIf="errorMessages.name != ''">{{ errorMessages.name}}</small>
                     </div>
                     <div class="col-12">
@@ -252,8 +254,8 @@
                     <div class="col-12">
                         <label htmlFor="state">Pincode</label>
                         <p-inputNumber [(ngModel)]="createMaster.pincode" mode="decimal" inputId="withoutgrouping"
-                        [disabled]="mode=='VIEW'"
-                            class="ng-invalid ng-dirty" [maxlength]="6" [useGrouping]="false"> </p-inputNumber>
+                            [disabled]="mode=='VIEW'" class="ng-invalid ng-dirty" [maxlength]="6" [useGrouping]="false">
+                        </p-inputNumber>
 
                         <!-- <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
                             [(ngModel)]="createMaster.pincode" class="p-2"> -->

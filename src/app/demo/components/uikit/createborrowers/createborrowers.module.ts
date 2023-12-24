@@ -49,7 +49,8 @@ import { ToastModule } from 'primeng/toast';
 		FileUploadModule,
 		ImageModule,
 		InputNumberModule,
-		ToastModule
+		ToastModule,
+		KeyFilterModule
 	]
 })
 export class CreateborrowersModule { }

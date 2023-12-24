@@ -11,6 +11,7 @@ import * as _ from 'lodash';
     providers: [MessageService, ConfirmationService]
 })
 export class CreateborrowersComponent implements OnInit {
+    public name = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
     @ViewChild('aa', { static: false }) aa!: FileUpload;
     @ViewChild('ab', { static: false }) ab!: FileUpload;
     @ViewChild('ac', { static: false }) ac!: FileUpload;
@@ -560,4 +561,15 @@ export class CreateborrowersComponent implements OnInit {
             this.hideDialog();
         }
     }
+
+    onInput(event: any) {
+        const inputValue = event.target.value;
+        const validPattern = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
+    
+        if (validPattern.test(inputValue)) {
+          // Valid input, you can handle it accordingly
+        } else {
+          // Invalid input, you can handle it accordingly (e.g., show an error message)
+        }
+      }
 }

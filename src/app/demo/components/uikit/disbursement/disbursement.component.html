@@ -26,7 +26,13 @@
 
                             </div>
                         </th>
-
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                SMT CODE
+                                <p-columnFilter type="text" field="smtcode" display="menu"
+                                    placeholder="Search by SML CODE"></p-columnFilter>
+                            </div>
+                        </th>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 Disbursement Status
@@ -69,13 +75,7 @@
 									placeholder="Search by Approval Status"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                SMT CODE
-                                <p-columnFilter type="text" field="smtcode" display="menu"
-                                    placeholder="Search by SML CODE"></p-columnFilter>
-                            </div>
-                        </th>
+
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 Branch
@@ -228,6 +228,9 @@
                             </div>
                         </td>
                         <td>
+                            {{customer.smtcode}}
+                        </td>
+                        <td>
                             <span *ngIf="customer.disbursementstatus == 'A'"
                                 [class]="'order-badge order-delivered'">Disbursed</span>
                             <span *ngIf="customer.disbursementstatus == 'C'"
@@ -255,9 +258,7 @@
                         <td>
                             {{customer.approvalremarks}}
                         </td>
-                        <td>
-                            {{customer.smtcode}}
-                        </td>
+                      
                         <td>
                             {{customer.branchName}}
                         </td>
