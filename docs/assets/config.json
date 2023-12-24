@@ -23,6 +23,9 @@
     "pagepermissionsList": {
         "postEndPoint": "sml/pagepermissionslist"
     },
+    "loanApprovalpermission": {
+        "postEndPoint": "sml/loanApprovalpermission"
+    },
     "updatepermissions": {
         "postEndPoint": "sml/updatepermissions"
     },
