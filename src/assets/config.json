@@ -5,7 +5,7 @@
     "nodePortNumber": 2300,
     "autoCode": 3,
     "timer": 120,
-    "isBuild": "N",
+    "isBuild": "Y",
     "isCrypto": "N",
     "fileUploadSize": "1024mb",
     "usersignin": {
