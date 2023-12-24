@@ -12,12 +12,50 @@ import * as _ from 'lodash';
 })
 export class PermissionsComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
+  public usersList: any = [
+  ];
+  public createMaster = {
+    uname: "",
+    uid: ""
+  };
   public MessageService = inject(MessageService);
   public _service = inject(ServicesService);
   public loading: boolean = false;
   public showSubmit: boolean = true;
   public permissionJSON: any = [];
+  public userApprovals: any = [];
+
   ngOnInit(): void {
+    this._service.postApi('smlgetusers', 'postEndPoint', {
+      code: 'HRPM',
+      ctrl: 'nofilter'
+    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data['S_CODE'] == 200) {
+            this.usersList = _.filter(data['DATA'], (ac, acin) => ac.active == true
+            );
+
+            _.forEach(this.usersList, (us, uIn) => {
+              let permisions: any = {
+                userId: us.id,
+                username: us.uname,
+                isCanDo: "N",
+                name: "Loan Approvals",
+                path: "/home/uikit/loanapprovals"
+              };
+              this.userApprovals.push(permisions)
+            });
+          };
+        },
+        error: (err) => {
+          // this.blocUI = false;
+          // this.myModels = [];
+          // console.log('error')
+        }
+      });
     this.getPermissions();
   }
 
@@ -654,6 +692,38 @@ export class PermissionsComponent implements OnInit {
         },
         error: (err) => {
           this.loading = false;
+          // this.loading = false;
+        }
+      });
+  }
+  public loadings = false;
+  savePermissionProduct() {
+    // this.loading = true;
+    let permissionSave: any = [];
+    let savePayload = JSON.parse(JSON.stringify(this.userApprovals));
+
+    permissionSave = _.filter(permissionSave, (cl, clIn) => cl.modules.length > 0)
+    let loginJson = this._service.postApi('loanApprovalpermission', 'postEndPoint', permissionSave)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data.S_CODE == 200) {
+            this.getPermissions();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
+            this.isOk = true;
+            this.loadings = false;
+
+          } else if (data.S_CODE == 300) {
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
+            this.isOk = true;
+            // this.loading = false;
+            //  this.isShowSidebarClose = false;
+            this.loadings = false;
+          }
+        },
+        error: (err) => {
+          this.loadings = false;
           // this.loading = false;
         }
       });

@@ -38,7 +38,8 @@ export class GenerateloansComponent implements OnInit {
         { name: 'Ohio', code: 'Ohio' },
         { name: 'Washington', code: 'Washington' }
     ];
-
+    public usersList: any = [
+    ];
     dropdownItems = [
         { name: 'Option 1', code: 'Option 1' },
         { name: 'Option 2', code: 'Option 2' },
@@ -389,6 +390,7 @@ export class GenerateloansComponent implements OnInit {
         if (this.createMaster.prodtype != 1) this.createMaster.deposit = "";
     }
     async ngOnInit() {
+
         let cader = this._service.getUserInfo('userCader');
 
         if (cader['code'] == 'DA') {
@@ -489,6 +491,26 @@ export class GenerateloansComponent implements OnInit {
     gridData() {
         try {
             this.loading = true;
+            this._service.postApi('smlgetusers', 'postEndPoint', {
+                code: 'HRPM',
+                ctrl: 'nofilter'
+            })
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                    next: (data) => {
+                        data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+                        if (data['S_CODE'] == 200) {
+                            this.usersList = _.filter(data['DATA'], (ac, acin) => ac.active == true
+                            )
+                        };
+                    },
+                    error: (err) => {
+                        // this.blocUI = false;
+                        // this.myModels = [];
+                        // console.log('error')
+                    }
+                });
+
             let cader = this._service.getUserInfo('userCader');
 
             if (cader['code'] == 'DA') {
@@ -515,7 +537,7 @@ export class GenerateloansComponent implements OnInit {
                                 let createdBorrowers: any = {
                                     accountname: pros.accountname,
                                     accountno: pros.accountno,
-                                    approvalby: pros.approvalby,
+                                    approvalby: _.filter(this.usersList || [], { id: pros.approvalby }).length > 0 ? _.filter(this.usersList || [], { id: pros.approvalby || '' })[0]['uname'] : "",
                                     approvalremarks: pros.approvalremarks,
                                     approvalstatus: pros.approvalstatus,
                                     bankname: pros.bankname,
@@ -528,13 +550,13 @@ export class GenerateloansComponent implements OnInit {
                                     create_by: pros.create_by,
                                     create_dt: pros.create_dt,
                                     deposit: pros.deposit,
-                                    depositName: ![undefined, null, "","0"].includes(pros.deposit) ? _.filter(this.despositList, { value: parseInt(pros.deposit) })[0]['label'] : 'Not Selected',
+                                    depositName: ![undefined, null, "", "0"].includes(pros.deposit) ? _.filter(this.despositList, { value: parseInt(pros.deposit) })[0]['label'] : 'Not Selected',
                                     description: pros.description,
                                     housetype: pros.housetype,
                                     housetypeName: ![undefined, null, ""].includes(pros.housetype) ? _.filter(this.houseTypeList, { value: parseInt(pros.housetype) })[0]['label'] : "",
                                     ifsc: pros.ifsc,
                                     loanamount: pros.loanamount,
-                                    loanAmountName: pros.loanamount, // ![undefined, null, ""].includes(pros.loanamount) ? _.filter(this.loanAmountList, { value: parseInt(pros.loanamount) })[0]['label'] : "",
+                                    loanAmountName: _.filter(this.loanAmountList || [], { value: parseInt(pros.loanamount) })[0]['label'], // ![undefined, null, ""].includes(pros.loanamount) ? _.filter(this.loanAmountList, { value: parseInt(pros.loanamount) })[0]['label'] : "",
                                     loanschedule: pros.loanschedule,
                                     loanscheduleName: ![undefined, null, ""].includes(pros.loanschedule) ? _.filter(this.tenureList, { value: parseInt(pros.loanschedule) })[0]['label'] : "",
                                     modify_by: pros.modify_by,
@@ -629,7 +651,7 @@ export class GenerateloansComponent implements OnInit {
                 loanamount: parseInt(event.loanamount),
                 loanschedule: parseInt(event.loanschedule),
                 tenure: parseInt(event.tenure),
-                branch : event.branch,
+                branch: event.branch,
                 bankname: event.bankname,
                 accountno: event.accountno,
                 accountname: event.accountname,
@@ -642,7 +664,7 @@ export class GenerateloansComponent implements OnInit {
                 approvalstatus: event.approvalstatus,
                 approvalremarks: event.approvalremarks,
                 approvalby: event.approvalby,
-                description : event.description,
+                description: event.description,
                 id: event._id,
                 active: event.active ? true : false,
             };

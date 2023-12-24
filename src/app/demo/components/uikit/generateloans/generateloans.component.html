@@ -36,6 +36,20 @@
 						</th>
 						<th style="min-width: 12rem">
 							<div class="flex justify-content-between align-items-center">
+								Approval By
+								<!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
+									placeholder="Search by Approval By"></p-columnFilter> -->
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Approval Remarks
+								<!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
+									placeholder="Search by Approval Status"></p-columnFilter> -->
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
 								SMT CODE
 								<p-columnFilter type="text" field="smtcode" display="menu"
 									placeholder="Search by SML CODE"></p-columnFilter>
@@ -183,7 +197,8 @@
 								<div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
 									<i class="pi pi-eye"></i>
 								</div>
-								<div class="flex align-items-center  ml-1" (click)="onClick(customer, 'EDIT')">
+								<div class="flex align-items-center 
+								 ml-1" (click)="onClick(customer, 'EDIT')" *ngIf="!['P','A','R','C'].includes(customer.approvalstatus)">
 									<i class="pi pi-file-edit"></i>
 								</div>
 
@@ -195,7 +210,15 @@
 							<span *ngIf="customer.approvalstatus == 'A'"
 								[class]="'order-badge order-delivered'">Approved</span>
 							<span *ngIf="customer.approvalstatus == 'R'"
-								[class]="'order-badge order-cancelled'">Reject</span>
+								[class]="'order-badge order-cancelled'">Rejected</span>
+							<span *ngIf="customer.approvalstatus == 'C'"
+								[class]="'order-badge order-cancelled'">Cancel</span>
+						</td>
+						<td>
+							{{customer.approvalby}}
+						</td>
+						<td>
+							{{customer.approvalremarks}}
 						</td>
 						<td>
 							{{customer.smtcode}}
@@ -270,12 +293,12 @@
 				</ng-template>
 				<ng-template pTemplate="emptymessage">
 					<tr>
-						<td colspan="21">No Generated loans found.</td>
+						<td colspan="23">No Generated loans found.</td>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="loadingbody">
 					<tr>
-						<td colspan="21">Loading Generated loans data. Please wait.</td>
+						<td colspan="23">Loading Generated loans data. Please wait.</td>
 					</tr>
 				</ng-template>
 			</p-table>
@@ -308,7 +331,7 @@
 					
 					</div> -->
 					<div class="col-12">
-						<label htmlFor="state">SML CODE </label>
+						<label htmlFor="state">SMT CODE </label>
 						<input pInputText id="age1" type="text" [disabled]="true" [(ngModel)]="createMaster.smtcode" />
 					</div>
 					<div class="col-12">
