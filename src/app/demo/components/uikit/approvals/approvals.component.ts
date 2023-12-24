@@ -566,7 +566,7 @@ export class ApprovalsComponent {
                   // branchName: pros.branchname,
                   branchName: pros.branchname,
                   contactnumber: pros.contactnumber,
-                  create_by: _.filter(this.usersList, { id: pros.create_by })[0]['uname'],//pros.create_by,
+                  create_by: _.filter(this.usersList, { id: pros.create_by }).length > 0 ? _.filter(this.usersList, { id: pros.create_by })[0]['uname'] : "",//pros.create_by,
                   create_dt: pros.create_dt,
                   deposit: pros.deposit,
                   depositName: ![undefined, null, "", "0"].includes(pros.deposit) ? _.filter(this.despositList, { value: parseInt(pros.deposit) })[0]['label'] : 'Not Selected',
