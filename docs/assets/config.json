@@ -1,0 +1,130 @@
+{
+    "apiHostUrl": "https://nodeservice-mx3q.onrender.com/",
+    "apiHostUrllocal": "http://localhost:2300/",
+    "apiHostUrlServerlocal": "https://nodeservice-mx3q.onrender.com/",
+    "nodePortNumber": 2300,
+    "autoCode": 3,
+    "timer": 120,
+    "isBuild": "Y",
+    "isCrypto": "N",
+    "fileUploadSize": "1024mb",
+    "usersignin": {
+        "postEndPoint": "sml/smlsignin"
+    },
+    "forgotpwd": {
+        "postEndPoint": "sml/validateuser"
+    },
+    "getAddressList": {
+        "postEndPoint": "sml/addressmasters"
+    },
+    "onlyPages": {
+        "postEndPoint": "sml/onlypages"
+    },
+    "pagepermissionsList": {
+        "postEndPoint": "sml/pagepermissionslist"
+    },
+    "loanApprovalpermission": {
+        "postEndPoint": "sml/loanApprovalpermission"
+    },
+    "updatepermissions": {
+        "postEndPoint": "sml/updatepermissions"
+    },
+    "getDashboardDetails": {
+        "postEndPoint": "sml/get-dasboard"
+    },
+    "caders": {
+        "postEndPoint": "sml/post-get-caders"
+    },
+    "getAllCaders": {
+        "postEndPoint": "sml/post-getall-caders"
+    },
+    "smlusers": {
+        "postEndPoint": "sml/smlcreateuser"
+    },
+    "smlgetusers": {
+        "postEndPoint": "sml/smlGetUsers"
+    },
+    "getDash": {
+        "postEndPoint": "sml/get-moduleslist"
+    },
+    "moduleCaderMapping": {
+        "getEndPoint": "sml/get-modules-caders-mapping-list",
+        "postEndPoint": "sml/create-modules-access-permission"
+    },
+    "genders": {
+        "postEndPoint": "sml/create-gender"
+    },
+    "getGenders": {
+        "postEndPoint": "sml/genderlist"
+    },
+    "createTitle": {
+        "postEndPoint": "sml/create-title"
+    },
+    "getTitle": {
+        "postEndPoint": "sml/titlelist"
+    },
+    "gnloanslist": {
+        "postEndPoint": "sml/gnloanslist"
+    },
+    "createDepartment": {
+        "postEndPoint": "sml/create-department"
+    },
+    "createTeam": {
+        "postEndPoint": "sml/create-team"
+    },
+    "generateloans": {
+        "postEndPoint": "sml/generateloans"
+    },
+    "getTeam": {
+        "postEndPoint": "sml/teammapper"
+    },
+    "getEditTeam": {
+        "postEndPoint": "sml/getteams"
+    },
+    "getDepartments": {
+        "postEndPoint": "sml/departmentlist"
+    },
+    "createBranch": {
+        "postEndPoint": "sml/create-branch"
+    },
+    "getBranch": {
+        "postEndPoint": "sml/branchlist"
+    },
+    "createAddress": {
+        "postEndPoint": "sml/create-address-master"
+    },
+    "getCompany": {
+        "postEndPoint": "sml/companylist"
+    },
+    "createCompany": {
+        "postEndPoint": "sml/create-company"
+    },
+    "getUnitslist": {
+        "postEndPoint": "sml/unitslist"
+    },
+    "createUnits": {
+        "postEndPoint": "sml/create-units"
+    },
+    "getTerm": {
+        "postEndPoint": "sml/termlist"
+    },
+    "createTerm": {
+        "postEndPoint": "sml/create-term"
+    },
+    "getMaster": {
+        "postEndPoint": "sml/getMastersList"
+    },
+    "createMaster": {
+        "postEndPoint": "sml/create-master"
+    },
+    "getBorrowers": {
+        "postEndPoint": "sml/borrowerlist"
+    },
+    "getOnlyCreatedBorrowers": {
+        "postEndPoint": "sml/getOnlyCreatedBorrowers"
+    },
+    "createBorrowers": {
+        "postEndPoint": "sml/create-borrower"
+    },
+    "tokenSecretKey": "smlsecret"
+}

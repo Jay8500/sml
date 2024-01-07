@@ -1,0 +1,82 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between flex-wrap">
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    Create Teams
+                </div>
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <p-dropdown [options]="genderList" [(ngModel)]="createMaster.branch_id" [filter]="true"
+                        class="ng-invalid ng-dirty" (onChange)="onBranchChange($event)"></p-dropdown>
+                    <!-- <div *ngIf="[null,undefined,''].includes(createMaster.branch_id)">
+                        <small class="text-red-600" id="username-help">
+                            Branch is required
+                        </small>
+                    </div> -->
+                </div>
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="" [disabled]="showSubmit"
+                        *ngIf="![undefined,null,''].includes(this.createMaster.branch_id)" [loading]="loading"
+                        styleClass="p-button-rounded " (click)="saveProduct()"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="main_crt_mstrs">
+                    <div class="crt_mstrs" *ngFor="let team of createTeam;">
+                        <!-- style="display: flex; align-items: center; justify-content: space-between;" -->
+                        <div class="crt_mstrs_pstn">
+                            {{team.cdname}}
+                        </div>
+                        <!-- padding: 0; display: flex; flex-direction: column; align-items: left; -->
+                        <ul class="crt_mstrs_lst" style="list-style-type: none; margin: 0;">
+                            <li *ngFor="let user of team['users']; let userId=index;">
+
+                                <input type="checkbox" name="tst" [id]="'d__{{userId}}'" [(ngModel)]="user.isChecked"
+                                    (change)="onUserChecked($event,team['users'],user,team)">
+                                {{user['uname']}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+
+<style>
+    .main_crt_mstrs {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .crt_mstrs {
+        border-radius: 3px;
+        position: relative;
+        padding-top: 5px;
+        font-weight: bold;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    .crt_mstrs_pstn {
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background-color: #fff;
+        padding: 0 5px;
+        color: #033fa0;
+    }
+
+    .crt_mstrs_lst {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+</style>

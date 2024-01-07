@@ -1,0 +1,305 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between flex-wrap">
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    Users List
+                </div>
+                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
+                    <!-- 2 -->
+                </div>
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
+                        (click)="onClick(null,'NEW')"></button>
+                </div>
+            </div>
+
+
+            <p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+                styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+                <!-- <ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template> -->
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width: 5rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Action
+                                <!-- <p-columnFilter type="text" field="name" display="menu"
+                                    placeholder="Search by name"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <th style="min-width: 18rem">
+                            <div class="flex justify-content-between align-items-center">
+                                User Name
+                                <p-columnFilter type="text" field="uname" display="menu"
+                                    placeholder="Search by name"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 4rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Gender
+                                <p-columnFilter type="text" field="gendername" display="menu"
+                                    placeholder="Search by gender"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Cadre
+                                <p-columnFilter type="text" field="cadername" display="menu"
+                                    placeholder="Search by Cadre"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Description
+                                <!-- <p-columnFilter type="text" field="desc" display="menu"
+                                    placeholder="Search by contact"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Status
+                                <!-- <p-columnFilter type="text" field="status" display="menu"
+                                    placeholder="Search by status"></p-columnFilter> -->
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td>
+                            <div class="flex justify-content-center flex-wrap">
+                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
+                                    <i class="pi pi-eye"></i>
+                                </div>
+                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'EDIT')">
+                                    <i class="pi pi-file-edit"></i>
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            {{customer.uname}}
+                        </td>
+
+                        <td>
+                            {{customer.gendername}}
+                        </td>
+                        <td>
+                            {{customer.cadername}}
+                        </td>
+
+                        <td>
+                            {{customer.desc}}
+                        </td>
+
+                        <td>
+
+                            <span *ngIf="customer.active == true"
+                                [class]="'customer-badge status-qualified'">Active</span>
+                            <span *ngIf="customer.active == false"
+                                [class]="'customer-badge status-unqualified'">Inactive</span>
+
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">No Users found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="6">Loading Users data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+
+<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"
+    [closeOnEscape]="isCloseOnEscape">
+    <div class="grid">
+        <div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
+            <div class="card  p-fluid">
+                <div class="grid">
+                    <h5>Create User </h5>
+                    <div class="col-12">
+                        <label htmlFor="name1">User Name</label>
+                        <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                            (change)="checkForValidUser()" [(ngModel)]="createMaster.master_name"
+                            [disabled]="mode=='VIEW'" class="p-2 ng-invalid ng-dirty">
+                        <small *ngIf="errorMessages.master_name != ''">{{ errorMessages.master_name}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label for="firstname2">password</label>
+                        <input id="firstname2" type="text" [(ngModel)]="createMaster.password" [disabled]="mode=='VIEW'"
+                            pInputText class="ng-invalid ng-dirty">
+                        <small *ngIf="errorMessages.password != ''">{{ errorMessages.password}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label for="firstname2">Gender</label>
+                        <p-dropdown [options]="genderList" [(ngModel)]="createMaster.gender" [filter]="true"
+                            [disabled]="mode=='VIEW' "></p-dropdown>
+                        <small *ngIf="errorMessages.gender != ''">{{ errorMessages.gender}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label for="firstname2">Cadre</label>
+                        <p-dropdown [options]="caders" [(ngModel)]="createMaster.cader_id"  [filter]="true"
+                            [disabled]="mode=='VIEW' "></p-dropdown>
+                        <small *ngIf="errorMessages.cader_id != ''">{{ errorMessages.cader_id}}</small>
+                    </div>
+
+                    <div class="col-12">
+                        <label htmlFor="state">Description </label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.description"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <input type="checkbox" name="master" id="1" [(ngModel)]="createMaster.active"
+                            [disabled]="mode=='VIEW' || mode == 'NEW'">
+                        <label for="lastname2" class="ml-2">Active</label>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="grid">
+                            <div class="col-6">
+                                <button pButton [disabled]="mode=='VIEW'" pRipple label="Clear" (click)="hideDialog()"
+                                    class="p-button-outlined"></button>
+
+                            </div>
+                            <div class="col-6">
+                                <button pButton pRipple label="Submit" [disabled]="mode=='VIEW'" (click)="saveProduct()"
+                                    [loading]="submitloading" class="p-button-success"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 		
+           <div class="card p-fluid">
+               <h5>Vertical Grid</h5>
+               <div class="p-formgrid grid">
+                   <div class="field col">
+                       <label htmlFor="name2">Name</label>
+                       <input pInputText id="name2" type="text" />
+                   </div>
+                   <div class="field col">
+                       <label htmlFor="email2">Email</label>
+                       <input pInputText id="email2" type="text" />
+                   </div>
+                   <div class="field col">
+                       <label htmlFor="name2">Name</label>
+                       <input pInputText id="name2" type="text" />
+                   </div>
+                   <div class="field col">
+                       <label htmlFor="email2">Email</label>
+                       <input pInputText id="email2" type="text" />
+                   </div>
+               </div>
+           </div> -->
+            <!-- </div> -->
+
+            <!-- <div class="col-12 md:col-6"> -->
+            <!-- <div class="card p-fluid">
+               <h5>Horizontal</h5>
+               <div class="field grid">
+                   <label htmlFor="name3" class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+                   <div class="col-12 md:col-10">
+                       <input pInputText id="name3" type="text" />
+                   </div>
+               </div>
+               <div class="field grid">
+                   <label htmlFor="email3" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
+                   <div class="col-12 md:col-10">
+                       <input pInputText id="email3" type="text" />
+                   </div>
+               </div>
+           </div> -->
+
+            <!-- <div class="card">
+               <h5>Inline</h5>
+               <div class="formgroup-inline">
+                   <div class="field">
+                       <label htmlFor="firstname1" class="p-sr-only">Firstname</label>
+                       <input pInputText id="firstname1" type="text" placeholder="Firstname" />
+                   </div>
+                   <div class="field">
+                       <label htmlFor="lastname1" class="p-sr-only">Lastname</label>
+                       <input pInputText id="lastname1" type="text" placeholder="Lastname" />
+                   </div>
+                   <button pButton label="Submit"></button>
+               </div>
+           </div> -->
+
+            <!-- <div class="card">
+               <h5>Help Text</h5>
+               <div class="field p-fluid">
+                   <label htmlFor="username">Username</label>
+                   <input pInputText id="username" type="text" />
+                   <small>Enter your username to reset your password.</small>
+               </div>
+           </div> -->
+            <!-- </div>  -->
+
+            <!-- <div class="col-12">
+           <div class="card">
+               <h5>Advanced</h5>
+               <div class="p-fluid p-formgrid grid">
+                   <div class="field col-12 md:col-6">
+                       <label htmlFor="firstname2">Firstname</label>
+                       <input pInputText id="firstname2" type="text" />
+                   </div>
+                   <div class="field col-12 md:col-6">
+                       <label htmlFor="lastname2">Lastname</label>
+                       <input pInputText id="lastname2" type="text" />
+                   </div>
+                   <div class="field col-12">
+                       <label htmlFor="address">Address</label>
+                       <input pInputTextarea id="address" rows="4" />
+                   </div>
+                   <div class="field col-12 md:col-6">
+                       <label htmlFor="city">City</label>
+                       <input pInputText id="city" type="text" />
+                   </div>
+                   <div class="field col-12 md:col-3">
+                       <label htmlFor="state">State</label>
+                       <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+                   </div>
+    
+                   <div class="field col-12 md:col-3">
+                       <label htmlFor="zip">Zip</label>
+                       <input pInputText id="zip" type="text" />
+                   </div>
+               </div>
+           </div>
+       </div> -->
+        </div>
+    </div>
+
+</p-sidebar>
+
+
+
+
+<style>
+    :host ::ng-deep .p-cascadeselect-items {
+        max-height: 100px;
+        overflow: auto;
+    }
+</style>
+
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+    (onClose)="onMessageClose()"></p-toast>

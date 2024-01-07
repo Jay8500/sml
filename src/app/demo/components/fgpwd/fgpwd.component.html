@@ -1,0 +1,63 @@
+<div class="surface-ground flex align-items-center surface-100 md:justify-content-center justify-content-center
+  min-h-screen min-w-screen p-input-filled overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center md:p-3 ">
+        <div style="border-radius:10px;
+             padding:0.4rem; 
+             background: linear-gradient(50deg, var(--primary-color) 0%, rgba(133, 184, 218, 0) 20%);">
+            <div class="w-19rem surface-card p-3" style="border-radius:20px;">
+                <div class="text-center mb-2">
+                    <img src="assets/layout/images/sml" alt="Sakai logo" class=" w-6rem flex-shrink-0" height="50">
+                    <!-- <div class="text-blue-500 text-3xl font-bold mb-1"> -->
+                    <!-- {{ comptSettings.cmpnyName}} -->
+                    <!-- SML
+                    </div> -->
+                </div>
+                <div class="text-center mb-4">
+                    <h5 class="text-blue-400">Reset to continue</h5>
+                </div>
+                <div class="flex flex-column align-items-center">
+                    <div class="mb-3">
+                        <label for="email1" class="block mb-1">Employee Name</label>
+
+                        <span class="p-input-icon-right">
+                            <i class="pi pi-spin pi-spinner" *ngIf="isTrigger"></i>
+                            <input id="email1" type="text" placeholder="Enter Employee Name" pInputText
+                                [autocomplete]="'off'" [(ngModel)]="siginJson.uname" class="p-2"
+                                (keyup)="checkForValidUser()">
+                        </span>
+                        <div *ngIf="![undefined,null,''].includes(siginJson.uname)">
+                            <!-- <i [ngClass]=" isValidUser ?  'pi pi-times' :'pi pi-check'  "></i> -->
+                        </div>
+
+                        <div>
+                            <small *ngIf="isValidUname" class="text-red-600" id="username-help">
+                                {{errorMessages.uname}}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password1" class="block mb-1">New Password</label>
+                        <input id="email2" type="password" placeholder="Enter New Password" pInputText
+                            [disabled]="isValidUser" [autocomplete]="'off'" [(ngModel)]="siginJson.password" class="p-2"
+                            (keyup)="onKeyUp($event)">
+                        <div>
+                            <small *ngIf="isValidPwd" class="text-red-600" id="username-help">{{
+                                errorMessages.pwd
+                                }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <button pButton label="Reset Password" class="w-13rem h-2rem p-1" [loading]="loading"
+                            [disabled]="isValidUser" styleClass="p-button-rounded " (click)="signUpClick()"></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>

@@ -1,0 +1,122 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between flex-wrap">
+                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    Recovery Postings
+                </div>
+                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
+                    <!-- 2 -->
+                </div>
+                <!-- <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
+                        (click)="onClick(null,'NEW')"></button>
+                </div> -->
+            </div>
+
+
+            <p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+                styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="true"
+                responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                SMT CODE
+                                <p-columnFilter type="text" field="smtcode" display="menu"
+                                    placeholder="Search by SML CODE"></p-columnFilter>
+                            </div>
+                        </th>
+
+                        <th style="min-width: 22rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Name
+                                <!-- <p-columnFilter type="text" field="borrower" display="menu"
+                                    placeholder="Search by name"></p-columnFilter> -->
+                            </div>
+                        </th>
+
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Repayment Mode
+                                <!-- <p-columnFilter type="text" field="prodtypeName" display="menu"
+                                    placeholder="Search by Product type"></p-columnFilter> -->
+                            </div>
+                        </th>
+
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Due Amount
+                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                    placeholder="Search by Loan amount"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Collected
+                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                    placeholder="Search by Loan amount"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Payment Type
+                                <!-- <p-columnFilter type="text" field="status" display="menu"
+                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td>
+                            {{customer.smtcode}}
+                        </td>
+                        <td>
+                            {{customer.borrower}}
+                        </td>
+
+                        <td>
+                            {{customer.loanscheduleName}}
+                        </td>
+                        <td>
+                            {{customer.loanAmountName}}
+                        </td>
+                        <td>
+                            <input pInputText id="age1" type="text" [(ngModel)]="createMaster.collectedloanAmount" />
+                        </td>
+                        <td>
+                            <input pInputText id="age1" type="text" [(ngModel)]="createMaster.collectedPaymentType" />
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">Recovery Postings found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="6 ">Loading Recovery Postings data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<style>
+    :host ::ng-deep .p-cascadeselect-items {
+        max-height: 100px;
+        overflow: auto;
+    }
+</style>
+
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+    (onClose)="onMessageClose()"></p-toast>

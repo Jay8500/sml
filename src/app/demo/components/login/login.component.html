@@ -1,0 +1,79 @@
+<div class="surface-ground flex align-items-center surface-100 md:justify-content-center justify-content-center
+  min-h-screen min-w-screen p-input-filled overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center md:p-3 ">
+        <div style="border-radius:10px;
+             padding:0.4rem; 
+             background: linear-gradient(50deg, var(--primary-color) 0%, rgba(12, 95, 150, 0) 20%);">
+            <div class="w-19rem surface-card p-5" style="border-radius:20px;">
+                <div class="text-center mb-2">
+                    <img src="assets/layout/images/sml" alt="Sakai logo" class=" w-6rem flex-shrink-0" height="50">
+                    <!-- <div class="text-blue-500 text-3xl font-bold mb-1"> -->
+                    <!-- {{ comptSettings.cmpnyName}} -->
+                    <!-- SML
+                    </div> -->
+                </div>
+                <div class="text-center mb-4">
+                    <h5 class="text-blue-400">Sign in to continue</h5>
+                </div>
+                <div class="flex flex-column align-items-center">
+
+                    <div class="mb-3 w-full">
+                        <label for="email1" class="block mb-1">Employee Name</label>
+
+                        <input id="email1" placeholder="Enter Employee Name" pInputText [autocomplete]="'off'"
+                            (blur)="getErrorMessages('uname')" [(ngModel)]="siginJson.uname"
+                            class="p-2 ng-invalid ng-dirty ">
+                        <div>
+                            <small *ngIf="errorMessages.uname!=''" class="text-red-600" id="username-help">
+                                {{errorMessages.uname}}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 w-full">
+                        <label for="password1" class="block mb-1">Password</label>
+                        <p-password [(ngModel)]="siginJson.password" [toggleMask]="true" [feedback]="false"
+                            (onBlur)="getErrorMessages('password')" (keydown)="onKeyUp($event)"
+                            class="ng-invalid ng-dirty"></p-password>
+                        <!-- <input id="email2" type="password" placeholder="Enter Password" pInputText
+                            [autocomplete]="'off'" [(ngModel)]="siginJson.password" class="p-2 ng-invalid ng-dirty"
+                            (blur)="getErrorMessages('password')" (keyup)="onKeyUp($event)"> -->
+                        <div>
+                            <small *ngIf="errorMessages.pwd!=''" class="text-red-600" id="username-help">{{
+                                errorMessages.pwd
+                                }}
+                            </small>
+                        </div>
+                    </div>
+                    <!-- <div class="mb-2" *ngIf="true">
+                        <div class="flex align-items-center" *ngIf="true">
+                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2" [disabled]="true"
+                                [(ngModel)]="checked"></p-checkbox>
+                            <label for="rememberme1">Remember me</label>
+                        </div>
+                    </div> -->
+                    <div class="">
+                        <button pButton label="Sign In" class="w-full " [loading]="loading"
+                            styleClass="p-button-rounded " (click)="signUpClick()"></button>
+                    </div>
+                    <div class="mt-1">
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                            routerLink="/sml-request-on-forgot-passowrd" style="color: var(--primary-color)">Forgot
+                            password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-center" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+
+
+<style>
+    :host(.p-password > .p-inputtext) {
+        /* border-color: #B00020; */
+        width: 172px;
+        /* Adjust the width value as needed */
+    }
+</style>
