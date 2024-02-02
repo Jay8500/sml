@@ -1,6 +1,5 @@
 <div class="layout-topbar">
-    <button title="bar" type="button" #menubutton class="p-link layout-menu-button layout-topbar-button"
-        (click)="layoutService.onMenuToggle()">
+    <button class="p-link layout-menu-button layout-topbar-button" (click)="onSideBarClick()">
         <i class="pi pi-bars"></i>
     </button>
 
@@ -29,16 +28,16 @@
     </div>
 
 
-    <button title="bar" type="button" #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button"
+    <button title="bar" type="button" class="p-link layout-topbar-menu-button layout-topbar-button"
         (click)="op.show($event, targetE2)">
         <div #targetE2>
-            <p-button [label]="userInfo['uname']"  icon="pi pi-user" iconPos="right"></p-button>
+            <p-button [label]="userInfo['uname']" icon="pi pi-user" iconPos="right"></p-button>
         </div>
     </button>
 
-    <div #topbarmenu class="layout-topbar-menu" (click)="op.show($event, targetEl)">
+    <div class="layout-topbar-menu" (click)="op.show($event, targetEl)">
         <div #targetEl>
-            <p-button [label]="userInfo['uname']"  icon="pi pi-user" iconPos="right"></p-button>
+            <p-button [label]="userInfo['uname']" icon="pi pi-user" iconPos="right"></p-button>
         </div>
     </div>
 
@@ -47,27 +46,21 @@
 <p-overlayPanel #op [showCloseIcon]="false" [style]="{'margin':'10px 1px 10px 10px'}">
     <ng-template pTemplate="content">
         <div class="flex flex-column pb-0">
-            <div class="card cursor-pointer py-1">
-                <!-- <div class="user_details"> -->
-                <div class="font-light text-gray-600">
-                    User Cadre
-                </div>
-                <small class="designation_tag font-bold text-center">
-                    {{userInfo['cader']}}
-                </small>
-                <!-- </div> -->
+            <div class="cursor-pointer text-left">
+                {{userInfo['cader']}}
             </div>
-
-            <div class="card cursor-pointer">
-                <div class="text-left font-light text-gray-600">
+            <div class="card">
+                <div class="text-center font-light text-gray-600">
                     Signed In
                 </div>
                 <div class="text-center font-bold ">
                     {{userInfo['loggedInTime']}}
                 </div>
-            </div>
-            <div class="m-1">
 
+            </div>
+
+
+            <div class="text-left">
                 <div (click)="onSignOutClick()" class="no-underline cursor-pointer">
                     <i class="pi pi-sign-out"></i>
                     Sign Out
@@ -76,3 +69,17 @@
         </div>
     </ng-template>
 </p-overlayPanel>
+
+<p-sidebar [(visible)]="sidebarVisible">
+    <ul *ngFor="let tab of model" style="list-style-type: none;">
+        <li>
+            <span class="font-bold">{{ tab.label}}</span>
+            <ul *ngFor="let tabs of tab.items" style="list-style-type: none;cursor: pointer;">
+                <li (click)="onClick(tabs)">
+                    <span class="font-semibold">{{tabs.label}}</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- <p-menu [model]="model" (onHide)="sidebarVisible=false"></p-menu> -->
+</p-sidebar>

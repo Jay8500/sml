@@ -22,6 +22,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ToastModule } from 'primeng/toast';
     FormsModule,
     AutoCompleteModule,
     CalendarModule,
+    TooltipModule,
     ChipsModule,
     DropdownModule,
     InputMaskModule,

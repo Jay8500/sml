@@ -220,7 +220,7 @@
                         <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
                             oninput="this.value=this.value.replace(/^[\s.]+/g,'').replace(/\s{2,}/g,' ').replace(/[.]{2,}/g,'.')"
                             (blur)="getErrorMessages('name')" [(ngModel)]="createMaster.name" [disabled]="mode=='VIEW'"
-                            class="p-2 ng-invalid ng-dirty"  >
+                            class="p-2 ng-invalid ng-dirty">
                         <small *ngIf="errorMessages.name != ''">{{ errorMessages.name}}</small>
                     </div>
                     <div class="col-12">
@@ -231,9 +231,12 @@
                     </div>
                     <div class="col-12">
                         <label htmlFor="name1">Contact No.</label>
-                        <p-inputNumber [(ngModel)]="createMaster.contact_no" mode="decimal" inputId="withoutgrouping"
+                        <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                            (blur)="getErrorMessages('contact_no')" [(ngModel)]="createMaster.contact_no"
+                            [disabled]="mode=='VIEW'" maxlength="10" class="p-2 ng-invalid ng-dirty">
+                        <!-- <p-inputNumber [(ngModel)]="createMaster.contact_no" mode="decimal" inputId="withoutgrouping"
                             [disabled]="mode=='VIEW'" class="ng-invalid ng-dirty" [maxlength]="10"
-                            [useGrouping]="false"> </p-inputNumber>
+                            [useGrouping]="false"> </p-inputNumber> -->
                         <!-- 
                         <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
                             [(ngModel)]="createMaster.contact_no" class="p-2"> -->

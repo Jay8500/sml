@@ -16,26 +16,17 @@
             "outputPath": "dist/smlapp",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/sml.ico",
-              "src/assets",
-              "src/assets/layout/styles/theme/md-light-indigo"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css"
-            ],
-            "scripts": [
-              "node_modules/chart.js/dist/chart.js"
-            ]
+          ],
+            "scripts": ["node_modules/chart.js/dist/chart.js"]
           },
           "configurations": {
             "production": {
@@ -85,19 +76,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/assets/layout/styles/theme/md-light-indigo"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         }

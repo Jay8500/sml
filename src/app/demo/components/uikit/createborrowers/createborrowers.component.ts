@@ -97,7 +97,18 @@ export class CreateborrowersComponent implements OnInit {
         byemployee: null,
         byemployeename: null,
         active: true,
-        A: null, RC: null, HTR: null, LA: null, HP: null, PPC: null, OTHERS: null
+        A: null,
+        RC: null,
+        HTR: null,
+        LA: null,
+        HP: null,
+        PPC: null,
+        OTHERS: null,
+        TEST: {
+            name: "",
+            original_file_name: "",
+            file_folder: ""
+        }
     };
     public defaultUser = JSON.stringify(this.createMaster);
 
@@ -118,12 +129,14 @@ export class CreateborrowersComponent implements OnInit {
                 if ([undefined, null, ''].includes(this.createMaster.name)) {
                     this.errorMessages.name = [undefined, null, ''].includes(this.createMaster.name) ? 'Name is required' : "";
                 } else {
-                    const nameRegex = /^[A-Za-z]+$/;
+                    // const nameRegex = /^[A-Za-z]+$/;
+                    const nameRegex = /^[a-zA-Z ]*$/;
                     // const specifiedString = "Jhon Doe.";
-                    if (!nameRegex.test(this.createMaster.name)) {
-                        this.errorMessages.name = 'Invalid name format';
-                    } else {
+                    if (nameRegex.test(this.createMaster.name)) {
                         this.errorMessages.name = '';
+                    } else {
+                        this.errorMessages.name = 'Invalid name format';
+
                     }
                 };
                 break;
@@ -398,15 +411,12 @@ export class CreateborrowersComponent implements OnInit {
         }
     }
 
-    // onClick(ctrl: string, data: any) {
-    //     this.isShowForm = true;
-    // }
-
     onSelect(event: any, ctrl: string) { // A, RC, HTR,LA, HP, PPC, OTHERS
         try {
             if (![undefined, null, ''].includes(event)) {
                 if (Object.keys(event.files).length > 0) {
                     const files = event.files[0];
+                    console.log("files", files)
                     if (files) this.uploadFile(files, ctrl)
                 };
             }
@@ -419,6 +429,11 @@ export class CreateborrowersComponent implements OnInit {
         reader.onload = (e: any) => {
             let base64 = e.target.result;
             this.createMaster[ctrl] = base64;
+            // this.createMaster[ctrl] = {
+            //     name: files.name,
+            //     file_folder: ""
+            // };
+            // console.log("files", files)
         };
         reader.readAsDataURL(files);
         this.aa.clear();
@@ -465,7 +480,6 @@ export class CreateborrowersComponent implements OnInit {
             };
         };
     }
-
 
     public submitloading = false;
 
@@ -562,7 +576,6 @@ export class CreateborrowersComponent implements OnInit {
         this.createMaster = JSON.parse(this.defaultUser);
         this.errorMessages = JSON.parse(this.defErrs);
     }
-
 
     onMessageClose() {
         if (this.isOk) {

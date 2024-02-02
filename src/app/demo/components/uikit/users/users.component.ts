@@ -64,7 +64,12 @@ export class UsersComponent {
       value: null
     }
   ];
-
+  public branchList = [
+    {
+      label: "Select Branch",
+      value: null
+    }
+  ];
 
   public branches = [
     {
@@ -93,11 +98,11 @@ export class UsersComponent {
     master_name: "",
     password: "",
     description: "",
-    branch_id: null,
+    branchid: null,
     gender: null,
     cader_id: null,
     dep_id: null,
-    active: true
+    active: true,
   };
   public defaultUser = JSON.stringify(this.createMaster);
 
@@ -105,6 +110,7 @@ export class UsersComponent {
     master_name: "",
     password: "",
     cader_id: "",
+    branchid: "",
     gender: "",
   };
   public defErrs = JSON.stringify(this.errorMessages);
@@ -120,6 +126,9 @@ export class UsersComponent {
 
       case "cader_id":
         this.errorMessages.cader_id = [undefined, null, ''].includes(this.createMaster.cader_id) ? 'Cader is required' : "";
+        break;
+      case "branchid":
+        this.errorMessages.branchid = [undefined, null, ''].includes(this.createMaster.branchid) ? 'Branch is required' : "";
         break;
       case "gender":
         this.errorMessages.gender = [undefined, null, ''].includes(this.createMaster.gender) ? 'Gender is required' : "";
@@ -202,6 +211,38 @@ export class UsersComponent {
           // console.log('error')
         }
       });
+
+    this._service.postApi('getBranch', 'postEndPoint', {})
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data['S_CODE'] == 200) {
+            this.branchList = [{
+              label: "Select Branches",
+              value: null
+            }];
+            data['DATA'] = _.filter(data['DATA'], { active: true });
+            data['DATA'].forEach((prodcuts: any, prdIn: number) => {
+              let products = {
+                label
+                  :
+                  prodcuts.bname,
+                value
+                  :
+                  prodcuts._id
+              };
+              this.branchList.push(products)
+            });
+          };
+        },
+        error: (err) => {
+          // this.blocUI = false;
+          // this.myModels = [];
+          // console.log('error')
+        }
+      });
+
     this.gridData();
   }
 
@@ -252,7 +293,13 @@ export class UsersComponent {
                       pros.gendername,
                     id
                       :
-                      pros._id,
+                      pros.id,
+                    branchname
+                      :
+                      pros.branchname,
+                    branchid
+                      :
+                      pros.branchid,
 
                     uname
                       :
@@ -331,7 +378,8 @@ export class UsersComponent {
         master_name: event.uname,
         password: null,//event.password,
         description: event.desc,
-        branch_id: event.uname,
+        branchid: event.branchid,
+        branchname: event.branchname,
         gender: event.gender,
         cader_id: event.cader,
         id: event.id,
@@ -351,7 +399,8 @@ export class UsersComponent {
         "master_name",
         "password",
         "gender",
-        "cader_id"
+        "cader_id",
+        "branchid"
       ];
       _.forEach(cols, (cols, colIn) => {
         this.getErrorMessages(cols);
@@ -373,10 +422,10 @@ export class UsersComponent {
         savePayload['cader'] = this.createMaster.cader_id;
         savePayload['department'] = this.createMaster.dep_id;
         savePayload['create_by'] = this._service.getUserInfo('_id');
-
+        savePayload['branchname'] = _.filter(this.branchList, (b, bIn) => b.value == savePayload['branchid'])[0]['label'];
         delete savePayload.master_name;
-        delete savePayload.branch_id;
-        // delete savePayload.password;
+        // delete savePayload.branch_id;
+        // // delete savePayload.password;
         delete savePayload.cader_id;
 
         // console.log(savePayload)

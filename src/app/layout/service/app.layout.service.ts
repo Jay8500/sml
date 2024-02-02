@@ -54,18 +54,7 @@ export class LayoutService {
         if (this.isOverlay()) {
             this.state.overlayMenuActive = !this.state.overlayMenuActive;
             if (this.state.overlayMenuActive) {
-                this.overlayOpen.next(null);
-            }
-        }
-
-        if (this.isDesktop()) {
-            this.state.staticMenuDesktopInactive = !this.state.staticMenuDesktopInactive;
-        }
-        else {
-            this.state.staticMenuMobileActive = !this.state.staticMenuMobileActive;
-
-            if (this.state.staticMenuMobileActive) {
-                this.overlayOpen.next(null);
+                // this.overlayOpen.next(null);
             }
         }
     }

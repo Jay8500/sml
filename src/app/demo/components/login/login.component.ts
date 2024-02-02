@@ -50,12 +50,13 @@ export class LoginComponent {
 
   async ngOnInit() {
 
-    setInterval(() => {
-      if (![undefined, null, ''].includes(window.localStorage.getItem('userInfo'))) {
-        // window.location.href = this._service.setPreRoutes('DASH');// '/sml/home/sml-dashboard';
-        window.location.href = '/home/sml-dashboard';// '/sml/home/sml-dashboard';
-      };
-    }, 1000);
+    // setInterval(() => {
+    //   if (![undefined, null, ''].includes(window.localStorage.getItem('userInfo'))) {
+    //     // window.location.href = this._service.setPreRoutes('DASH');// '/sml/home/sml-dashboard';
+    //     //    window.location.href = '/home/sml-dashboard';// '/sml/home/sml-dashboard';
+    //     this.router.navigate(['/home/sml-dashboard']);
+    //   };
+    // }, 1000);
   }
 
   public errorMessages = {
@@ -79,20 +80,21 @@ export class LoginComponent {
       };
 
       this.loading = true;
-      setTimeout(() => {
-        this._service.postApi('usersignin', 'postEndPoint', this.siginJson).subscribe(res => {
-          res = this._service.enableCryptoForResponse() ? this._service.decrypt(res) : res;
-          if (res.S_CODE == 200) {
-            // localStorage.setItem('userInfo', JSON.stringify(res.DATA[0]['userInfo']));
-            localStorage.setItem('userInfo', this._service.encrypt(JSON.stringify(res.DATA[0]['userInfo'])));
-            window.location.href = '/home/sml-dashboard'//this._service.setPreRoutes('DASH'); //'/sml/home/sml-dashboard'
-
-          } else if (res.S_CODE == 300) {
-            this.MessageService.add({ severity: 'error', summary: 'Sign In Error', detail: `${res['S_MSG']}` });
-            this.loading = false;
-          }
-        });
-      }, 2000);
+      // setTimeout(() => {
+      this._service.postApi('usersignin', 'postEndPoint', this.siginJson).subscribe(res => {
+        res = this._service.enableCryptoForResponse() ? this._service.decrypt(res) : res;
+        if (res.S_CODE == 200) {
+          // localStorage.setItem('userInfo', JSON.stringify(res.DATA[0]['userInfo']));
+          localStorage.setItem('userInfo', this._service.encrypt(JSON.stringify(res.DATA[0]['userInfo'])));
+          //window.location.href = '/home/sml-dashboard'//this._service.setPreRoutes('DASH'); //'/sml/home/sml-dashboard'
+          // window.location.href = '/home/sml-dashboard'
+          this.router.navigate(['/home/sml-dashboard']);
+        } else if (res.S_CODE == 300) {
+          this.MessageService.add({ severity: 'error', summary: 'Sign In Error', detail: `${res['S_MSG']}` });
+          this.loading = false;
+        }
+      });
+      // }, 2000);
 
     } catch (e) {
       this.loading = false;

@@ -58,6 +58,13 @@
                         </th>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
+                                Branch
+                                <p-columnFilter type="text" field="branchname" display="menu"
+                                    placeholder="Search by Cadre"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div class="flex justify-content-between align-items-center">
                                 Description
                                 <!-- <p-columnFilter type="text" field="desc" display="menu"
                                     placeholder="Search by contact"></p-columnFilter> -->
@@ -94,6 +101,9 @@
                         </td>
                         <td>
                             {{customer.cadername}}
+                        </td>
+                        <td>
+                            {{customer.branchname}}
                         </td>
 
                         <td>
@@ -156,9 +166,15 @@
                     </div>
                     <div class="col-12">
                         <label for="firstname2">Cadre</label>
-                        <p-dropdown [options]="caders" [(ngModel)]="createMaster.cader_id"  [filter]="true"
+                        <p-dropdown [options]="caders" [(ngModel)]="createMaster.cader_id" [filter]="true"
                             [disabled]="mode=='VIEW' "></p-dropdown>
                         <small *ngIf="errorMessages.cader_id != ''">{{ errorMessages.cader_id}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label for="firstname2">Branch</label>
+                        <p-dropdown [options]="branchList" [(ngModel)]="createMaster.branchid" [filter]="true"
+                            [disabled]="mode=='VIEW' "></p-dropdown>
+                        <small *ngIf="errorMessages.branchid != ''">{{ errorMessages.branchid}}</small>
                     </div>
 
                     <div class="col-12">

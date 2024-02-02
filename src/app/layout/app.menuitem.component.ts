@@ -65,7 +65,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
 
     key: string = "";
 
-    constructor(public layoutService: LayoutService, private cd: ChangeDetectorRef, 
+    constructor(public layoutService: LayoutService, private cd: ChangeDetectorRef,
         public router: Router, private menuService: MenuService) {
         this.menuSourceSubscription = this.menuService.menuSource$.subscribe(value => {
             Promise.resolve(null).then(() => {
@@ -109,30 +109,35 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
     }
 
     itemClick(event: Event) {
+        // alert('j')
         // avoid processing disabled items
         if (this.item.disabled) {
+           
             event.preventDefault();
             return;
         }
 
         // execute command
         if (this.item.command) {
+          
             this.item.command({ originalEvent: event, item: this.item });
         }
 
         // toggle active state
         if (this.item.items) {
+            
             this.active = !this.active;
         }
-
+        this.layoutService.onMenuToggle()
         this.menuService.onMenuStateChange({ key: this.key });
+        
     }
 
     get submenuAnimation() {
         return this.root ? 'expanded' : (this.active ? 'expanded' : 'collapsed');
     }
 
-    @HostBinding('class.active-menuitem') 
+    @HostBinding('class.active-menuitem')
     get activeClass() {
         return this.active && !this.root;
     }

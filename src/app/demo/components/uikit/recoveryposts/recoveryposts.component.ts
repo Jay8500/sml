@@ -5,6 +5,7 @@ import { FileUpload } from 'primeng/fileupload';
 import { Subject, takeUntil } from 'rxjs';
 import { ServicesService } from 'src/app/services.service';
 import * as _ from 'lodash';
+import { Sidebar } from 'primeng/sidebar';
 @Component({
   selector: 'app-recoveryposts',
   templateUrl: './recoveryposts.component.html',
@@ -12,6 +13,8 @@ import * as _ from 'lodash';
   providers: [MessageService, ConfirmationService]
 })
 export class RecoverypostsComponent {
+  @ViewChild('sidebarRef') sidebarRef!: Sidebar;
+  public sidebarVisible = false;
 
   public pymentType = [
     {
@@ -64,6 +67,29 @@ export class RecoverypostsComponent {
     { label: 'Renewal', value: 'renewal' },
     { label: 'Proposal', value: 'proposal' }
   ];
+
+  public paymentTypeList = [
+    {
+      label: 'Cash',
+      value: 1
+    },
+    {
+      label: 'Phone Pay',
+      value: 2
+    },
+    {
+      label: 'Google Pay',
+      value: 3
+    },
+    {
+      label: 'PayTM',
+      value: 4
+    },
+    {
+      label: 'Other Online',
+      value: 5
+    }
+  ]
 
   public borrwoersList = [
     {
@@ -350,49 +376,6 @@ export class RecoverypostsComponent {
       case "disbursementstatus":
         this.errorMessages.disbursementstatus = [undefined, null, ''].includes(this.createMaster.disbursementstatus) ? 'Dibursement Status is required' : "";
         break;
-      // case "prodtype":
-      //   this.errorMessages.prodtype = [undefined, null, ''].includes(this.createMaster.prodtype) ? 'Product type is required' : "";
-      //   break;
-      // case "loanamount":
-      //   this.errorMessages.loanamount = [undefined, null, ''].includes(this.createMaster.loanamount) ? 'Amount is required' : "";
-      //   break;
-      // case "loanschedule":
-      //   this.errorMessages.loanschedule = [undefined, null, ''].includes(this.createMaster.loanschedule) ? 'Loan schedule is required' : "";
-      //   break;
-
-      // case "tenure":
-      //   this.errorMessages.tenure = [undefined, null, ''].includes(this.createMaster.tenure) ? 'Tenure is required' : "";
-      //   break;
-      // case "bankname":
-      //   this.errorMessages.bankname = [undefined, null, ''].includes(this.createMaster.bankname) ? 'Bank name is required' : "";
-      //   break;
-      // case "accountno":
-      //   this.errorMessages.accountno = [undefined, null, ''].includes(this.createMaster.accountno) ? 'Account no. is required' : "";
-      //   break;
-      // case "accountname":
-      //   this.errorMessages.accountname = [undefined, null, ''].includes(this.createMaster.accountname) ? 'Account name is required' : "";
-      //   break;
-      // case "ifsc":
-      //   this.errorMessages.ifsc = [undefined, null, ''].includes(this.createMaster.ifsc) ? 'IFSC is required' : "";
-      //   break;
-
-      // case "surityname":
-      //   this.errorMessages.surityname = [undefined, null, ''].includes(this.createMaster.surityname) ? 'Surity name is required' : "";
-      //   break;
-      // case "surityaadhar":
-      //   this.errorMessages.surityaadhar = [undefined, null, ''].includes(this.createMaster.surityaadhar) ? 'Surity aadhar is required' : "";
-      //   break;
-      // case "surityhousetype":
-      //   this.errorMessages.surityhousetype = [undefined, null, ''].includes(this.createMaster.surityhousetype) ? 'Surity House Type is required' : "";
-      //   break;
-      // case "contactnumber":
-      //   this.errorMessages.contactnumber = [undefined, null, ''].includes(this.createMaster.contactnumber) ? 'Surity Contact no. is required' : "";
-      //   break;
-      // case "deposit":
-      //   if (this.createMaster.prodtype == 1) {
-      //     this.errorMessages.deposit = [undefined, null, ''].includes(this.createMaster.deposit) ? 'Deposit is required' : "";
-      //   }
-      //   break;
     }
   }
   public approvalsStatusList = [
@@ -591,22 +574,28 @@ export class RecoverypostsComponent {
                     housetypeName: ![undefined, null, ""].includes(pros.housetype) ? _.filter(this.houseTypeList, { value: parseInt(pros.housetype) })[0]['label'] : "",
                     ifsc: pros.ifsc,
                     loanamount: pros.loanamount,
+                    emi: parseInt(pros.loanamount)  /  parseInt(_.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label']),
+                    pastDue: 0,
+                    currentDue: 0,
                     loanAmountName: _.filter(this.loanAmountList || [], { value: parseInt(pros.loanamount) })[0]['label'], // ![undefined, null, ""].includes(pros.loanamount) ? _.filter(this.loanAmountList, { value: parseInt(pros.loanamount) })[0]['label'] : "",
                     loanschedule: pros.loanschedule,
-                    loanscheduleName: ![undefined, null, ""].includes(pros.loanschedule) ? _.filter(this.tenureList, { value: parseInt(pros.loanschedule) })[0]['label'] : "",
+                    loanscheduleName: ![undefined, null, ""].includes(pros.loanschedule) ? _.filter(this.loanShedule, { value: parseInt(pros.loanschedule) })[0]['label'] : "",
                     modify_by: pros.modify_by,
-                    collectedloanAmount : "",
-                    collectedPaymentType : "",
+
+                    collectedloanAmount: "",
+                    collectedPaymentType: "",
+                    paymentHistory: true,
+
                     modify_dt: pros.modify_dt,
                     prodtype: pros.prodtype,
                     prodtypeName: ![undefined, null, ""].includes(pros.prodtype) ? _.filter(this.productTypeList, { value: parseInt(pros.prodtype) })[0]['label'] : "",
                     smtcode: pros.smtcode,
                     surityaadhar: pros.surityaadhar,
                     surityhousetype: pros.surityhousetype,
-                    surityhousetypeName: ![undefined, null, ""].includes(pros.prodtype) ? _.filter(this.houseTypeList, { value: parseInt(pros.surityhousetype) })[0]['label'] : "",
+                    surityhousetypeName: ![undefined, null, ""].includes(pros.surityhousetype) ? _.filter(this.houseTypeList, { value: parseInt(pros.surityhousetype) })[0]['label'] : "",
                     surityname: pros.surityname,
                     tenure: pros.tenure,
-                    tenureName: ![undefined, null, ""].includes(pros.prodtype) ? _.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label'] : "",
+                    tenureName: ![undefined, null, ""].includes(pros.tenure) ? _.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label'] : "",
                     _id: pros._id,
                     id: prdIn + 1,
                     active: pros.active,
@@ -800,4 +789,23 @@ export class RecoverypostsComponent {
     }
   }
 
+  public historyHeader = "";
+  historyLookup(customer: any) {
+    this.sidebarVisible = true;
+    this.historyHeader = ` Borrower :- ${customer.borrower} with SMTCODE :- ${customer.smtcode}`;
+  }
+
+  closeCallback(e: any): void {
+    this.sidebarRef.close(e);
+    this.historyHeader = "";
+  }
+  public loadings = false;
+  save() {
+
+  }
+
+  collectedAmount(customer: any) {
+    customer['error'] = parseInt(customer.collectedloanAmount) > parseInt(customer.loanamount) ? 'Collection Amount is greater than Due Amount' : "";
+  }
 }
+
