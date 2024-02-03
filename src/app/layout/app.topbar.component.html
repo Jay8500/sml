@@ -70,7 +70,7 @@
     </ng-template>
 </p-overlayPanel>
 
-<p-sidebar [(visible)]="sidebarVisible">
+<p-sidebar [(visible)]="Visible">
     <ul *ngFor="let tab of model" style="list-style-type: none;">
         <li>
             <span class="font-bold">{{ tab.label}}</span>
@@ -81,5 +81,5 @@
             </ul>
         </li>
     </ul>
-    <!-- <p-menu [model]="model" (onHide)="sidebarVisible=false"></p-menu> -->
+    <!-- <p-menu [model]="model" (onHide)="Visible=false"></p-menu> -->
 </p-sidebar>

@@ -11,8 +11,6 @@ import { AppTopBarComponent } from './app.topbar.component';
 })
 export class AppLayoutComponent implements OnDestroy {
 
-    overlayMenuOpenSubscription: Subscription;
-
     menuOutsideClickListener: any;
 
     profileMenuOutsideClickListener: any;
@@ -22,39 +20,6 @@ export class AppLayoutComponent implements OnDestroy {
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
-        this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
-            if (!this.menuOutsideClickListener) {
-                this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
-                    const isOutsideClicked = !(this.appSidebar.el.nativeElement.isSameNode(event.target) || this.appSidebar.el.nativeElement.contains(event.target) 
-                        || this.appTopbar.menuButton.nativeElement.isSameNode(event.target) || this.appTopbar.menuButton.nativeElement.contains(event.target));
-                    
-                    if (isOutsideClicked) {
-                        this.hideMenu();
-                    }
-                });
-            }
-
-            if (!this.profileMenuOutsideClickListener) {
-                this.profileMenuOutsideClickListener = this.renderer.listen('document', 'click', event => {
-                    const isOutsideClicked = !(this.appTopbar.menu.nativeElement.isSameNode(event.target) || this.appTopbar.menu.nativeElement.contains(event.target)
-                        || this.appTopbar.topbarMenuButton.nativeElement.isSameNode(event.target) || this.appTopbar.topbarMenuButton.nativeElement.contains(event.target));
-
-                    if (isOutsideClicked) {
-                        this.hideProfileMenu();
-                    }
-                });
-            }
-
-            if (this.layoutService.state.staticMenuMobileActive) {
-                this.blockBodyScroll();
-            }
-        });
-
-        this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => {
-                this.hideMenu();
-                this.hideProfileMenu();
-            });
     }
 
     hideMenu() {
@@ -110,10 +75,6 @@ export class AppLayoutComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.overlayMenuOpenSubscription) {
-            this.overlayMenuOpenSubscription.unsubscribe();
-        }
-
         if (this.menuOutsideClickListener) {
             this.menuOutsideClickListener();
         }

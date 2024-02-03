@@ -1,6 +1,5 @@
 // import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { LayoutService } from "./service/app.layout.service";
 
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, inject, ElementRef, ViewChild } from '@angular/core';
@@ -20,16 +19,10 @@ export class AppTopBarComponent implements OnInit {
     private router = inject(Router);
     items!: MenuItem[];
     model: any[] = [];
-    @ViewChild('menubutton') menuButton!: ElementRef;
 
-    @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
+    constructor() { }
 
-    @ViewChild('topbarmenu') menu!: ElementRef;
-
-    constructor(public layoutService: LayoutService) { }
-
-    @Output() sideBarClicks = new EventEmitter();
-    @Input() sidebarVisible: boolean = false;
+    public Visible = false;
     public service = inject(ServicesService);
     public datePipe = inject(DatePipe)
     public userInfo: any = {};
@@ -168,12 +161,9 @@ export class AppTopBarComponent implements OnInit {
         // window.location.href = '/sml/sml-signin'  //this.service.setPreRoutes('REDIRECTLOGIN');// '/sml/sml-signin';
     }
 
-    onBarClick() {
-        this.sideBarClicks.emit(this.sidebarVisible);
-    }
 
     onClick(tabs: any) {
-        this.sidebarVisible = false;
+        this.Visible = false;
         // setTimeout(() => {
         this.router.navigateByUrl(tabs.pat);
         // }, 1200)
@@ -181,6 +171,6 @@ export class AppTopBarComponent implements OnInit {
     }
 
     onSideBarClick() {
-        this.sidebarVisible = !this.sidebarVisible;
+        this.Visible = !this.Visible;
     }
 }
