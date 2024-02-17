@@ -172,7 +172,7 @@
                                 maxlength="1054"></textarea>
                         </td>
                         <td>
-                            <button pButton label="Save" class="w-full " [loading]="customer['loadings']"
+                            <button pButton label="Save" class="w-full " [loading]="customer['loadings']" *ngIf="customer.paymentcnt>0"
                                 [disabled]="customer.collectedloanAmount==''  ||  customer.collectedPaymentType == ''"
                                 styleClass="p-button-rounded " (click)="save(customer,cusId)"></button>
                         </td>
