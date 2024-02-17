@@ -581,6 +581,8 @@ export class RecoverypostsComponent {
                     loanamount: pros.loanamount,
                     emi: parseInt(pros.loanamount) / parseInt(_.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label']),
                     pastDue: 0,
+                    hide: pros.hide,
+                    showhistory: pros.showhistory,
                     currentDue: 0,
                     loanAmountName: _.filter(this.loanAmountList || [], { value: parseInt(pros.loanamount) })[0]['label'], // ![undefined, null, ""].includes(pros.loanamount) ? _.filter(this.loanAmountList, { value: parseInt(pros.loanamount) })[0]['label'] : "",
                     loanschedule: pros.loanschedule,
@@ -799,12 +801,14 @@ export class RecoverypostsComponent {
   public historyHeader = "";
   public paymentHistory: any = [];
   public paymentHistType = [];
+  public summaryTotal = 0;
   historyLookup(customer: any) {
     this.sidebarVisible = true;
+    this.summaryTotal = 0;
     this.paymentHistory = [];
     this.historyHeader = ` Borrower :- ${customer.borrower} with SMTCODE :- ${customer.smtcode}`;
 
-    this._service.postApi('historypayments', 'postEndPoint', { smtcode: customer.smtcode })
+    this._service.postApi('historypayments', 'postEndPoint', { smtcode: customer.smtcode, loanid: customer._id })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
@@ -819,6 +823,7 @@ export class RecoverypostsComponent {
                 remarks: pymnt.remarks,
                 create_dt: this.datePipe.transform(pymnt.create_dt, 'dd-MMM-YYYY hh:mm a'),
               };
+              this.summaryTotal += parseInt(pymnt.collectedAmount) ;
               this.paymentHistory.push(createHisPayment);
             });
           };

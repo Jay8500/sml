@@ -121,8 +121,9 @@
                 <ng-template pTemplate="body" let-customer let-cusId="rowIndex">
                     <tr>
                         <td>
-                            <i class="pi pi-history" pTooltip="Payment History" *ngIf="customer.paymentcnt>0"
-                                (click)="historyLookup(customer)"></i>
+                            <!-- *ngIf="customer.paymentcnt==0" -->
+                            <i class="pi pi-history" pTooltip="Payment History" (click)="historyLookup(customer)"
+                                *ngIf="customer.paymentcnt>=1"></i>
                             <span style="color: blue;font-size: medium;">
                                 {{customer.smtcode}}
                             </span>
@@ -133,6 +134,8 @@
 
                         <td>
                             {{customer.tenureName}}
+                            <i class="pi pi-info-circle" [pTooltip]="'Payments Count ' + customer.paymentcnt"
+                                (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
                         </td>
                         <td class="text-green-500 text-xl ">
                             {{customer.loanscheduleName}}
@@ -153,7 +156,7 @@
                             {{customer.loanAmountName}}
                         </td> -->
                         <td>
-                            <div class="text-center">
+                            <div class="text-center" *ngIf="customer.hide">
                                 <input pInputText id="age1" type="text" [(ngModel)]="customer.collectedloanAmount"
                                     [pKeyFilter]="'num'" maxlength="10" (blur)="collectedAmount(customer)" />
                             </div>
@@ -164,15 +167,17 @@
                         <td>
                             <div *ngFor="let paymentType of paymentTypeList ">
                                 <input type="radio" name="test_{{cusId}}" id="1" [value]="paymentType.value"
+                                    *ngIf="customer.hide"
                                     [(ngModel)]="customer.collectedPaymentType">{{paymentType.label}}
                             </div>
                         </td>
                         <td class="text-center">
                             <textarea rows="2" cols="30" pInputTextarea [(ngModel)]="customer.remarks"
-                                maxlength="1054"></textarea>
+                                *ngIf="customer.hide" maxlength="1054"></textarea>
                         </td>
                         <td>
-                            <button pButton label="Save" class="w-full " [loading]="customer['loadings']" *ngIf="customer.paymentcnt>0"
+                            <button pButton label="Save" class="w-full " [loading]="customer['loadings']"
+                                *ngIf="customer.hide"
                                 [disabled]="customer.collectedloanAmount==''  ||  customer.collectedPaymentType == ''"
                                 styleClass="p-button-rounded " (click)="save(customer,cusId)"></button>
                         </td>
@@ -239,7 +244,7 @@
                             </th>
                             <th>
 
-                                <div class="flex justify-content-between align-items-center">
+                                <div class="flex justify-content-between align-items-center" style="width: 3rem;">
                                     Payment Type
                                     <!-- <p-columnFilter type="text" field="status" display="menu"
                                     placeholder="Search by Suriy Status"></p-columnFilter> -->
@@ -273,7 +278,7 @@
                             <td class="text-green-500 text-xl text-right">
                                 {{customer.collectedAmount}}
                             </td>
-                            <td class="text-orange-500 text-xl text-right">
+                            <td class="text-orange-500 text-xl text-left">
                                 {{customer.collectedPaymentType}}
                                 <!-- <div *ngFor="let paymentType of paymentTypeList ">
                                     <input type="radio" name="test_{{cusId}}" id="1" [value]="paymentType.value"
@@ -287,6 +292,12 @@
                             <td>
                                 {{customer.create_dt}}
                             </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr>
+                            <td></td>
+                            <td colspan="5">Total : {{ summaryTotal }}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
