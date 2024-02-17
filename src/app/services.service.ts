@@ -123,4 +123,8 @@ export class ServicesService {
     return this._configClone['autoCode'] || 0;
   }
 
+  appVersion(){
+    return this._configClone['appVersion'];
+  }
+
 }

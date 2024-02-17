@@ -54,20 +54,7 @@
                                     placeholder="Search by Approval Status"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Approval Status
-                                <!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
-                                    placeholder="Search by Approval Status"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Approval By
-                                <!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
-									placeholder="Search by Approval By"></p-columnFilter> -->
-                            </div>
-                        </th>
+
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 Approval Remarks
@@ -243,22 +230,9 @@
                             {{customer.paymenttype}}
                         </td>
                         <td>
-                            <span *ngIf="customer.approvalstatus == 'P'"
-                                [class]="'order-badge order-pending'">Pending</span>
-                            <span *ngIf="customer.approvalstatus == 'A'"
-                                [class]="'order-badge order-delivered'">Approved</span>
-                            <span *ngIf="customer.approvalstatus == 'R'"
-                                [class]="'order-badge order-cancelled'">Rejected</span>
-                            <span *ngIf="customer.approvalstatus == 'C'"
-                                [class]="'order-badge order-cancelled'">Cancel</span>
-                        </td>
-                        <td>
-                            {{customer.approvalby}}
-                        </td>
-                        <td>
                             {{customer.approvalremarks}}
                         </td>
-                      
+
                         <td>
                             {{customer.branchName}}
                         </td>
@@ -329,12 +303,12 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="26">No Approvals loans found.</td>
+                        <td colspan="24">No Approvals loans found.</td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="loadingbody">
                     <tr>
-                        <td colspan="26 ">Loading Approvals loans data. Please wait.</td>
+                        <td colspan="24">Loading Approvals loans data. Please wait.</td>
                     </tr>
                 </ng-template>
             </p-table>

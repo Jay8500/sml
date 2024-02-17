@@ -8,14 +8,21 @@
     "isBuild": "Y",
     "isCrypto": "N",
     "fileUploadSize": "1024mb",
+    "appVersion": "2.0.0",
     "usersignin": {
         "postEndPoint": "sml/smlsignin"
     },
     "forgotpwd": {
         "postEndPoint": "sml/validateuser"
     },
+    "payment": {
+        "postEndPoint": "sml/payment"
+    },
     "getAddressList": {
         "postEndPoint": "sml/addressmasters"
+    },
+    "historypayments": {
+        "postEndPoint": "sml/historypayments"
     },
     "onlyPages": {
         "postEndPoint": "sml/onlypages"

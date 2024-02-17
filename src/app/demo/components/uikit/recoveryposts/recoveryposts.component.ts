@@ -6,11 +6,12 @@ import { Subject, takeUntil } from 'rxjs';
 import { ServicesService } from 'src/app/services.service';
 import * as _ from 'lodash';
 import { Sidebar } from 'primeng/sidebar';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-recoveryposts',
   templateUrl: './recoveryposts.component.html',
   styleUrls: ['./recoveryposts.component.css'],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService, DatePipe]
 })
 export class RecoverypostsComponent {
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
@@ -44,6 +45,7 @@ export class RecoverypostsComponent {
   public blocUI = false;
   selectedCity: any;
   selectedState: any = null;
+  public loadings = false;
   states: any[] = [
     { name: 'Arizona', code: 'Arizona' },
     { name: 'California', value: 'California' },
@@ -400,6 +402,7 @@ export class RecoverypostsComponent {
       value: null
     }
   ]
+  public datePipe = inject(DatePipe);
 
   onProducttype() {
     if (this.createMaster.prodtype != 1) this.createMaster.deposit = "";
@@ -574,18 +577,18 @@ export class RecoverypostsComponent {
                     housetypeName: ![undefined, null, ""].includes(pros.housetype) ? _.filter(this.houseTypeList, { value: parseInt(pros.housetype) })[0]['label'] : "",
                     ifsc: pros.ifsc,
                     loanamount: pros.loanamount,
-                    emi: parseInt(pros.loanamount)  /  parseInt(_.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label']),
+                    emi: parseInt(pros.loanamount) / parseInt(_.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label']),
                     pastDue: 0,
                     currentDue: 0,
                     loanAmountName: _.filter(this.loanAmountList || [], { value: parseInt(pros.loanamount) })[0]['label'], // ![undefined, null, ""].includes(pros.loanamount) ? _.filter(this.loanAmountList, { value: parseInt(pros.loanamount) })[0]['label'] : "",
                     loanschedule: pros.loanschedule,
                     loanscheduleName: ![undefined, null, ""].includes(pros.loanschedule) ? _.filter(this.loanShedule, { value: parseInt(pros.loanschedule) })[0]['label'] : "",
                     modify_by: pros.modify_by,
-
+                    loadings: false,
                     collectedloanAmount: "",
                     collectedPaymentType: "",
                     paymentHistory: true,
-
+                    remarks: "",
                     modify_dt: pros.modify_dt,
                     prodtype: pros.prodtype,
                     prodtypeName: ![undefined, null, ""].includes(pros.prodtype) ? _.filter(this.productTypeList, { value: parseInt(pros.prodtype) })[0]['label'] : "",
@@ -700,7 +703,10 @@ export class RecoverypostsComponent {
 
   public submitloading = false;
 
-  saveProduct() {
+  save(
+    uniquePayment: any,
+    cusId: number
+  ) {
 
     try {
       let cols: any = [
@@ -718,14 +724,21 @@ export class RecoverypostsComponent {
         }
       });
       if (count > 0) {
-        this.submitloading = true;
-        let savePayload = JSON.parse(JSON.stringify(this.createMaster));
-        savePayload['flag'] = 'DISBURSEMENT';
-        savePayload['create_by'] = this._service.getUserInfo('_id');
-        let filterName: any = _.filter(this.borrwoersList, { _id: this.createMaster.borrowername });
-        savePayload['borrower'] = filterName[0]['name'];
-        // console.log(savePayload)
-        let loginJson = this._service.postApi('generateloans', 'postEndPoint', savePayload)
+        uniquePayment.loadings = true;
+        let paymentType = {
+          flag: 'S',
+          loanid: uniquePayment._id,
+          smtcode: uniquePayment.smtcode,
+          borrwedamount: uniquePayment.loanamount,
+          totaldue: uniquePayment.totaldue,
+          collectedAmount: uniquePayment.collectedloanAmount,
+          paymenttype: uniquePayment.collectedPaymentType,
+          remarks: uniquePayment.remarks,
+          create_by: this._service.getUserInfo('_id'),
+          paymentcnt: 1
+        };
+
+        let loginJson = this._service.postApi('payment', 'postEndPoint', paymentType)
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (data) => {
@@ -734,27 +747,19 @@ export class RecoverypostsComponent {
                 this.isShowSidebarClose = false;
                 this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
                 this.isOk = true;
-                this.createMaster = JSON.parse(this.defaultUser);
-                this.submitloading = false;
-
+                uniquePayment.loadings = false;
               } else if ([400, 300].includes(data.S_CODE)) {
                 this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
-                this.submitloading = false;
-                this.isShowSidebarClose = false;
-                this.submitloading = false;
+                uniquePayment.loadings = false;
               }
             },
             error: (err) => {
-              this.submitloading = false;
-              // this.loading = false;
+              uniquePayment.loadings = false;
             }
           });
       };
-
     } catch (e) {
-
     }
-    // this.loading = false;
   }
 
   hideDialog() {
@@ -790,21 +795,45 @@ export class RecoverypostsComponent {
   }
 
   public historyHeader = "";
+  public paymentHistory: any = [];
+  public paymentHistType = [];
   historyLookup(customer: any) {
     this.sidebarVisible = true;
+    this.paymentHistory = [];
     this.historyHeader = ` Borrower :- ${customer.borrower} with SMTCODE :- ${customer.smtcode}`;
+
+    this._service.postApi('historypayments', 'postEndPoint', { smtcode: customer.smtcode })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data['S_CODE'] == 200) {
+            _.forEach(data['DATA'], (pymnt, pyIn) => {
+              let createHisPayment = {
+                borrwedamount: pymnt.borrwedamount,
+                collectedAmount: pymnt.collectedAmount,
+                // collectedPaymentType: parseInt(pymnt.paymenttype),
+                collectedPaymentType: _.filter(this.paymentTypeList, (v, vIn) => v.value === parseInt(pymnt.paymenttype))[0]['label'],
+                remarks: pymnt.remarks,
+                create_dt: this.datePipe.transform(pymnt.create_dt, 'dd-MMM-YYYY hh:mm a'),
+              };
+              this.paymentHistory.push(createHisPayment);
+            });
+          };
+        },
+        error: (err) => {
+        }
+      });
   }
 
   closeCallback(e: any): void {
     this.sidebarRef.close(e);
     this.historyHeader = "";
   }
-  public loadings = false;
-  save() {
 
-  }
 
   collectedAmount(customer: any) {
+    customer.collectedloanAmount = customer.collectedloanAmount.trim();
     customer['error'] = parseInt(customer.collectedloanAmount) > parseInt(customer.loanamount) ? 'Collection Amount is greater than Due Amount' : "";
   }
 }

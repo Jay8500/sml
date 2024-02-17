@@ -5,22 +5,14 @@
                 <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
                     Recovery Postings
                 </div>
-                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
-                    <!-- 2 -->
-                </div>
-                <!-- <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
-                        (click)="onClick(null,'NEW')"></button>
-                </div> -->
             </div>
-
 
             <p-table #dt1 [value]="crudGrid" dataKey="smtcode" [rows]="10" [loading]="loading" [rowHover]="true"
                 styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="true"
                 responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="min-width: 12rem">
+                        <th>
                             <div class="flex justify-content-between align-items-center">
                                 SMT CODE
                                 <p-columnFilter type="text" field="smtcode" display="menu"
@@ -28,15 +20,16 @@
                             </div>
                         </th>
 
-                        <th style="min-width: 22rem">
+                        <th>
                             <div class="flex justify-content-between align-items-center">
                                 Name
-                                <!-- <p-columnFilter type="text" field="borrower" display="menu"
-                                    placeholder="Search by name"></p-columnFilter> -->
+                                <p-columnFilter type="text" field="borrower" display="menu"
+                                    placeholder="Search by name"></p-columnFilter>
                             </div>
                         </th>
 
-                        <th style="min-width: 8rem">
+                        <th>
+
                             <div class="flex justify-content-between align-items-center">
                                 Tenure
                                 <!-- <p-columnFilter type="text" field="borrower" display="menu"
@@ -44,7 +37,8 @@
                             </div>
                         </th>
 
-                        <th style="min-width: 5rem">
+                        <th>
+
                             <div class="flex justify-content-between align-items-center">
                                 Repay Mode
                                 <!-- <p-columnFilter type="text" field="prodtypeName" display="menu"
@@ -52,23 +46,21 @@
                             </div>
                         </th>
 
-                        <th style="min-width: 10rem">
+                        <th>
                             <div class="flex justify-content-between align-items-center">
-                               Borrowed Amount
+                                Borrowed Amount
                                 <!-- Due Amount -->
                                 <!-- <p-columnFilter type="text" field="loanamount" display="menu"
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 10rem">
+                        <!-- <th>
                             <div class="flex justify-content-between align-items-center">
-                               EMI
-                                <!-- Due Amount -->
-                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                    placeholder="Search by Loan amount"></p-columnFilter> -->
+                                EMI
+
                             </div>
-                        </th>
-                        <th style="min-width: 8rem">
+                        </th> -->
+                        <th>
                             <div class="flex justify-content-between align-items-center">
                                 Past due
                                 <!-- Due Amount -->
@@ -76,7 +68,8 @@
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 8rem">
+                        <th>
+
                             <div class="flex justify-content-between align-items-center">
                                 Current due
                                 <!-- Due Amount -->
@@ -84,7 +77,8 @@
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 8rem">
+                        <th>
+
                             <div class="flex justify-content-between align-items-center">
                                 Total due
                                 <!-- Due Amount -->
@@ -92,21 +86,30 @@
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 10rem">
+                        <th>
                             <div class="flex justify-content-between align-items-center">
                                 Collected Amount
                                 <!-- <p-columnFilter type="text" field="loanamount" display="menu"
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 6rem">
+                        <th>
+
                             <div class="flex justify-content-between align-items-center">
                                 Payment Type
                                 <!-- <p-columnFilter type="text" field="status" display="menu"
                                     placeholder="Search by Suriy Status"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 10rem">
+                        <th>
+
+                            <div class="flex justify-content-between align-items-center">
+                                Remarks
+                                <!-- <p-columnFilter type="text" field="status" display="menu"
+                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
+                            </div>
+                        </th>
+                        <th>
                             <div class="flex justify-content-between align-items-center">
                                 Action
                                 <!-- <p-columnFilter type="text" field="status" display="menu"
@@ -124,33 +127,33 @@
                                 {{customer.smtcode}}
                             </span>
                         </td>
-                        <td>
+                        <td class="text-pink-500 text-xl">
                             {{customer.borrower}}
                         </td>
 
                         <td>
                             {{customer.tenureName}}
                         </td>
-                        <td>
+                        <td class="text-green-500 text-xl ">
                             {{customer.loanscheduleName}}
                         </td>
-                        <td>
+                        <td class="text-orange-500 text-xl text-right">
                             {{customer.loanAmountName}}
                         </td>
-                        <td>
+                        <!-- <td>
                             {{customer.emi}}
-                        </td>
-                        <td>
+                        </td> -->
+                        <td class="text-red-500 text-xl text-right">
                             {{customer.pastDue}}
                         </td>
-                        <td>
+                        <td class="text-red-500 text-xl text-right">
                             {{customer.currentDue}}
                         </td>
-                        <td>
+                        <td class="text-yellow-500 text-xl text-right">
                             {{customer.loanAmountName}}
                         </td>
                         <td>
-                            <div class="mb-3 w-full">
+                            <div class="text-center">
                                 <input pInputText id="age1" type="text" [(ngModel)]="customer.collectedloanAmount"
                                     [pKeyFilter]="'num'" maxlength="10" (blur)="collectedAmount(customer)" />
                             </div>
@@ -164,21 +167,26 @@
                                     [(ngModel)]="customer.collectedPaymentType">{{paymentType.label}}
                             </div>
                         </td>
+                        <td class="text-center">
+                            <textarea rows="2" cols="30" pInputTextarea [(ngModel)]="customer.remarks"
+                                maxlength="1054"></textarea>
+                        </td>
                         <td>
-                            <button pButton label="Save payment" class="w-full " [loading]="loadings"
-                                styleClass="p-button-rounded " (click)="save()"></button>
+                            <button pButton label="Save" class="w-full " [loading]="customer['loadings']"
+                                [disabled]="customer.collectedloanAmount==''  ||  customer.collectedPaymentType == ''"
+                                styleClass="p-button-rounded " (click)="save(customer,cusId)"></button>
                         </td>
 
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">Recovery Postings found.</td>
+                        <td colspan="12">Recovery Postings found.</td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="loadingbody">
                     <tr>
-                        <td colspan="8">Loading Recovery Postings data. Please wait.</td>
+                        <td colspan="12">Loading Recovery Postings data. Please wait.</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -206,19 +214,95 @@
                 </span>
             </div>
             <div class="overflow-y-auto">
-                <ul class="list-none p-3 m-0">
-                    <li>
-                        <ul class="list-none p-0 m-0 overflow-hidden">
-                            <li>
-                                <a pRipple
-                                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
-                                    <i class="pi pi-home mr-2"></i>
-                                    <span class="font-medium">Dashboard</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+
+
+                <p-table #dt1 [value]="paymentHistory" dataKey="smtcode" [loading]="loading" [rowHover]="true"
+                rowGroupMode="rowspan"
+                    styleClass="p-datatable-gridlines" [paginator]="false" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Borrowed Amount
+                                    <!-- Due Amount -->
+                                    <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                    placeholder="Search by Loan amount"></p-columnFilter> -->
+                                </div>
+                            </th>
+
+                            <th>
+                                <div class="flex justify-content-between align-items-center">
+                                    Collected Amount
+                                    <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                    placeholder="Search by Loan amount"></p-columnFilter> -->
+                                </div>
+                            </th>
+                            <th>
+
+                                <div class="flex justify-content-between align-items-center">
+                                    Payment Type
+                                    <!-- <p-columnFilter type="text" field="status" display="menu"
+                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
+                                </div>
+                            </th>
+                            <th>
+
+                                <div class="flex justify-content-between align-items-center">
+                                    Remarks
+                                    <!-- <p-columnFilter type="text" field="status" display="menu"
+                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
+                                </div>
+                            </th>
+                            <th>
+
+                                <div class="flex justify-content-between align-items-center">
+                                    Payment Date
+                                    <!-- <p-columnFilter type="text" field="status" display="menu"
+                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer let-cusId="rowIndex" let-rowgroup="rowgroup" let-rowspan="rowspan">
+                        <tr>
+                            <td class="text-orange-500 text-xl text-right" *ngIf="rowgroup"  [attr.rowspan]="rowspan">
+                                {{customer.borrwedamount}}
+                            </td>
+                            <td class="text-green-500 text-xl text-right">
+                                {{customer.collectedAmount}}
+                            </td>
+                            <td class="text-orange-500 text-xl text-right">
+                                {{customer.collectedPaymentType}}
+                                <!-- <div *ngFor="let paymentType of paymentTypeList ">
+                                    <input type="radio" name="test_{{cusId}}" id="1" [value]="paymentType.value"
+                                        [disabled]=true
+                                        [(ngModel)]="customer.collectedPaymentType">{{paymentType.label}}
+                                </div> -->
+                            </td>
+                            <td>
+                                {{customer.remarks}}
+                            </td>
+                            <td>
+                                {{customer.create_dt}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="5">Payments.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="loadingbody">
+                        <tr>
+                            <td colspan="5">Loading Payments data. Please wait.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+
+
+
             </div>
         </div>
     </ng-template>
