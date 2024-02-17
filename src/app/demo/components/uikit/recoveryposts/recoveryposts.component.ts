@@ -549,7 +549,7 @@ export class RecoverypostsComponent {
             data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
             if (data['S_CODE'] == 200) {
               this.blocUI = false;
-              data['DATA'] = _.filter(data['DATA'], { approvalstatus: 'A' });
+              data['DATA'] = _.filter(data['DATA'], { disbursementstatus: 'A' });
               if (data['DATA'].length > 0) {
                 data['DATA'].forEach((pros: any, prdIn: number) => {
                   let createdBorrowers: any = {
@@ -566,11 +566,13 @@ export class RecoverypostsComponent {
                     borrowername: pros.borrowername,
                     branch: pros.branch,
                     // branchName: pros.branchname,
+                    paymentcnt: pros.paymentcnt,
                     branchName: pros.branchname,
                     contactnumber: pros.contactnumber,
                     create_by: pros.create_by,
                     create_dt: pros.create_dt,
                     deposit: pros.deposit,
+                    dueamount: pros.dueamount,
                     depositName: ![undefined, null, "", "0"].includes(pros.deposit) ? _.filter(this.despositList, { value: parseInt(pros.deposit) })[0]['label'] : 'Not Selected',
                     description: pros.description,
                     housetype: pros.housetype,

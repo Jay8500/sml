@@ -7,8 +7,8 @@
                 </div>
             </div>
 
-            <p-table #dt1 [value]="crudGrid" dataKey="smtcode" [rows]="10" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="true"
+            <p-table #dt1 [value]="crudGrid" dataKey="smtcode" [loading]="loading" [rowHover]="true"
+                styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="false"
                 responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
@@ -60,23 +60,23 @@
 
                             </div>
                         </th> -->
-                        <th>
+                        <!-- <th>
                             <div class="flex justify-content-between align-items-center">
-                                Past due
-                                <!-- Due Amount -->
-                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                Past due -->
+                        <!-- Due Amount -->
+                        <!-- <p-columnFilter type="text" field="loanamount" display="menu"
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th>
+                        <!-- </div>
+                        </th> -->
+                        <!-- <th>
 
                             <div class="flex justify-content-between align-items-center">
-                                Current due
-                                <!-- Due Amount -->
-                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                Current due -->
+                        <!-- Due Amount -->
+                        <!-- <p-columnFilter type="text" field="loanamount" display="menu"
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
-                            </div>
-                        </th>
+                        <!-- </div>
+                        </th> -->
                         <th>
 
                             <div class="flex justify-content-between align-items-center">
@@ -121,7 +121,7 @@
                 <ng-template pTemplate="body" let-customer let-cusId="rowIndex">
                     <tr>
                         <td>
-                            <i class="pi pi-history" pTooltip="Payment History" *ngIf="customer.paymentHistory"
+                            <i class="pi pi-history" pTooltip="Payment History" *ngIf="customer.paymentcnt>0"
                                 (click)="historyLookup(customer)"></i>
                             <span style="color: blue;font-size: medium;">
                                 {{customer.smtcode}}
@@ -144,14 +144,14 @@
                             {{customer.emi}}
                         </td> -->
                         <td class="text-red-500 text-xl text-right">
-                            {{customer.pastDue}}
+                            {{customer.dueamount}}
                         </td>
-                        <td class="text-red-500 text-xl text-right">
+                        <!-- <td class="text-red-500 text-xl text-right">
                             {{customer.currentDue}}
-                        </td>
-                        <td class="text-yellow-500 text-xl text-right">
+                        </td> -->
+                        <!-- <td class="text-yellow-500 text-xl text-right">
                             {{customer.loanAmountName}}
-                        </td>
+                        </td> -->
                         <td>
                             <div class="text-center">
                                 <input pInputText id="age1" type="text" [(ngModel)]="customer.collectedloanAmount"
@@ -181,12 +181,12 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="12">Recovery Postings found.</td>
+                        <td colspan="10">Recovery Postings found.</td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="loadingbody">
                     <tr>
-                        <td colspan="12">Loading Recovery Postings data. Please wait.</td>
+                        <td colspan="10">Loading Recovery Postings data. Please wait.</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -217,8 +217,8 @@
 
 
                 <p-table #dt1 [value]="paymentHistory" dataKey="smtcode" [loading]="loading" [rowHover]="true"
-                rowGroupMode="rowspan"
-                    styleClass="p-datatable-gridlines" [paginator]="false" responsiveLayout="scroll">
+                    rowGroupMode="rowspan" styleClass="p-datatable-gridlines" [paginator]="false"
+                    responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>
@@ -264,9 +264,10 @@
 
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-customer let-cusId="rowIndex" let-rowgroup="rowgroup" let-rowspan="rowspan">
+                    <ng-template pTemplate="body" let-customer let-cusId="rowIndex" let-rowgroup="rowgroup"
+                        let-rowspan="rowspan">
                         <tr>
-                            <td class="text-orange-500 text-xl text-right" *ngIf="rowgroup"  [attr.rowspan]="rowspan">
+                            <td class="text-orange-500 text-xl text-right" *ngIf="rowgroup" [attr.rowspan]="rowspan">
                                 {{customer.borrwedamount}}
                             </td>
                             <td class="text-green-500 text-xl text-right">
