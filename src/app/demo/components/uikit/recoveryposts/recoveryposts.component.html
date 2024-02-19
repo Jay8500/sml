@@ -1,205 +1,402 @@
-<div class="grid">
-    <div class="col-12">
-        <div class="card">
-            <div class="flex justify-content-between flex-wrap">
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    Recovery Postings
+<div class="card">
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <i class="pi pi-calendar"></i>
+                <span class="ml-1"> Recovery Postsings</span>
+            </ng-template>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="card">
+                        <!-- <div class="flex justify-content-between flex-wrap">
+                            <div
+                                class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
+                                Recovery Postings
+                            </div>
+                        </div> -->
+
+                        <p-table #dt1 [value]="recoveryPosts" dataKey="smtcode" [loading]="loading" [rowHover]="true"
+                            styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="false"
+                            responsiveLayout="scroll">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            SMT CODE
+                                            <p-columnFilter type="text" field="smtcode" display="menu"
+                                                placeholder="Search by SML CODE"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Name
+                                            <p-columnFilter type="text" field="borrower" display="menu"
+                                                placeholder="Search by name"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+
+                                        <div class="flex justify-content-between align-items-center">
+                                            Tenure
+                                            <!-- <p-columnFilter type="text" field="borrower" display="menu"
+                                                placeholder="Search by name"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+
+                                        <div class="flex justify-content-between align-items-center">
+                                            Repay Mode
+                                            <!-- <p-columnFilter type="text" field="prodtypeName" display="menu"
+                                                placeholder="Search by Product type"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Borrowed Amount
+                                            <!-- Due Amount -->
+                                            <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                    <!-- <th>
+                                        <div class="flex justify-content-between align-items-center">
+                                            EMI
+            
+                                        </div>
+                                    </th> -->
+                                    <!-- <th>
+                                        <div class="flex justify-content-between align-items-center">
+                                            Past due -->
+                                    <!-- Due Amount -->
+                                    <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                    <!-- </div>
+                                    </th> -->
+                                    <!-- <th>
+            
+                                        <div class="flex justify-content-between align-items-center">
+                                            Current due -->
+                                    <!-- Due Amount -->
+                                    <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                    <!-- </div>
+                                    </th> -->
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+
+                                        <div class="flex justify-content-between align-items-center">
+                                            Total due
+                                            <!-- Due Amount -->
+                                            <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Collected Amount
+                                            <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+
+                                        <div class="flex justify-content-between align-items-center">
+                                            Payment Type
+                                            <!-- <p-columnFilter type="text" field="status" display="menu"
+                                                placeholder="Search by Suriy Status"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+
+                                        <div class="flex justify-content-between align-items-center">
+                                            Remarks
+                                            <!-- <p-columnFilter type="text" field="status" display="menu"
+                                                placeholder="Search by Suriy Status"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Action
+                                            <!-- <p-columnFilter type="text" field="status" display="menu"
+                                                placeholder="Search by Suriy Status"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer let-cusId="rowIndex">
+                                <tr>
+                                    <td>
+                                        <!-- *ngIf="customer.paymentcnt==0" -->
+                                        <i class="pi pi-history" pTooltip="Payment History"
+                                            (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
+                                        <span style="color: blue;font-size: medium;">
+                                            {{customer.smtcode}}
+                                        </span>
+                                    </td>
+                                    <td class="text-pink-500 text-xl">
+                                        {{customer.borrower}}
+                                    </td>
+
+                                    <td>
+                                        {{customer.tenureName}}
+                                        <i class="pi pi-info-circle"
+                                            [pTooltip]="'Payments Count ' + customer.paymentcnt"
+                                            (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
+                                    </td>
+                                    <td class="text-green-500 text-xl ">
+                                        {{customer.loanscheduleName}}
+                                    </td>
+                                    <td class="text-orange-500 text-xl text-right">
+                                        {{customer.loanAmountName}}
+                                    </td>
+                                    <!-- <td>
+                                        {{customer.emi}}
+                                    </td> -->
+                                    <td class="text-red-500 text-xl text-right">
+                                        {{customer.dueamount}}
+                                    </td>
+                                    <!-- <td class="text-red-500 text-xl text-right">
+                                        {{customer.currentDue}}
+                                    </td> -->
+                                    <!-- <td class="text-yellow-500 text-xl text-right">
+                                        {{customer.loanAmountName}}
+                                    </td> -->
+                                    <td>
+                                        <div class="text-center" *ngIf="customer.hide">
+                                            <input pInputText id="age1" type="text"
+                                                [(ngModel)]="customer.collectedloanAmount" [pKeyFilter]="'num'"
+                                                maxlength="10" (blur)="collectedAmount(customer)" />
+                                        </div>
+                                        <div>
+                                            <small *ngIf="customer.error  != ''">{{customer.error}}</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="customer.hide">
+                                            <div *ngFor="let paymentType of paymentTypeList ">
+                                                <input type="radio" name="test_{{cusId}}" id="1"
+                                                    [value]="paymentType.value"
+                                                    [(ngModel)]="customer.collectedPaymentType">{{paymentType.label}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <textarea rows="2" cols="30" pInputTextarea [(ngModel)]="customer.remarks"
+                                            *ngIf="customer.hide" maxlength="1054"></textarea>
+                                    </td>
+                                    <td>
+                                        <button pButton label="Save" class="w-full " [loading]="customer['loadings']"
+                                            *ngIf="customer.hide"
+                                            [disabled]="customer.collectedloanAmount==''  ||  customer.collectedPaymentType == ''"
+                                            styleClass="p-button-rounded " (click)="save(customer,cusId)"></button>
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="10">Recovery Postings found.</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="loadingbody">
+                                <tr>
+                                    <td colspan="10">Loading Recovery Postings data. Please wait.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+
                 </div>
             </div>
 
-            <p-table #dt1 [value]="crudGrid" dataKey="smtcode" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="false"
-                responsiveLayout="scroll">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>
-                            <div class="flex justify-content-between align-items-center">
-                                SMT CODE
-                                <p-columnFilter type="text" field="smtcode" display="menu"
-                                    placeholder="Search by SML CODE"></p-columnFilter>
-                            </div>
-                        </th>
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate="header">
+                <i class="pi pi-user"></i>
+                <span class="ml-1">Completed Payments</span>
+            </ng-template>
 
-                        <th>
-                            <div class="flex justify-content-between align-items-center">
-                                Name
-                                <p-columnFilter type="text" field="borrower" display="menu"
-                                    placeholder="Search by name"></p-columnFilter>
-                            </div>
-                        </th>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="card">
+                        <p-table #dt1 [value]="recoveryPaymentsDone" dataKey="smtcode" [loading]="loading"
+                            [rowHover]="true" styleClass="p-datatable-gridlines" [showCurrentPageReport]="true"
+                            [paginator]="false" responsiveLayout="scroll">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            SMT CODE
+                                            <p-columnFilter type="text" field="smtcode" display="menu"
+                                                placeholder="Search by SML CODE"></p-columnFilter>
+                                        </div>
+                                    </th>
 
-                        <th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Name
+                                            <p-columnFilter type="text" field="borrower" display="menu"
+                                                placeholder="Search by name"></p-columnFilter>
+                                        </div>
+                                    </th>
 
-                            <div class="flex justify-content-between align-items-center">
-                                Tenure
-                                <!-- <p-columnFilter type="text" field="borrower" display="menu"
-                                    placeholder="Search by name"></p-columnFilter> -->
-                            </div>
-                        </th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
-                        <th>
+                                        <div class="flex justify-content-between align-items-center">
+                                            Tenure
+                                            <!-- <p-columnFilter type="text" field="borrower" display="menu"
+                                                placeholder="Search by name"></p-columnFilter> -->
+                                        </div>
+                                    </th>
 
-                            <div class="flex justify-content-between align-items-center">
-                                Repay Mode
-                                <!-- <p-columnFilter type="text" field="prodtypeName" display="menu"
-                                    placeholder="Search by Product type"></p-columnFilter> -->
-                            </div>
-                        </th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
-                        <th>
-                            <div class="flex justify-content-between align-items-center">
-                                Borrowed Amount
-                                <!-- Due Amount -->
-                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                    placeholder="Search by Loan amount"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <!-- <th>
-                            <div class="flex justify-content-between align-items-center">
-                                EMI
+                                        <div class="flex justify-content-between align-items-center">
+                                            Repay Mode
+                                            <!-- <p-columnFilter type="text" field="prodtypeName" display="menu"
+                                                placeholder="Search by Product type"></p-columnFilter> -->
+                                        </div>
+                                    </th>
 
-                            </div>
-                        </th> -->
-                        <!-- <th>
-                            <div class="flex justify-content-between align-items-center">
-                                Past due -->
-                        <!-- Due Amount -->
-                        <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                    placeholder="Search by Loan amount"></p-columnFilter> -->
-                        <!-- </div>
-                        </th> -->
-                        <!-- <th>
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Borrowed Amount
+                                            <!-- Due Amount -->
+                                            <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                    <!-- <th>
+                                        <div class="flex justify-content-between align-items-center">
+                                            EMI
+            
+                                        </div>
+                                    </th> -->
+                                    <!-- <th>
+                                        <div class="flex justify-content-between align-items-center">
+                                            Past due -->
+                                    <!-- Due Amount -->
+                                    <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                    <!-- </div>
+                                    </th> -->
+                                    <!-- <th>
+            
+                                        <div class="flex justify-content-between align-items-center">
+                                            Current due -->
+                                    <!-- Due Amount -->
+                                    <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                    <!-- </div>
+                                    </th> -->
+                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
-                            <div class="flex justify-content-between align-items-center">
-                                Current due -->
-                        <!-- Due Amount -->
-                        <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                    placeholder="Search by Loan amount"></p-columnFilter> -->
-                        <!-- </div>
-                        </th> -->
-                        <th>
+                                        <div class="flex justify-content-between align-items-center">
+                                            Total due
+                                            <!-- Due Amount -->
+                                            <!-- <p-columnFilter type="text" field="loanamount" display="menu"
+                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer let-cusId="rowIndex">
+                                <tr>
+                                    <td>
+                                        <!-- *ngIf="customer.paymentcnt==0" -->
+                                        <i class="pi pi-history" pTooltip="Payment History"
+                                            (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
+                                        <span style="color: blue;font-size: medium;">
+                                            {{customer.smtcode}}
+                                        </span>
+                                    </td>
+                                    <td class="text-pink-500 text-xl">
+                                        {{customer.borrower}}
+                                    </td>
 
-                            <div class="flex justify-content-between align-items-center">
-                                Total due
-                                <!-- Due Amount -->
-                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                    placeholder="Search by Loan amount"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th>
-                            <div class="flex justify-content-between align-items-center">
-                                Collected Amount
-                                <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                    placeholder="Search by Loan amount"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th>
+                                    <td>
+                                        {{customer.tenureName}}
+                                        <i class="pi pi-info-circle"
+                                            [pTooltip]="'Payments Count ' + customer.paymentcnt"
+                                            (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
+                                    </td>
+                                    <td class="text-green-500 text-xl ">
+                                        {{customer.loanscheduleName}}
+                                    </td>
+                                    <td class="text-orange-500 text-xl text-right">
+                                        {{customer.loanAmountName}}
+                                    </td>
+                                    <!-- <td>
+                                        {{customer.emi}}
+                                    </td> -->
+                                    <td class="text-red-500 text-xl text-right">
+                                        {{customer.dueamount}}
+                                    </td>
+                                    <!-- <td class="text-red-500 text-xl text-right">
+                                        {{customer.currentDue}}
+                                    </td> -->
+                                    <!-- <td class="text-yellow-500 text-xl text-right">
+                                        {{customer.loanAmountName}}
+                                    </td> -->
+                                    <!-- <td>
+                                        <div class="text-center" *ngIf="customer.hide">
+                                            <input pInputText id="age1" type="text"
+                                                [(ngModel)]="customer.collectedloanAmount" [pKeyFilter]="'num'"
+                                                maxlength="10" (blur)="collectedAmount(customer)" />
+                                        </div>
+                                        <div>
+                                            <small *ngIf="customer.error  != ''">{{customer.error}}</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="customer.hide">
+                                            <div *ngFor="let paymentType of paymentTypeList ">
+                                                <input type="radio" name="test_{{cusId}}" id="1"
+                                                    [value]="paymentType.value"
+                                                    [(ngModel)]="customer.collectedPaymentType">{{paymentType.label}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <textarea rows="2" cols="30" pInputTextarea [(ngModel)]="customer.remarks"
+                                            *ngIf="customer.hide" maxlength="1054"></textarea>
+                                    </td>
+                                    <td>
+                                        <button pButton label="Save" class="w-full " [loading]="customer['loadings']"
+                                            *ngIf="customer.hide"
+                                            [disabled]="customer.collectedloanAmount==''  ||  customer.collectedPaymentType == ''"
+                                            styleClass="p-button-rounded " (click)="save(customer,cusId)"></button>
+                                    </td> -->
 
-                            <div class="flex justify-content-between align-items-center">
-                                Payment Type
-                                <!-- <p-columnFilter type="text" field="status" display="menu"
-                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="10">Recovery Postings found.</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="loadingbody">
+                                <tr>
+                                    <td colspan="6">Loading Recovery Postings data. Please wait.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
 
-                            <div class="flex justify-content-between align-items-center">
-                                Remarks
-                                <!-- <p-columnFilter type="text" field="status" display="menu"
-                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th>
-                            <div class="flex justify-content-between align-items-center">
-                                Action
-                                <!-- <p-columnFilter type="text" field="status" display="menu"
-                                    placeholder="Search by Suriy Status"></p-columnFilter> -->
-                            </div>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-customer let-cusId="rowIndex">
-                    <tr>
-                        <td>
-                            <!-- *ngIf="customer.paymentcnt==0" -->
-                            <i class="pi pi-history" pTooltip="Payment History" (click)="historyLookup(customer)"
-                                *ngIf="customer.paymentcnt>=1"></i>
-                            <span style="color: blue;font-size: medium;">
-                                {{customer.smtcode}}
-                            </span>
-                        </td>
-                        <td class="text-pink-500 text-xl">
-                            {{customer.borrower}}
-                        </td>
+                    </div>
 
-                        <td>
-                            {{customer.tenureName}}
-                            <i class="pi pi-info-circle" [pTooltip]="'Payments Count ' + customer.paymentcnt"
-                                (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
-                        </td>
-                        <td class="text-green-500 text-xl ">
-                            {{customer.loanscheduleName}}
-                        </td>
-                        <td class="text-orange-500 text-xl text-right">
-                            {{customer.loanAmountName}}
-                        </td>
-                        <!-- <td>
-                            {{customer.emi}}
-                        </td> -->
-                        <td class="text-red-500 text-xl text-right">
-                            {{customer.dueamount}}
-                        </td>
-                        <!-- <td class="text-red-500 text-xl text-right">
-                            {{customer.currentDue}}
-                        </td> -->
-                        <!-- <td class="text-yellow-500 text-xl text-right">
-                            {{customer.loanAmountName}}
-                        </td> -->
-                        <td>
-                            <div class="text-center" *ngIf="customer.hide">
-                                <input pInputText id="age1" type="text" [(ngModel)]="customer.collectedloanAmount"
-                                    [pKeyFilter]="'num'" maxlength="10" (blur)="collectedAmount(customer)" />
-                            </div>
-                            <div>
-                                <small *ngIf="customer.error  != ''">{{customer.error}}</small>
-                            </div>
-                        </td>
-                        <td>
-                            <div *ngFor="let paymentType of paymentTypeList ">
-                                <input type="radio" name="test_{{cusId}}" id="1" [value]="paymentType.value"
-                                    *ngIf="customer.hide"
-                                    [(ngModel)]="customer.collectedPaymentType">{{paymentType.label}}
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <textarea rows="2" cols="30" pInputTextarea [(ngModel)]="customer.remarks"
-                                *ngIf="customer.hide" maxlength="1054"></textarea>
-                        </td>
-                        <td>
-                            <button pButton label="Save" class="w-full " [loading]="customer['loadings']"
-                                *ngIf="customer.hide"
-                                [disabled]="customer.collectedloanAmount==''  ||  customer.collectedPaymentType == ''"
-                                styleClass="p-button-rounded " (click)="save(customer,cusId)"></button>
-                        </td>
+                </div>
+            </div>
 
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="10">Recovery Postings found.</td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="loadingbody">
-                    <tr>
-                        <td colspan="10">Loading Recovery Postings data. Please wait.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
 
-        </div>
+        </p-tabPanel>
 
-    </div>
+    </p-tabView>
 </div>
+
 
 
 <p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
@@ -221,12 +418,12 @@
             <div class="overflow-y-auto">
 
 
-                <p-table #dt1 [value]="paymentHistory" dataKey="smtcode" [loading]="loading" [rowHover]="true"
+                <p-table #dt1 [value]="paymentHistory" dataKey="smtcode" [loading]="histloading" [rowHover]="true"
                     rowGroupMode="rowspan" styleClass="p-datatable-gridlines" [paginator]="false"
                     responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>
+                            <th style="background-color: rgb(91, 91, 182);" class="text-white">
                                 <div class="flex justify-content-between align-items-center">
                                     Borrowed Amount
                                     <!-- Due Amount -->
@@ -235,14 +432,14 @@
                                 </div>
                             </th>
 
-                            <th>
+                            <th style="background-color: rgb(91, 91, 182);" class="text-white">
                                 <div class="flex justify-content-between align-items-center">
                                     Collected Amount
                                     <!-- <p-columnFilter type="text" field="loanamount" display="menu"
                                     placeholder="Search by Loan amount"></p-columnFilter> -->
                                 </div>
                             </th>
-                            <th>
+                            <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
                                 <div class="flex justify-content-between align-items-center" style="width: 3rem;">
                                     Payment Type
@@ -250,7 +447,7 @@
                                     placeholder="Search by Suriy Status"></p-columnFilter> -->
                                 </div>
                             </th>
-                            <th>
+                            <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
                                 <div class="flex justify-content-between align-items-center">
                                     Remarks
@@ -258,7 +455,7 @@
                                     placeholder="Search by Suriy Status"></p-columnFilter> -->
                                 </div>
                             </th>
-                            <th>
+                            <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
                                 <div class="flex justify-content-between align-items-center">
                                     Payment Date
@@ -307,7 +504,7 @@
                     </ng-template>
                     <ng-template pTemplate="loadingbody">
                         <tr>
-                            <td colspan="5">Loading Payments data. Please wait.</td>
+                            <td colspan="5">Loading Payments history data. Please wait.</td>
                         </tr>
                     </ng-template>
                 </p-table>

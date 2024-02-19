@@ -16,7 +16,7 @@
 
 
             <p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+                styleClass="p-datatable-gridlines" [paginator]="false" responsiveLayout="scroll">
                 <!-- <ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">
 						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
@@ -28,35 +28,35 @@
 				</ng-template> -->
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="min-width: 5rem">
+                        <th style="min-width: 5rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Action
                                 <!-- <p-columnFilter type="text" field="name" display="menu"
                                     placeholder="Search by name"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Borrower Name
                                 <p-columnFilter type="text" field="name" display="menu"
                                     placeholder="Search by name"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 6rem">
+                        <th style="min-width: 6rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Logo
                                 <!-- <p-columnFilter type="text" field="name" display="menu"
                                     placeholder="Search by name"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Aadhaar
                                 <p-columnFilter type="text" field="aadhar" display="menu"
                                     placeholder="Search by aadhar"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Contact
                                 <p-columnFilter type="text" field="contact_no" display="menu"
@@ -70,49 +70,49 @@
                                     placeholder="Search by country"></p-columnFilter>
                             </div>
                         </th> -->
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Country
                                 <p-columnFilter type="text" field="countryname" display="menu"
                                     placeholder="Search by country"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 State
                                 <p-columnFilter type="text" field="state" display="menu"
                                     placeholder="Search by state"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 City
                                 <!-- <p-columnFilter type="text" field="city" display="menu"
                                     placeholder="Search by country"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Pincode
                                 <p-columnFilter type="text" field="pincode" display="menu"
                                     placeholder="Search by pincode"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Description
                                 <!-- <p-columnFilter type="text" field="country.name" display="menu"
                                     placeholder="Search by country"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Created By
                                 <p-columnFilter type="text" field="byemployeename" display="menu"
                                     placeholder="Search by Creator"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Status
                                 <p-columnFilter type="text" field="active" display="menu"

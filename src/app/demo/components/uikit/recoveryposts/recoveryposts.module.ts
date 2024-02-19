@@ -24,7 +24,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
-
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   declarations: [
     RecoverypostsComponent
@@ -54,7 +54,8 @@ import { TooltipModule } from 'primeng/tooltip';
     FileUploadModule,
     ImageModule,
     InputNumberModule,
-    ToastModule
+    ToastModule,
+    TabViewModule
   ]
 })
 export class RecoverypostsModule { }

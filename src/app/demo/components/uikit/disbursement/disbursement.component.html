@@ -2,8 +2,8 @@
     <div class="col-12">
         <div class="card">
             <div class="flex justify-content-between flex-wrap">
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    Approved Loans
+                <div class="flex align-items-center justify-content-center w-22rem h-2rem font-bold border-round m-2">
+                  Disbursements ( Approved loans )  
                 </div>
                 <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
                     <!-- 2 -->
@@ -16,38 +16,38 @@
 
 
             <p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="true"
+                styleClass="p-datatable-gridlines" [showCurrentPageReport]="true" [paginator]="false"
                 responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="min-width: 5rem">
+                        <th style="min-width: 5rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Action
 
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 SMT CODE
                                 <p-columnFilter type="text" field="smtcode" display="menu"
                                     placeholder="Search by SML CODE"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Disbursement Status
                                 <!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
                                     placeholder="Search by Approval Status"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 15rem">
+                        <th style="min-width: 15rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Disbursement Remarks
                                 <!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
                                     placeholder="Search by Approval Status"></p-columnFilter> -->
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Payment Mode
                                 <!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
@@ -55,7 +55,7 @@
                             </div>
                         </th>
 
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Approval Remarks
                                 <!-- <p-columnFilter type="text" field="approvalstatus" display="menu"
@@ -63,133 +63,133 @@
                             </div>
                         </th>
 
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Branch
                                 <p-columnFilter type="text" field="branchName" display="menu"
                                     placeholder="Search by Branches"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 22rem">
+                        <th style="min-width: 22rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Borrower Name
                                 <p-columnFilter type="text" field="borrower" display="menu"
                                     placeholder="Search by name"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 House Type
                                 <p-columnFilter type="text" field="housetypeName" display="menu"
                                     placeholder="Search by House type"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Product Type
                                 <p-columnFilter type="text" field="prodtypeName" display="menu"
                                     placeholder="Search by Product type"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Deposit
                                 <p-columnFilter type="text" field="depositName" display="menu"
                                     placeholder="Search by Deposit List"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Loan Amount
                                 <p-columnFilter type="text" field="loanamount" display="menu"
                                     placeholder="Search by Loan amount"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Repay Mode
                                 <p-columnFilter type="text" field="country.name" display="menu"
                                     placeholder="Search by Loan loanscheduleName"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Loan Tenure
                                 <p-columnFilter type="text" field="tenureName" display="menu"
                                     placeholder="Search by Loan tenure "></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Bank
                                 <p-columnFilter type="text" field="bankname" display="menu"
                                     placeholder="Search by Bank"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Account No
                                 <p-columnFilter type="text" field="accountno" display="menu"
                                     placeholder="Search by Account no"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Bank Account Name
                                 <p-columnFilter type="text" field="accountname" display="menu"
                                     placeholder="Search by Bank Account Name"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 IFSC Code
                                 <p-columnFilter type="text" field="ifsc" display="menu"
                                     placeholder="Search by IFSC Code"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Surity Name
                                 <p-columnFilter type="text" field="surityname" display="menu"
                                     placeholder="Search by Surity Name"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Surity Aadhar
                                 <p-columnFilter type="text" field="surityaadhar" display="menu"
                                     placeholder="Search by Suriy Aadhar"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 House type
                                 <p-columnFilter type="text" field="surityhousetypeName" display="menu"
                                     placeholder="Search by House type"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Contact no
                                 <p-columnFilter type="text" field="active" display="menu"
                                     placeholder="Search by Contact no"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem ; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Surity Aadhar
                                 <p-columnFilter type="text" field="surityaadhar" display="menu"
                                     placeholder="Search by Suriy Aadhar"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Description
                                 <p-columnFilter type="text" field="description" display="menu"
                                     placeholder="Search by Suriy Description"></p-columnFilter>
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
                             <div class="flex justify-content-between align-items-center">
                                 Status
                                 <p-columnFilter type="text" field="status" display="menu"

@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
 export class RecoverypostsComponent {
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
   public sidebarVisible = false;
-
+  public histloading = false;
   public pymentType = [
     {
       label: "Online",
@@ -69,6 +69,12 @@ export class RecoverypostsComponent {
     { label: 'Renewal', value: 'renewal' },
     { label: 'Proposal', value: 'proposal' }
   ];
+
+  public historyHeader = "";
+  public paymentHistory: any = [];
+  public paymentHistType = [];
+  public summaryTotal = 0;
+
 
   public paymentTypeList = [
     {
@@ -504,6 +510,8 @@ export class RecoverypostsComponent {
     this.gridData();
   }
 
+  public recoveryPosts: any = [];
+  public recoveryPaymentsDone: any = [];
 
   gridData() {
     try {
@@ -611,6 +619,8 @@ export class RecoverypostsComponent {
                   }
                   this.crudGrid.push(createdBorrowers)
                 });
+                this.recoveryPosts = _.filter(this.crudGrid, (fl, fIn) => fl.dueamount != '0');
+                this.recoveryPaymentsDone = _.filter(this.crudGrid, (fl, fIn) => fl.dueamount == '0');
               };
               this.loading = false;
             } else if (data['S_CODE'] == 300) {
@@ -798,16 +808,13 @@ export class RecoverypostsComponent {
     }
   }
 
-  public historyHeader = "";
-  public paymentHistory: any = [];
-  public paymentHistType = [];
-  public summaryTotal = 0;
+
   historyLookup(customer: any) {
     this.sidebarVisible = true;
     this.summaryTotal = 0;
     this.paymentHistory = [];
     this.historyHeader = ` Borrower :- ${customer.borrower} with SMTCODE :- ${customer.smtcode}`;
-
+    this.histloading = true;
     this._service.postApi('historypayments', 'postEndPoint', { smtcode: customer.smtcode, loanid: customer._id })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -823,7 +830,7 @@ export class RecoverypostsComponent {
                 remarks: pymnt.remarks,
                 create_dt: this.datePipe.transform(pymnt.create_dt, 'dd-MMM-YYYY hh:mm a'),
               };
-              this.summaryTotal += parseInt(pymnt.collectedAmount) ;
+              this.summaryTotal += parseInt(pymnt.collectedAmount);
               this.paymentHistory.push(createHisPayment);
             });
           };
@@ -831,6 +838,7 @@ export class RecoverypostsComponent {
         error: (err) => {
         }
       });
+    this.histloading = false;
   }
 
   closeCallback(e: any): void {
@@ -840,8 +848,13 @@ export class RecoverypostsComponent {
 
 
   collectedAmount(customer: any) {
+    customer['error'] = "";
     customer.collectedloanAmount = customer.collectedloanAmount.trim();
-    customer['error'] = parseInt(customer.collectedloanAmount) > parseInt(customer.loanamount) ? 'Collection Amount is greater than Due Amount' : "";
+    if (parseInt(customer.collectedloanAmount) == 0) {
+      customer['error'] = 'Collection Amount Should be greater than zero';
+    } else {
+      customer['error'] = parseInt(customer.collectedloanAmount) > parseInt(customer.dueamount) ? 'Collection amount is greater than due amount' : "";
+    }
   }
 }
 
