@@ -293,15 +293,13 @@
                                                 placeholder="Search by Loan amount"></p-columnFilter> -->
                                     <!-- </div>
                                     </th> -->
-                                    <th style="background-color: rgb(91, 91, 182);" class="text-white">
+                                    <!-- <th style="background-color: rgb(91, 91, 182);" class="text-white">
 
                                         <div class="flex justify-content-between align-items-center">
                                             Total due
-                                            <!-- Due Amount -->
-                                            <!-- <p-columnFilter type="text" field="loanamount" display="menu"
-                                                placeholder="Search by Loan amount"></p-columnFilter> -->
+                                            
                                         </div>
-                                    </th>
+                                    </th> -->
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-customer let-cusId="rowIndex">
@@ -333,9 +331,9 @@
                                     <!-- <td>
                                         {{customer.emi}}
                                     </td> -->
-                                    <td class="text-red-500 text-xl text-right">
+                                    <!-- <td class="text-red-500 text-xl text-right">
                                         {{customer.dueamount}}
-                                    </td>
+                                    </td> -->
                                     <!-- <td class="text-red-500 text-xl text-right">
                                         {{customer.currentDue}}
                                     </td> -->
@@ -376,12 +374,12 @@
                             </ng-template>
                             <ng-template pTemplate="emptymessage">
                                 <tr>
-                                    <td colspan="10">Recovery Postings found.</td>
+                                    <td colspan="9">Recovery Postings found.</td>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="loadingbody">
                                 <tr>
-                                    <td colspan="6">Loading Recovery Postings data. Please wait.</td>
+                                    <td colspan="9">Loading Recovery Postings data. Please wait.</td>
                                 </tr>
                             </ng-template>
                         </p-table>

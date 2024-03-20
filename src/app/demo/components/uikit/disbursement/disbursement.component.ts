@@ -295,6 +295,7 @@ export class DisbursementComponent {
     smtcode: "",
     branch: this._service.getUserInfo('branchid'),
     borrowername: "",
+    repaymenttype: null,
     housetype: "",
     prodtype: "",
     loanamount: "",
@@ -518,7 +519,7 @@ export class DisbursementComponent {
     this.gridData();
   }
 
-
+  public headerText = "";
   gridData() {
     try {
       this._service.postApi('smlgetusers', 'postEndPoint', {
@@ -666,6 +667,7 @@ export class DisbursementComponent {
   fileSize = () => this._service.fileMaxSize();
   public isOk = false;
   onClick(event: any, mode: any) {
+    this.headerText = "";
     this.isShowForm = true;
     this.submitloading = false;
     this.isShowSidebarClose = true;
@@ -678,6 +680,8 @@ export class DisbursementComponent {
 
     if (['VIEW', 'EDIT'].includes(mode)) {
       //   this.isClicked = true;
+      let filterName: any = _.filter(this.borrwoersList, { _id: event.borrowername });
+      this.headerText = filterName[0]['name'] || '';
       this.createMaster = {
         smtcode: event.smtcode,
         borrowername: event.borrowername,

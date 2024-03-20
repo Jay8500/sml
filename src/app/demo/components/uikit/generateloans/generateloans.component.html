@@ -20,12 +20,12 @@
 				responsiveLayout="scroll">
 				<ng-template pTemplate="header">
 					<tr>
-						<th style="min-width: 5rem; background-color: rgb(91, 91, 182);" class="text-white">
+						<!-- <th style="min-width: 5rem; background-color: rgb(91, 91, 182);" class="text-white">
 							<div class="flex justify-content-between align-items-center">
 								Action
 
 							</div>
-						</th>
+						</th> -->
 
 						<th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
 							<div class="flex justify-content-between align-items-center">
@@ -192,7 +192,7 @@
 				</ng-template>
 				<ng-template pTemplate="body" let-customer>
 					<tr>
-						<td>
+						<!-- <td>
 							<div class="flex justify-content-center flex-wrap">
 								<div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
 									<i class="pi pi-eye"></i>
@@ -203,7 +203,7 @@
 								</div>
 
 							</div>
-						</td>
+						</td> -->
 						<td>
 							<span *ngIf="customer.approvalstatus == 'P'"
 								[class]="'order-badge order-pending'">Pending</span>
@@ -293,12 +293,12 @@
 				</ng-template>
 				<ng-template pTemplate="emptymessage">
 					<tr>
-						<td colspan="23">No Generated loans found.</td>
+						<td colspan="22">No Generated loans found.</td>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="loadingbody">
 					<tr>
-						<td colspan="23">Loading Generated loans data. Please wait.</td>
+						<td colspan="22">Loading Generated loans data. Please wait.</td>
 					</tr>
 				</ng-template>
 			</p-table>

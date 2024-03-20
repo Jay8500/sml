@@ -24,7 +24,7 @@ import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { DisbursementComponent } from './disbursement.component';
-
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     DisbursementComponent
@@ -53,7 +53,8 @@ import { DisbursementComponent } from './disbursement.component';
     FileUploadModule,
     ImageModule,
     InputNumberModule,
-    ToastModule
+    ToastModule,
+    DialogModule
   ]
 })
 export class DisbursementModule { }

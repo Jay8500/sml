@@ -328,7 +328,7 @@
             <div class="card  p-fluid">
                 <div class="grid">
                     <h5>Generated Approval Pending Loan </h5>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <label htmlFor="state">Borrower</label>
                         <p-dropdown [options]="borrwoersList" [(ngModel)]="createMaster.borrowername"
                             placeholder="Select Borrower" optionLabel="name" class="ng-invalid ng-dirty"
@@ -348,8 +348,8 @@
                             optionValue="value" class="ng-invalid ng-dirty" [filter]="true"
                             placeholder="Select House Type" [disabled]="mode=='VIEW' "></p-dropdown>
                         <small *ngIf="errorMessages.housetype != ''">{{ errorMessages.housetype}}</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="state">Product type</label>
                         <p-dropdown [options]="productTypeList" [(ngModel)]="createMaster.prodtype" optionLabel="label"
                             optionValue="value" class="ng-invalid ng-dirty" [filter]="true" (onChange)="onProducttype()"
@@ -362,20 +362,18 @@
                             optionValue="value" class="ng-invalid ng-dirty" [filter]="true" placeholder="Select Deposit"
                             [disabled]="mode=='VIEW' || createMaster.prodtype != 1 "></p-dropdown>
                         <small *ngIf="errorMessages.deposit != ''">{{ errorMessages.deposit}}</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="state">Loan Amount </label>
                         <p-dropdown [options]="loanAmountList" [(ngModel)]="createMaster.loanamount" optionLabel="label"
                             optionValue="value" class="ng-invalid ng-dirty" [filter]="true"
                             placeholder="Select Loan Amount" [disabled]="mode=='VIEW' "></p-dropdown>
 
-                        <!-- <p-inputNumber [(ngModel)]="createMaster.loanamount" mode="decimal" inputId="withoutgrouping"
-							class="ng-invalid ng-dirty" [disabled]="mode=='VIEW'" class="ng-invalid ng-dirty"
-							[maxlength]="20" [useGrouping]="false"> </p-inputNumber> -->
+                      
 
                         <small *ngIf="errorMessages.loanamount != ''">{{ errorMessages.loanamount}}</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="state">Repay Mode </label>
                         <p-dropdown [options]="loanShedule" [(ngModel)]="createMaster.loanschedule" optionLabel="label"
                             optionValue="value" class="ng-invalid ng-dirty" [filter]="true"
@@ -394,8 +392,8 @@
                         <input pInputText id="age1" type="text" [disabled]="mode=='VIEW' "
                             [(ngModel)]="createMaster.bankname" class="ng-invalid ng-dirty" />
                         <small *ngIf="errorMessages.bankname != ''">{{ errorMessages.bankname}}</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="age1">Account no</label>
                         <input pInputText id="age1" type="text" [disabled]="mode=='VIEW' "
                             [(ngModel)]="createMaster.accountno" [maxLength]="18" class="ng-invalid ng-dirty" />
@@ -418,8 +416,8 @@
                         <input pInputText id="name1" type="text" [disabled]="mode=='VIEW' "
                             [(ngModel)]="createMaster.surityname" class="ng-invalid ng-dirty" />
                         <small *ngIf="errorMessages.surityname != ''">{{ errorMessages.surityname}}</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="name1">Surity Aadhar</label>
                         <p-inputMask mask="9999-9999-9999" [disabled]="mode=='VIEW' "
                             [(ngModel)]="createMaster.surityaadhar" [disabled]="mode=='VIEW'"
@@ -433,31 +431,27 @@
                             class="ng-invalid ng-dirty" optionLabel="label" optionValue="value" [filter]="true"
                             [disabled]="mode=='VIEW' " placeholder="Select House Type"></p-dropdown>
                         <small *ngIf="errorMessages.surityhousetype != ''">House type is required.</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="name1">Surity Contact no</label>
                         <input pInputText id="age1" type="text" [(ngModel)]="createMaster.contactnumber"
                             placeholder="999999999" [disabled]="mode=='VIEW' " [minlength]="10" [maxlength]="10"
                             class="ng-invalid ng-dirty" />
 
-                        <!-- <p-inputNumber [(ngModel)]="createMaster.contactnumber" mode="decimal" inputId="withoutgrouping"
-							[useGrouping]="false" class="ng-invalid ng-dirty" [disabled]="mode=='VIEW'"
-							placeholder="9999999999" class="ng-invalid ng-dirty" [useGrouping]="false">
-						</p-inputNumber> -->
                         <small *ngIf="errorMessages.contactnumber != ''">{{ errorMessages.contactnumber}}</small>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <label htmlFor="name1">Description</label>
-                        <!-- [(ngModel)]="value" -->
+                        
                         <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW' "
                             [(ngModel)]="createMaster.description"></textarea>
-                        <!-- <small>Description is required.</small> -->
+
                     </div>
                     <div class="col-12">
                         <input type="checkbox" name="master" id="1" [(ngModel)]="createMaster.active"
                             [disabled]="mode=='VIEW' || mode == 'NEW'">
                         <label for="lastname2" class="ml-2">Active</label>
-                    </div>
+                    </div> -->
 
                     <div class="col-12">
                         <label htmlFor="name1">Loan Status</label>
@@ -470,17 +464,11 @@
                         <label htmlFor="name1">{{loanStatusRemarks}} </label>
                         <textarea rows="5" cols="30" pInputTextarea
                             [(ngModel)]="createMaster.approvalremarks"></textarea>
-
-                        <!-- <small *ngIf="errorMessages.approvalstatus != ''">Loan Status is required.</small> -->
                     </div>
 
                     <div class="col-12">
                         <div class="grid">
-                            <!-- <div class="col-6">
-                                <button pButton [disabled]="mode=='VIEW'" pRipple label="Clear" (click)="hideDialog()"
-                                    class="p-button-outlined"></button>
 
-                            </div> -->
                             <div class="col-12">
                                 <button pButton pRipple label="Submit status" (click)="saveProduct()"
                                     [loading]="submitloading" class="p-button-success"></button>
