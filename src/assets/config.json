@@ -18,8 +18,14 @@
     "payment": {
         "postEndPoint": "sml/payment"
     },
+    "producstssave": {
+        "postEndPoint": "sml/producsts-save"
+    },
     "getAddressList": {
         "postEndPoint": "sml/addressmasters"
+    },
+    "getproducsts": {
+        "postEndPoint": "sml/getproducsts"
     },
     "historypayments": {
         "postEndPoint": "sml/historypayments"

@@ -12,6 +12,9 @@ import * as _ from 'lodash';
 })
 export class PermissionsComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
+
+  public products: any = [];
+
   public usersList: any = [
   ];
   public createMaster = {
@@ -26,6 +29,21 @@ export class PermissionsComponent implements OnInit {
   public userApprovals: any = [];
 
   ngOnInit(): void {
+    this.products = [];
+    this.products.push(
+      {
+        _id: 0,
+        pid: 0,
+        category: "",
+        product: "",
+        suritystatus: "",
+        tenure: null,
+        roi: "",
+        repayment: "",
+        flag: 'S'
+      }
+    )
+
     this._service.postApi('smlgetusers', 'postEndPoint', {
       code: 'HRPM',
       ctrl: 'nofilter'
@@ -56,7 +74,47 @@ export class PermissionsComponent implements OnInit {
           // console.log('error')
         }
       });
+
+
     this.getPermissions();
+    this.getAllProducts();
+  }
+
+
+  async getAllProducts() {
+
+    this._service.postApi('getproducsts', 'postEndPoint', {
+    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data['S_CODE'] == 200) {
+            if (data['DATA'].length > 0) {
+              this.products = [];
+              _.forEach(data['DATA'], (us, uIn) => {
+                let permisions: any = {
+                  _id: us._id,
+                  pid: parseInt(us.pid),
+                  category: us.category,
+                  product: us.product,
+                  suritystatus: us.suritystatus,
+                  tenure: us.tenure,
+                  roi: us.roi,
+                  repayment: us.repayment,
+                  flag: 'E'
+                };
+                this.products.push(permisions)
+              });
+            };
+          };
+        },
+        error: (err) => {
+          // this.blocUI = false;
+          // this.myModels = [];
+          // console.log('error')
+        }
+      });
   }
 
   getPermissions() {
@@ -748,5 +806,70 @@ export class PermissionsComponent implements OnInit {
 
     }
 
+  }
+
+  public clonedProducts: any = {};
+  // public editing = false;
+  onRowEditInit(product: any) {
+    // product['flag'] = 'E';
+    this.clonedProducts[product.pid as string] = { ...product };
+  }
+
+  onRowEditSave(product: any) {
+    let savePayload = JSON.parse(JSON.stringify(product));
+    savePayload['flag'] = savePayload['_id'] == 0 ? 'S' : 'E';
+    let loginJson = this._service.postApi('producstssave', 'postEndPoint', savePayload)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data.S_CODE == 200) {
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
+            // this.isOk = true;
+            // this.loadings = false;
+            this.getAllProducts();
+          } else if (data.S_CODE == 300) {
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
+            // this.isOk = true;
+            // // this.loading = false;
+            // //  this.isShowSidebarClose = false;
+            // this.loadings = false;
+          }
+        },
+        error: (err) => {
+          this.loadings = false;
+          // this.loading = false;
+        }
+      });
+  }
+
+  onRowEditCancel(product: any, ri: number) {
+    product['active'] = false;
+
+
+    if (product['_id'] == 0) {
+      product['flag'] = 'S';
+      this.products[ri] = this.clonedProducts[product.pid as string];
+      delete this.clonedProducts[product.pid as string];
+    } else {
+      product['flag'] = 'E';
+      this.onRowEditSave(product);
+    };
+  }
+
+  onRowNewCancel(product: any) {
+    let newProduct = JSON.parse(JSON.stringify(product));
+    newProduct['pid'] = product['pid'] + 1;
+    newProduct['category'] = 'New';
+    newProduct['product'] = null;
+    newProduct['suritystatus'] = null;
+    newProduct['tenure'] = null;
+    newProduct['roi'] = null;
+    newProduct['repayment'] = null;
+    // newProduct['flag'] = 'S';
+    newProduct['_id'] = 0;
+    newProduct['active'] = true;
+
+    this.products.splice(this.products.length, 0, newProduct);
   }
 }

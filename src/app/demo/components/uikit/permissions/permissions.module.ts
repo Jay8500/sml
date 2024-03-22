@@ -27,6 +27,7 @@ import { ToastModule } from 'primeng/toast';
 import { PermissionsComponent } from './permissions.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { AccordionModule } from 'primeng/accordion';
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   declarations: [
     PermissionsComponent
@@ -57,7 +58,10 @@ import { AccordionModule } from 'primeng/accordion';
     InputNumberModule,
     ToastModule,
     RadioButtonModule,
-    AccordionModule
+    AccordionModule,
+    TabViewModule,
+    TableModule
+
   ]
 })
 export class PermissionsModule { }
