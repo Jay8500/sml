@@ -22,6 +22,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { CompanyComponent } from './company.component';
 import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AvatarModule } from 'primeng/avatar';
     ImageModule,
     InputNumberModule,
     ToastModule,
-    AvatarModule
+    AvatarModule,
+    BadgeModule
   ]
 })
 export class CompanyModule { }

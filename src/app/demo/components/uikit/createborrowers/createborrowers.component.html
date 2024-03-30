@@ -1,4 +1,135 @@
+<div class="card">
+    <div class="flex justify-content-between flex-wrap">
+        <div class="flex align-items-center justify-content-center  font-bold border-round">
+            Borrowers List
+        </div>
+        <div class="flex align-items-center justify-content-center  font-bold border-round">
+            <!-- 2 -->
+        </div>
+        <div class="flex align-items-center justify-content-center w-6rem h-1rem font-bold border-round">
+            <button pButton pRipple label="Add new" [loading]=false class="p-button-success cursor-pointer"
+                (click)="onClick(null,'NEW')"></button>
+        </div>
+    </div>
+</div>
 <div class="grid">
+    <ng-container *ngIf="crudGrid.length>0">
+        <div class="col-12 lg:col-3 xl:col-3 md:col-4 sm:col-12" *ngFor="let userDetails of crudGrid;let userIn=index;">
+            <div class="card">
+                <div class="flex justify-content-between flex-row">
+                    <div class="flex align-items-center justify-content-start border-round">
+                        <p-avatar [image]="userDetails['A']" size="normal" shape="circle"></p-avatar>
+                        <div class="w-full ml-3 ml-2 text-orange-400">
+                            {{userDetails.name | uppercase}}
+
+                        </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-end">
+                        <!-- <div  (click)="onClick(userDetails, 'VIEW')">
+                        <i class="pi pi-eye"></i>
+                    </div> -->
+                        <div (click)="onClick(userDetails, 'EDIT')" class="cursor-pointer">
+                            <i class="pi pi-file-edit"></i>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="flex  flex-row">
+                    <div class="grid">
+                        <div class="col-12">
+                            <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+                                Aadhaar
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                <p-badge [value]="userDetails.aadhar | uppercase"></p-badge>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+                                Contact No.
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.contact_no | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Country
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.countryname | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                State
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.state | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                City
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.cityname | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Pincode
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.pincode | uppercase}}
+                            </div>
+                        </div>
+                       
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Description:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                {{userDetails.description}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Created By:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                {{userDetails.byemployeename}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Status:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                <span *ngIf="userDetails.active == true"
+                                    class="customer-badge status-qualified">Active</span>
+                                <span *ngIf="userDetails.active == false"
+                                    class="customer-badge status-unqualified">Inactive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="col-12" *ngIf="crudGrid.length==0">
+        <div class="card">
+            <div class="grid">
+                <div class="col-12 text-center">
+                    No data found...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid" *ngIf="false">
     <div class="col-12">
         <div class="card">
             <div class="flex justify-content-between flex-wrap">
@@ -533,9 +664,6 @@
     </div>
 
 </p-sidebar>
-
-
-
 
 <style>
     :host ::ng-deep .p-cascadeselect-items {

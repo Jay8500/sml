@@ -22,6 +22,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 @NgModule({
 	declarations: [
 		CreateborrowersComponent
@@ -50,7 +52,9 @@ import { ToastModule } from 'primeng/toast';
 		ImageModule,
 		InputNumberModule,
 		ToastModule,
-		KeyFilterModule
+		KeyFilterModule,
+		AvatarModule,
+		BadgeModule
 	]
 })
 export class CreateborrowersModule { }

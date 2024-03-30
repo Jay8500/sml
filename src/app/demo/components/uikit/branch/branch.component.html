@@ -1,201 +1,165 @@
-<div class="grid">
-    <div class="col-12">
-        <div class="card">
-            <div class="flex justify-content-between flex-wrap">
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    Branches List
-                </div>
-                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
-                    <!-- 2 -->
-                </div>
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
-                        (click)="onClick(null,'NEW')"></button>
-                </div>
-            </div>
-
-
-            <p-table #dt1 [value]="crudGrid" dataKey="dataKey" [rows]="10" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
-                <!-- <ng-template pTemplate="caption">
-					<div class="flex justify-content-between flex-column sm:flex-row">
-						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
-						<span class="p-input-icon-left mb-2">
-							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
-						</span>
-					</div>
-				</ng-template> -->
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="min-width: 5rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Action
-                                <!-- <p-columnFilter type="text" field="name" display="menu"
-                                    placeholder="Search by name"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Branch Code
-                                <p-columnFilter type="text" field="bcode" display="menu"
-                                    placeholder="Search by branch code"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 20rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Branch
-                                <p-columnFilter type="text" field="bname" display="menu"
-                                    placeholder="Search by branch"></p-columnFilter>
-                            </div>
-                        </th>
-
-                        <th style="min-width: 20rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Company
-                                <p-columnFilter type="text" field="cname" display="menu"
-                                    placeholder="Search by company"></p-columnFilter>
-                            </div>
-                        </th>
-
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Branch Opened On
-                                <p-columnFilter type="text" field="b_opn_dt" display="menu"
-                                    placeholder="Search by branch Opening on"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 10rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Contact No.
-                                <p-columnFilter type="text" field="contact_no" display="menu"
-                                    placeholder="Search by contact no."></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 9rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Country
-                                <p-columnFilter type="text" field="countryname" display="menu"
-                                    placeholder="Search by country"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                State
-                                <p-columnFilter type="text" field="state" display="menu"
-                                    placeholder="Search by state"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                City
-                                <p-columnFilter type="text" field="cityname" display="menu"
-                                    placeholder="Search by city"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 10rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Pincode
-                                <p-columnFilter type="text" field="pincode" display="menu"
-                                    placeholder="Search by pincode"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Description
-                                <!-- <p-columnFilter type="text" field="country.name" display="menu"
-                                    placeholder="Search by country"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <!-- <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Created By
-                                <p-columnFilter type="text" field="create_by" display="menu"
-                                    placeholder="Search by create by"></p-columnFilter>
-                            </div>
-                        </th> -->
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Status
-                                <p-columnFilter type="text" field="active" display="menu"
-                                    placeholder="Search by Status"></p-columnFilter>
-                            </div>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-customer>
-                    <tr>
-                        <td>
-                            <div class="flex justify-content-center flex-wrap">
-                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
-                                    <i class="pi pi-eye"></i>
-                                </div>
-                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'EDIT')">
-                                    <i class="pi pi-file-edit"></i>
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            {{customer.bcode}}
-                        </td>
-                        <td>
-                            {{customer.bname}}
-                        </td>
-                        <td>
-                            {{customer.cname}}
-                        </td>
-                        <td>
-                            {{customer.b_opn_dt}}
-                        </td>
-                        <td>
-                            {{customer.contact_no}}
-                        </td>
-                        <td>
-                            {{customer.countryname}}
-                        </td>
-                        <td>
-                            {{customer.state}}
-                        </td>
-
-                        <td>
-                            {{customer.cityname}}
-                        </td>
-                        <td>
-                            {{customer.pincode}}
-                        </td>
-                        <td>
-                            {{customer.desc}}
-                        </td>
-                        <!-- <td>
-                            {{customer.create_by}}
-                        </td> -->
-                        <td>
-
-                            <span *ngIf="customer.active == true"
-                                [class]="'customer-badge status-qualified'">Active</span>
-                            <span *ngIf="customer.active == false"
-                                [class]="'customer-badge status-unqualified'">Inactive</span>
-
-                        </td>
-
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="13">No Branches found.</td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="loadingbody">
-                    <tr>
-                        <td colspan="13">Loading Branches data. Please wait.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+<div class="card">
+    <div class="flex justify-content-between flex-wrap">
+        <div class="flex align-items-center justify-content-center  font-bold border-round">
+            Branches List
         </div>
-
+        <div class="flex align-items-center justify-content-center  font-bold border-round">
+            <!-- 2 -->
+        </div>
+        <div class="flex align-items-center justify-content-center w-6rem h-1rem font-bold border-round">
+            <button pButton pRipple label="Add new" [loading]=false class="p-button-success cursor-pointer"
+                (click)="onClick(null,'NEW')"></button>
+        </div>
     </div>
 </div>
+<div class="grid">
+    <ng-container *ngIf="crudGrid.length>0">
+        <div class="col-12 lg:col-3 xl:col-3 md:col-4 sm:col-12" *ngFor="let userDetails of crudGrid;let userIn=index;">
+            <div class="card">
+                <div class="flex justify-content-between flex-row">
+                    <div class="flex align-items-center justify-content-start border-round">
+                        <!-- <p-avatar [image]="userDetails['cLogo']" size="normal" shape="circle"></p-avatar> -->
+                        <div class="w-full ml-3 ml-2 text-orange-400">
+                            {{userDetails.bname | uppercase}}
+
+                        </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-end">
+                        <!-- <div  (click)="onClick(userDetails, 'VIEW')">
+                        <i class="pi pi-eye"></i>
+                    </div> -->
+                        <div (click)="onClick(userDetails, 'EDIT')" class="cursor-pointer">
+                            <i class="pi pi-file-edit"></i>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="flex  flex-row">
+                    <div class="grid">
+                        <div class="col-12">
+                            <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+                                Branch Code
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                <p-badge [value]="userDetails.bcode | uppercase"></p-badge>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+                                Company
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.cname | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Branch Opened On
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.b_opn_dt | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Contact No.
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.contact_no}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Country
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.countryname}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                State
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.state}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                City
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.cityname}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Pincode
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.pincode}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Description:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                {{userDetails.desc}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Status:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                <span *ngIf="userDetails.active == true"
+                                    class="customer-badge status-qualified">Active</span>
+                                <span *ngIf="userDetails.active == false"
+                                    class="customer-badge status-unqualified">Inactive</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="grid">
+                    <div class="col-12">
+                        <div class="grid">
+                            <div class="">
+                                Cader:
+                            </div>
+                            <div class="">
+                                {{userDetails.cadername | uppercase}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-center   font-bold">
+                            {{userDetails.branchname | uppercase}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="">
+                            {{userDetails.desc | uppercase}}
+                        </div>
+                    </div>
+
+                </div> -->
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="col-12" *ngIf="crudGrid.length==0">
+        <div class="card">
+            <div class="grid">
+                <div class="col-12 text-center">
+                    No data found...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"

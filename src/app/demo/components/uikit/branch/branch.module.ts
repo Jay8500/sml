@@ -23,6 +23,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ToastModule } from 'primeng/toast';
     FileUploadModule,
     ImageModule,
     InputNumberModule,
-    ToastModule
+    ToastModule,
+    AvatarModule,
+    BadgeModule
   ]
 })
 export class BranchModule { }

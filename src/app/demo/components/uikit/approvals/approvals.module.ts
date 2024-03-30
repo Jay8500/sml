@@ -26,6 +26,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { BadgeModule } from 'primeng/badge';
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { ToastModule } from 'primeng/toast';
     FileUploadModule,
     ImageModule,
     InputNumberModule,
-    ToastModule
+    ToastModule,
+    BadgeModule,
+    AvatarModule
   ]
 })
 export class ApprovalsModule { }

@@ -1,4 +1,203 @@
+<div class="card">
+    <div class="flex justify-content-between flex-wrap">
+        <div class="flex align-items-center justify-content-center  font-bold border-round">
+            Generated Loans List
+        </div>
+
+    </div>
+</div>
 <div class="grid">
+    <ng-container *ngIf="crudGrid.length>0">
+        <div class="col-12 lg:col-3 xl:col-3 md:col-4 sm:col-12" *ngFor="let userDetails of crudGrid;let userIn=index;">
+            <div class="card">
+                <div class="flex justify-content-between flex-row">
+                    <div class="flex align-items-center justify-content-start border-round">
+                        <p-avatar [image]="userDetails['A']" size="normal" shape="circle"></p-avatar>
+                        <div class="w-full ml-3 ml-2 text-orange-400">
+                            {{userDetails.borrower | uppercase}}
+
+                        </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-end">
+                        <!-- <div  (click)="onClick(userDetails, 'VIEW')">
+                        <i class="pi pi-eye"></i>
+                    </div> -->
+                        <div class="flex align-items-center  ml-1"
+                            *ngIf="!['A','R','C'].includes(userDetails.approvalstatus)"
+                            (click)="onClick(userDetails, 'VIEW')">
+                            <i class="pi pi-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="flex  flex-row">
+                    <div class="grid">
+                        <!-- <div class="col-12">
+                            <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+                                Approved by
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                <p-badge [value]="userDetails.approvalby | uppercase"></p-badge>
+                            </div>
+                        </div> -->
+
+                        <div class="col-12">
+                            <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+                                Approved status.
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                <span *ngIf="userDetails.approvalstatus == 'P'"
+                                    [class]="'order-badge order-pending'">Pending</span>
+                                <span *ngIf="userDetails.approvalstatus == 'A'"
+                                    [class]="'order-badge order-delivered'">Approved</span>
+                                <span *ngIf="userDetails.approvalstatus == 'R'"
+                                    [class]="'order-badge order-cancelled'">Rejected</span>
+                                <span *ngIf="userDetails.approvalstatus == 'C'"
+                                    [class]="'order-badge order-cancelled'">Cancel</span>
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Approved remarks
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.approvalremarks}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                SMT CODE
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.smtcode | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Branch
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.branchName | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                House type
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.housetypeName | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Product type
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.prodtypeName | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Deposit
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.depositName | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Loan amount
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.loanAmountName | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Loan schedule
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.loanscheduleName | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Tenure
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.tenureName | uppercase}}
+                            </div>
+                        </div>
+                        <!-- <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Bank
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.bankname | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Account no.
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.accountno | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Account name
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.accountname | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="w-full text-cyan-500 mb-1 justify-content-start">
+                                Ifsc
+                            </div>
+                            <div class="w-full mb-1 justify-content-end">
+                                {{userDetails.ifsc | uppercase}}
+                            </div>
+                        </div> -->
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Description:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                {{userDetails.description}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Status:
+                            </div>
+                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
+                                <span *ngIf="userDetails.active == true"
+                                    class="userDetails-badge status-qualified">Active</span>
+                                <span *ngIf="userDetails.active == false"
+                                    class="userDetails-badge status-unqualified">Inactive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="col-12" *ngIf="crudGrid.length==0">
+        <div class="card">
+            <div class="grid">
+                <div class="col-12 text-center">
+                    No data found...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="grid" *ngIf=false>
     <div class="col-12">
         <div class="card">
             <div class="flex justify-content-between flex-wrap">

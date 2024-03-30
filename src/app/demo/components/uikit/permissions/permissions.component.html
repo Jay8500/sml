@@ -1,4 +1,5 @@
 <p-tabView styleClass="tabview-custom">
+
     <p-tabPanel>
         <ng-template pTemplate="header">
             <i class="pi pi-cog"></i>
@@ -52,123 +53,112 @@
             <i class="pi pi-cog"></i>
             <span class="ml-1"> Products</span>
         </ng-template>
-        <div class="grid">
-            <div class="col-12">
+        <div class="card">
+            <p-toast></p-toast>
+            <p-table [value]="products" dataKey="pid" editMode="row" [tableStyle]="{'min-width': '50rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:20%">Category</th>
+                        <th style="width:20%">Product</th>
+                        <th style="width:20%">Surity Status</th>
+                        <th style="width:20%">Tenure</th>
+                        <th style="width:20%">ROI</th>
+                        <th style="width:20%">Repayment</th>
+                        <th style="width:20%">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="product">
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
 
+                                    <input pInputText type="text" [(ngModel)]="product.category" [pKeyFilter]="'alpha'">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{product.category}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="product.product" required
+                                        [pKeyFilter]="'alpha'">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{product.product}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="product.suritystatus"
+                                        [pKeyFilter]="'alpha'">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{product.suritystatus}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="product.tenure" [pKeyFilter]="'int'">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{product.tenure }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="product.roi" [pKeyFilter]="'alpha'">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{product.roi}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="product.repayment">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{product.repayment }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <div class="flex align-items-center justify-content-center gap-2">
 
-                <div class="card">
-                    <p-toast></p-toast>
-                    <p-table [value]="products" dataKey="pid" editMode="row" [tableStyle]="{'min-width': '50rem'}">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width:20%">Category</th>
-                                <th style="width:20%">Product</th>
-                                <th style="width:20%">Surity Status</th>
-                                <th style="width:20%">Tenure</th>
-                                <th style="width:20%">ROI</th>
-                                <th style="width:20%">Repayment</th>
-                                <th style="width:20%">Action</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-                            <tr [pEditableRow]="product">
-                                <td>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
+                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
+                                    icon="pi pi-pencil" (click)="onRowEditInit(product)"
+                                    class="p-button-rounded p-button-text"></button>
 
-                                            <input pInputText type="text" [(ngModel)]="product.category"
-                                                [pKeyFilter]="'alpha'">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{product.category}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="product.product" required
-                                                [pKeyFilter]="'alpha'">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{product.product}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="product.suritystatus"
-                                                [pKeyFilter]="'alpha'">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{product.suritystatus}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="product.tenure"
-                                                [pKeyFilter]="'int'">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{product.tenure }}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="product.roi"
-                                                [pKeyFilter]="'alpha'">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{product.roi}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="product.repayment">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{product.repayment }}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <div class="flex align-items-center justify-content-center gap-2">
+                                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
+                                    icon="pi pi-check" (click)="onRowEditSave(product)"
+                                    class="p-button-rounded p-button-text p-button-success mr-2"></button>
 
-                                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
-                                            icon="pi pi-pencil" (click)="onRowEditInit(product)"
-                                            class="p-button-rounded p-button-text"></button>
+                                <button *ngIf="ri != 0 || (ri==0 && products.length > 1) &&  editing" pButton pRipple
+                                    type="button" pCancelEditableRow icon="pi pi-times"
+                                    (click)="onRowEditCancel(product,ri)"
+                                    class="p-button-rounded p-button-text p-button-danger"></button>
 
-                                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
-                                            icon="pi pi-check" (click)="onRowEditSave(product)"
-                                            class="p-button-rounded p-button-text p-button-success mr-2"></button>
-
-                                        <button *ngIf="ri != 0 || (ri==0 && products.length > 1) &&  editing" pButton
-                                            pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                                            (click)="onRowEditCancel(product,ri)"
-                                            class="p-button-rounded p-button-text p-button-danger"></button>
-
-                                        <button *ngIf=" (ri ==  products.length-1  ) && !editing " pButton pRipple
-                                            type="button" pCancelEditableRow icon="pi pi-plus"
-                                            (click)="onRowNewCancel(product)"
-                                            class="p-button-rounded p-button-text p-button-danger"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-
-            </div>
+                                <button *ngIf=" (ri ==  products.length-1  ) && !editing " pButton pRipple type="button"
+                                    pCancelEditableRow icon="pi pi-plus" (click)="onRowNewCancel(product)"
+                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
-
     </p-tabPanel>
+
 </p-tabView>
 
 <p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"

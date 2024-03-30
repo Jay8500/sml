@@ -24,6 +24,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BadgeModule } from 'primeng/badge';
 @NgModule({
 	declarations: [
 		UsersComponent
@@ -53,7 +54,9 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 		InputNumberModule,
 		ToastModule,
 		AvatarModule,
-		AvatarGroupModule
+		AvatarGroupModule,
+		CalendarModule,
+		BadgeModule
 	]
 })
 export class UsersModule { }
