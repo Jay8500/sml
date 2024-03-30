@@ -409,7 +409,7 @@ export class DisbursementComponent {
   ];
   public loanStatusRemarks = "Disbursement remarks";
   onloanStatusRemarks() {
-    this.loanStatusRemarks = _.filter(this.approvalsStatusList, { value: this.createMaster.approvalstatus })[0]['label']
+    // this.loanStatusRemarks = _.filter(this.approvalsStatusList, { value: this.createMaster.approvalstatus })[0]['label']
   }
 
   public borrowersList: any = [
@@ -681,7 +681,7 @@ export class DisbursementComponent {
     if (['VIEW', 'EDIT'].includes(mode)) {
       //   this.isClicked = true;
       let filterName: any = _.filter(this.borrwoersList, { _id: event.borrowername });
-      this.headerText = filterName[0]['name'] || '';
+      // this.headerText = filterName[0]['name'] || '';
       this.createMaster = {
         smtcode: event.smtcode,
         borrowername: event.borrowername,
@@ -735,8 +735,8 @@ export class DisbursementComponent {
         let savePayload = JSON.parse(JSON.stringify(this.createMaster));
         savePayload['flag'] = 'DISBURSEMENT';
         savePayload['create_by'] = this._service.getUserInfo('_id');
-        let filterName: any = _.filter(this.borrwoersList, { _id: this.createMaster.borrowername });
-        savePayload['borrower'] = filterName[0]['name'];
+        // let filterName: any = _.filter(this.borrwoersList, { _id: this.createMaster.borrowername });
+        // savePayload['borrower'] = filterName[0]['name'];
         // console.log(savePayload)
         let loginJson = this._service.postApi('generateloans', 'postEndPoint', savePayload)
           .pipe(takeUntil(this.destroy$))
