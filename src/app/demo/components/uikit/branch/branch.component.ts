@@ -572,7 +572,7 @@ export class BranchComponent {
   }
 
   hideDialog() {
-    this.isShowForm = false;
+    // this.isShowForm = false;
     this.createMaster = JSON.parse(this.defaultUser);
     this.errorMessages = JSON.parse(this.defErrs);
   }

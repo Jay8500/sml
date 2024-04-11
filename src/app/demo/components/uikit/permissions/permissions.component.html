@@ -1,5 +1,33 @@
 <p-tabView styleClass="tabview-custom">
-
+    <!-- <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="pi pi-cog"></i>
+            <span class="ml-1"> Alter Permission</span>
+        </ng-template>
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    {{permissions | json}}
+                    <p-table [value]="permissions" [columns]="roles">
+                        <ng-template pTemplate="header" let-columns>
+                          <tr>
+                            <th>Pages</th>
+                            <th *ngFor="let col of columns.slice(1)">{{ col.header }}</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-page let-columns="columns">
+                          <tr>
+                            <td>{{ page.name }}</td>
+                            <td *ngFor="let col of columns.slice(1)">
+                              <input type="checkbox" [ngModel]="page['permissions'][col.field]" >
+                            </td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                </div>
+            </div>
+        </div>
+    </p-tabPanel> -->
     <p-tabPanel>
         <ng-template pTemplate="header">
             <i class="pi pi-cog"></i>

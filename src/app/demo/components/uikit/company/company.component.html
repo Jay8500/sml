@@ -282,23 +282,13 @@
 </div>
 
 
-<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"
+<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose" [styleClass]="'test'"
     [closeOnEscape]="isCloseOnEscape">
     <div class="grid">
         <div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
             <div class="card  p-fluid">
                 <div class="grid">
                     <h5>Create Company </h5>
-
-                    <!-- <div class="col-12">
-                   <label htmlFor="name1">Country/ State/ City</label>
-                   <div class="w-5">
-                       
-                       <p-cascadeSelect [(ngModel)]="selectedCity" [options]="countries" optionLabel="cname" optionGroupLabel="name" [optionGroupChildren]="['states', 'cities']" [style]="{ minWidth: '14rem' }" placeholder="Select a City"></p-cascadeSelect>
-                       <small>Country/ State/ City is required.</small>
-                   </div>
-                   
-               </div> -->
                     <div class="col-12">
                         <label htmlFor="name1">Name</label>
                         <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
@@ -356,13 +346,17 @@
                     <div class="col-12">
                         <div class="grid">
                             <div class="col-6">
-                                <button pButton [disabled]="mode=='VIEW'" pRipple label="Clear" (click)="hideDialog()"
-                                    class="p-button-outlined"></button>
+                                <button pButton [disabled]="['',null,undefined].includes(createMaster.cadress) || 
+                                ['',null,undefined].includes(createMaster.city) || 
+                                ['',null,undefined].includes(createMaster.cname) 
+                                " pRipple label="Clear" (click)="hideDialog()" class="p-button-outlined"></button>
 
                             </div>
                             <div class="col-6">
-                                <button pButton pRipple label="Submit" [disabled]="mode=='VIEW'" (click)="saveProduct()"
-                                    [loading]="submitloading" class="p-button-success"></button>
+                                <button pButton pRipple label="Submit" [disabled]="['',null,undefined].includes(createMaster.cadress) || 
+                                ['',null,undefined].includes(createMaster.city) || 
+                                ['',null,undefined].includes(createMaster.cname) 
+                                " (click)="saveProduct()" [loading]="submitloading" class="p-button-success"></button>
                             </div>
                         </div>
                     </div>
@@ -475,6 +469,10 @@
     :host ::ng-deep .p-cascadeselect-items {
         max-height: 100px;
         overflow: auto;
+    }
+
+    :host ::ng-deep .test .p-icon {
+        color: red !important;
     }
 </style>
 

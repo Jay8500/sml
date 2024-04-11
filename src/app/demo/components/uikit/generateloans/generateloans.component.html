@@ -28,7 +28,8 @@
 						<!-- <div  (click)="onClick(userDetails, 'VIEW')">
                         <i class="pi pi-eye"></i>
                     </div> -->
-						<div (click)="onClick(userDetails, 'EDIT')" class="cursor-pointer">
+						<div (click)="onClick(userDetails, 'EDIT')" class="cursor-pointer"
+						*ngIf="userDetails.approvalstatus != 'A'">
 							<i class="pi pi-file-edit"></i>
 						</div>
 					</div>
@@ -37,11 +38,11 @@
 				<div class="flex  flex-row">
 					<div class="grid">
 						<div class="col-12">
-							<div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
+							<div class="w-full mt-2 mb-1 justify-content-start text-cyan-500" >
 								Approved by
 							</div>
 							<div class="w-full mb-1 justify-content-end">
-								<p-badge [value]="userDetails.approvalby | uppercase"></p-badge>
+								<p-badge value="{{userDetails.approvalby | uppercase}}"></p-badge>
 							</div>
 						</div>
 

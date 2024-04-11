@@ -432,7 +432,7 @@ export class GenerateloansComponent implements OnInit {
                             };
                             this.branches.push(products);
                         });
-                        this.generateCode(this.createMaster)
+                        // this.generateCode(this.createMaster)
                     };
                 },
                 error: (err) => {

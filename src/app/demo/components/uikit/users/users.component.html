@@ -263,7 +263,7 @@
 </div>
 
 
-<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"
+<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"  [styleClass]="'test'"
     [closeOnEscape]="isCloseOnEscape">
     <div class="grid">
         <div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
@@ -278,7 +278,7 @@
                         <small *ngIf="errorMessages.master_name != ''">{{ errorMessages.master_name}}</small>
                     </div>
                     <div class="col-12">
-                        <label for="firstname2">password</label>
+                        <label for="firstname2">Password</label>
                         <input id="firstname2" type="text" [(ngModel)]="createMaster.password" [disabled]="mode=='VIEW'"
                             pInputText class="ng-invalid ng-dirty">
                         <small *ngIf="errorMessages.password != ''">{{ errorMessages.password}}</small>
@@ -317,13 +317,21 @@
                     <div class="col-12">
                         <div class="grid">
                             <div class="col-6">
-                                <button pButton [disabled]="mode=='VIEW'" pRipple label="Clear" (click)="hideDialog()"
-                                    class="p-button-outlined"></button>
+                                <button pButton [disabled]="['',null,undefined].includes(createMaster.master_name) || 
+                                ['',null,undefined].includes(createMaster.password) || 
+                                ['',null,undefined].includes(createMaster.gender) ||
+                                ['',null,undefined].includes(createMaster.cader_id) ||
+                                ['',null,undefined].includes(createMaster.branchid) 
+                                " pRipple label="Clear" (click)="hideDialog()" class="p-button-outlined"></button>
 
                             </div>
                             <div class="col-6">
-                                <button pButton pRipple label="Submit" [disabled]="mode=='VIEW'" (click)="saveProduct()"
-                                    [loading]="submitloading" class="p-button-success"></button>
+                                <button pButton pRipple label="Submit" [disabled]="['',null,undefined].includes(createMaster.master_name) || 
+                                ['',null,undefined].includes(createMaster.password) || 
+                                ['',null,undefined].includes(createMaster.gender) ||
+                                ['',null,undefined].includes(createMaster.cader_id) ||
+                                ['',null,undefined].includes(createMaster.branchid) 
+                                " (click)="saveProduct()" [loading]="submitloading" class="p-button-success"></button>
                             </div>
                         </div>
                     </div>
@@ -436,7 +444,10 @@
     :host ::ng-deep .p-cascadeselect-items {
         max-height: 100px;
         overflow: auto;
-    }
+    };
+    :host ::ng-deep .test .p-icon {
+        color: red !important;
+    };
 </style>
 
 <p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"

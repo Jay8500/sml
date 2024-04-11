@@ -485,7 +485,7 @@ export class CompanyComponent {
   }
 
   hideDialog() {
-    this.isShowForm = false;
+    // this.isShowForm = false;
     this.createMaster = JSON.parse(this.defaultUser);
     this.errorMessages = JSON.parse(this.defErrs);
   }

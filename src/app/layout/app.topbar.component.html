@@ -26,7 +26,7 @@
     <button title="bar" type="button" class="p-link layout-topbar-menu-button layout-topbar-button"
         (click)="op.show($event, targetE2)">
         <div #targetE2>
-            <p-button  [label]="userInfo['uname']" icon="pi pi-user" iconPos="right"></p-button>
+            <p-button [label]="userInfo['uname']" icon="pi pi-user" iconPos="right"></p-button>
         </div>
     </button>
 
@@ -41,19 +41,20 @@
 <p-overlayPanel #op [showCloseIcon]="false" [style]="{'margin':'10px 1px 10px 10px'}">
     <ng-template pTemplate="content">
         <div class="flex flex-column pb-0">
-            <div class="cursor-pointer text-left">
-                {{userInfo['cader']}}
-            </div>
+
             <div class="card">
-                <div class="text-center font-light text-gray-600">
-                    Signed In
+                <div class="flex flex-column justify-content-start">
+                    <div class="text-center font-light text-gray-600 m-1">
+                        Signed In {{userInfo['cader']}}
+                    </div>
+                    <div class="text-center font-light text-orange-600 m-1">
+                        {{userInfo['cader']}}
+                    </div>
+                    <div class="text-center font-bold text-sm">
+                        {{userInfo['loggedInTime']}}
+                    </div>
                 </div>
-                <div class="text-center font-bold ">
-                    {{userInfo['loggedInTime']}}
-                </div>
-
             </div>
-
 
             <div class="text-left">
                 <div (click)="onSignOutClick()" class="no-underline cursor-pointer">

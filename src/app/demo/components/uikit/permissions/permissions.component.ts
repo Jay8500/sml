@@ -4,6 +4,7 @@ import { FileUpload } from 'primeng/fileupload';
 import { Subject, takeUntil } from 'rxjs';
 import { ServicesService } from 'src/app/services.service';
 import * as _ from 'lodash';
+
 @Component({
   selector: 'app-permissions',
   templateUrl: './permissions.component.html',
@@ -12,6 +13,13 @@ import * as _ from 'lodash';
 })
 export class PermissionsComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
+
+  public roles = [
+    { header: 'Admin', field: 'Admin' },
+    { header: 'Manager', field: 'Manager' },
+    { header: 'User', field: 'User' }
+  ];
+  public permissions: any = [];
 
   public products: any = [];
 
@@ -29,6 +37,39 @@ export class PermissionsComponent implements OnInit {
   public userApprovals: any = [];
 
   ngOnInit(): void {
+    this.permissions = [];
+
+
+    // Pages array
+    this.permissions = [
+      {
+        name: 'Dashboard',
+        permissions: {
+          Admin: true,
+          Manager: true,
+          User: false
+        }
+      },
+      {
+        name: 'Settings',
+        permissions: {
+          Admin: true,
+          Manager: true,
+          User: false
+        }
+      },
+      {
+        name: 'Profile',
+        permissions: {
+          Admin: false,
+          Manager: false,
+          User: true
+        }
+      },
+      // Add more pages as needed
+    ];
+
+
     this.products = [];
     this.products.push(
       {
