@@ -28,6 +28,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AvatarModule } from 'primeng/avatar';
     InputNumberModule,
     ToastModule,
     BadgeModule,
-    AvatarModule
+    AvatarModule,
+    ScrollTopModule
   ]
 })
 export class ApprovalsModule { }

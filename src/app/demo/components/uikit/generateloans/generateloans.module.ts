@@ -25,6 +25,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
+import { ScrollerModule } from 'primeng/scroller';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
 	imports: [
@@ -52,7 +54,8 @@ import { BadgeModule } from 'primeng/badge';
 		InputNumberModule,
 		ToastModule,
 		AvatarModule,
-		BadgeModule
+		BadgeModule,
+		ScrollTopModule
 	],
 	declarations: [
 		GenerateloansComponent

@@ -25,6 +25,7 @@ import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
+import { ScrollTopModule } from 'primeng/scrolltop';
 @NgModule({
 	declarations: [
 		UsersComponent
@@ -56,7 +57,8 @@ import { BadgeModule } from 'primeng/badge';
 		AvatarModule,
 		AvatarGroupModule,
 		CalendarModule,
-		BadgeModule
+		BadgeModule,
+		ScrollTopModule
 	]
 })
 export class UsersModule { }

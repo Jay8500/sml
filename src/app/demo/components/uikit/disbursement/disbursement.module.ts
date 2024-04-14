@@ -27,6 +27,7 @@ import { DisbursementComponent } from './disbursement.component';
 import { DialogModule } from 'primeng/dialog';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
+import { ScrollTopModule } from 'primeng/scrolltop';
 @NgModule({
   declarations: [
     DisbursementComponent
@@ -58,7 +59,8 @@ import { AvatarModule } from 'primeng/avatar';
     ToastModule,
     DialogModule,
     BadgeModule,
-    AvatarModule
+    AvatarModule,
+    ScrollTopModule
   ]
 })
 export class DisbursementModule { }

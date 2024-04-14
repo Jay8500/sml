@@ -10,6 +10,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { DashboardsRoutingModule } from './dashboard-routing.module';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
     imports: [
         CommonModule,
@@ -21,7 +22,8 @@ import { SkeletonModule } from 'primeng/skeleton';
         PanelMenuModule,
         ButtonModule,
         DashboardsRoutingModule,
-        SkeletonModule
+        SkeletonModule,
+        ProgressSpinnerModule
     ],
     declarations: [DashboardComponent]
 })

@@ -14,7 +14,6 @@ import { PasswordModule } from 'primeng/password';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-// import { OverlayModule } from 'primeng/overlay';
 
 @NgModule({
     declarations: [
@@ -26,7 +25,13 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
         AppRoutingModule,
         ButtonModule,
         ToastModule,
-        AppLayoutModule, InputTextModule, PasswordModule, ButtonModule, OverlayPanelModule, AvatarModule, AvatarGroupModule
+        AppLayoutModule,
+        InputTextModule,
+        PasswordModule,
+        ButtonModule,
+        OverlayPanelModule,
+        AvatarModule,
+        AvatarGroupModule
     ],
     providers: [
         // { provide: LocationStrategy, useClass: HashLocationStrategy },

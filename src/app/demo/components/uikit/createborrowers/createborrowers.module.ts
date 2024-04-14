@@ -24,6 +24,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
+import { ScrollTopModule } from 'primeng/scrolltop';
 @NgModule({
 	declarations: [
 		CreateborrowersComponent
@@ -54,7 +55,8 @@ import { BadgeModule } from 'primeng/badge';
 		ToastModule,
 		KeyFilterModule,
 		AvatarModule,
-		BadgeModule
+		BadgeModule,
+		ScrollTopModule
 	]
 })
 export class CreateborrowersModule { }

@@ -19,7 +19,8 @@
                         </div>
                     </div>
                     <div class="flex align-items-center justify-content-end">
-                        <div class="flex align-items-center  ml-1" *ngIf="!['A'].includes(userDetails.disbursementstatus)"
+                        <div class="flex align-items-center  ml-1"
+                            *ngIf="!['A'].includes(userDetails.disbursementstatus)"
                             (click)="onClick(userDetails, 'VIEW')">
                             <i class="pi pi-eye"></i>
                         </div>
@@ -103,6 +104,7 @@
                     </div>
                 </div>
             </div>
+            <p-scrollTop></p-scrollTop>
         </div>
     </ng-container>
     <div class="col-12" *ngIf="crudGrid.length==0">
@@ -288,7 +290,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <p-scrollTop></p-scrollTop>
                 </div>
             </div>
         </div>

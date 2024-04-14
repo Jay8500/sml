@@ -19,6 +19,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { MegaMenuModule } from 'primeng/megamenu';
+import { ChipModule } from 'primeng/chip';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     declarations: [
@@ -43,7 +45,9 @@ import { MegaMenuModule } from 'primeng/megamenu';
         AppConfigModule,
         ButtonModule,
         MenuModule,
-        MegaMenuModule
+        MegaMenuModule,
+        ChipModule,
+        TooltipModule
     ],
     exports: [AppLayoutComponent]
 })

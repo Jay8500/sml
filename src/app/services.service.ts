@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import _config from 'src/assets/config.json';
-import { Subject, takeUntil } from 'rxjs';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subject, Observable, throwError, of } from 'rxjs';
 import CryptoJS from 'crypto-js';
+import { catchError, timeout } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,16 +39,21 @@ export class ServicesService {
       'Content-Type': 'application/json', // Example content type
       'isCrypto': this._configClone['isCrypto']
     };
-    // if (!localStorage.getItem('userInfo') != null) {
-    //   createHdrs['Authorization'] = `Bearer ${ localStorage.getItem('userInfo') } `
-    // };
+
     const httpHeaders = new HttpHeaders(createHdrs);
     let apiHostUrl = this._configClone['apiHostUrl'] +
       this._configClone[mstrApiParentKey][srvcApiChildKey];
     return this._httpClient.post<any>(apiHostUrl, {
       secure: this._configClone['isCrypto'] == 'Y' ?
         this.encrypt(JSON.stringify(postData)) : postData
-    }, { headers: httpHeaders });
+    }, { headers: httpHeaders })
+      .pipe(
+        timeout(10000), // Set timeout to 10 seconds
+        catchError((error) => {
+          return of('NETOWRK_ISSUE');
+        })
+
+      );
   }
 
   startTimer(): void {
@@ -89,7 +95,7 @@ export class ServicesService {
         let decryptData: any = this.decrypt(getUserInfo);
         // console.log("getUserInfo", decryptData);
         getUserInfo = decryptData[keyName];
-       
+
       };
     } catch (e) {
     }
@@ -123,7 +129,7 @@ export class ServicesService {
     return this._configClone['autoCode'] || 0;
   }
 
-  appVersion(){
+  appVersion() {
     return this._configClone['appVersion'];
   }
 

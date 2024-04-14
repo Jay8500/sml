@@ -10,18 +10,16 @@ export class DashboardComponent implements OnInit {
     private _service = inject(ServicesService);
     public showSkeleton = true;
     private destroy$: Subject<void> = new Subject<void>();
-    public dashboardData: any = [
-    ];
-    public blocUI = false;
+    public dashboardData: any = [];
 
     async ngOnInit() {
-        this.gridData();
+        await this.gridData();
     }
 
-    gridData() {
-        this.blocUI = true;
+    async gridData() {
         try {
-            let cader = this._service.getUserInfo('userCader');
+            this.dashboardData = [];
+            let cader = await this._service.getUserInfo('userCader');
             this._service.postApi('getDashboardDetails', 'postEndPoint',
                 {
                     cader: cader['code'],
@@ -33,20 +31,14 @@ export class DashboardComponent implements OnInit {
                     next: (data) => {
                         data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
                         if (data['S_CODE'] == 200) {
-                            this.blocUI = false;
-                            //  this.model = [];
                             if (data['DATA'].length > 0) this.dashboardData = data['DATA'];
-                            // this.blocUI = false;
-                            // this.myModels = [];
                         };
                     },
                     error: (err) => {
-                        this.blocUI = false;
-                        // this.myModels = [];
+                        this.dashboardData = [];
                     }
                 });
-        } catch (e) { this.blocUI = false; }
-        // setTimeout(() => this.blocUI = false, 1400);
+        } catch (e) { }
     }
 
 }

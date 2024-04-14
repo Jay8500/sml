@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output, inject, ElementRef, Vie
 import { ServicesService } from 'src/app/services.service';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { Sidebar } from 'primeng/sidebar';
 
 import * as _ from 'lodash';
 @Component({
@@ -14,6 +15,7 @@ import * as _ from 'lodash';
     providers: [DatePipe]
 })
 export class AppTopBarComponent implements OnInit {
+    @ViewChild('sidebarRef') sidebarRef!: Sidebar;
     @Input() companyName: string = "SML";
     @Input() branchName: string = "";
     private router = inject(Router);
@@ -31,8 +33,7 @@ export class AppTopBarComponent implements OnInit {
             // console.log(window.localStorage.getItem('userInfo'))
             // setInterval(() => {
             //     if ([undefined, null, ''].includes(window.localStorage.getItem('userInfo'))) {
-            //         this.router.navigate(['/home/sml-signin']);
-            //         // window.location.href = '/sml/sml-signin' //this.service.setPreRoutes('REDIRECTLOGIN');// '/sml/sml-signin';
+            //         this.router.navigate(['/sml-signin']);
             //     }
             // }, 1000);
 
@@ -172,5 +173,9 @@ export class AppTopBarComponent implements OnInit {
 
     onSideBarClick() {
         this.Visible = !this.Visible;
+    }
+
+    closeCallback(e: any): void {
+        this.sidebarRef.close(e);
     }
 }
