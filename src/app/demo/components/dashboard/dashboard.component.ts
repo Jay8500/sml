@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 
     async ngOnInit() {
         await this.gridData();
+        //await this.getprofilepicture();
     }
 
     async gridData() {
@@ -36,6 +37,34 @@ export class DashboardComponent implements OnInit {
                     },
                     error: (err) => {
                         this.dashboardData = [];
+                    }
+                });
+        } catch (e) { }
+    }
+
+    async getprofilepicture() {
+        try {
+            // this.dashboardData = [];
+            // let cader = await this._service.getUserInfo('userCader');
+            this._service.postApi('getprofilepicture', 'postEndPoint',
+                {
+                    // cader: cader['code'],
+                    empId: this._service.getUserInfo('_id')
+                }
+            )
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                    next: (data) => {
+                        data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+                        if (data['S_CODE'] == 200) {
+                            if (data['DATA'].length > 0) {
+                                console.log("data['DATA'] ", data['DATA']);
+                            }
+                            //this.dashboardData = data['DATA'];
+                        };
+                    },
+                    error: (err) => {
+                        // this.dashboardData = [];
                     }
                 });
         } catch (e) { }

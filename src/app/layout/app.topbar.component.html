@@ -13,17 +13,17 @@
     <button title="bar" type="button" class="p-link layout-topbar-menu-button layout-topbar-button"
         (click)="op.show($event, targetE2)">
         <div #targetE2>
-            <p-chip pTooltip="userInfo['uname']" tooltipPosition="left"
-                [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() : userInfo['uname'].substring(0,5).toUpperCase()"
-                icon="pi pi-user" styleClass="cursor-pointer"></p-chip>
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="normal"
+                shape="circle" [ngStyle]="{'margin-left': '50px'}"></p-avatar>
         </div>
     </button>
 
     <div class="layout-topbar-menu" (click)="op.show($event, targetEl)">
         <div #targetEl>
-            <p-chip [pTooltip]="userInfo['uname']" tooltipPosition="left"
-                [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() : userInfo['uname'].substring(0,5).toUpperCase()"
-                icon="pi pi-user" styleClass="cursor-pointer"></p-chip>
+            <p-chip [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() :
+                userInfo['uname'].substring(0,5).toUpperCase()" [pTooltip]="userInfo['uname']" tooltipPosition="left"
+                styleClass="cursor-pointer" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                alt="Avatar image"></p-chip>
         </div>
     </div>
 
@@ -50,6 +50,10 @@
                 </div>
             </div>
 
+            <!-- <div class="card cursor-pointer" >
+                Edit Profile picture
+            </div> -->
+
             <div class="text-left">
                 <div (click)="onSignOutClick()" class="no-underline cursor-pointer">
                     <i class="pi pi-sign-out"></i>
@@ -59,6 +63,7 @@
         </div>
     </ng-template>
 </p-overlayPanel>
+
 
 <!-- <div class="card flex justify-content-center"> -->
 <p-sidebar #sidebarRef [(visible)]="Visible">
@@ -83,8 +88,7 @@
                             <!-- <i class="pi pi-chevron-down"></i> -->
                         </div>
                         <ul class="list-none p-0 m-0 overflow-hidden">
-                            <li pRipple pButton *ngFor="let tabs of tab.items" [label]="tabs.label"
-                             class="text-white flex align-items-center cursor-pointer p-3 border-round text-700 
+                            <li pRipple pButton *ngFor="let tabs of tab.items" [label]="tabs.label" class="text-white flex align-items-center cursor-pointer p-3 border-round text-700 
                             p-ripple
                             m-1" styleClass="p-button-rounded" (click)="onClick(tabs)">
                             </li>

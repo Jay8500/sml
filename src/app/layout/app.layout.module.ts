@@ -21,6 +21,8 @@ import { MenuModule } from 'primeng/menu';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { ChipModule } from 'primeng/chip';
 import { TooltipModule } from 'primeng/tooltip';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 @NgModule({
     declarations: [
@@ -47,7 +49,9 @@ import { TooltipModule } from 'primeng/tooltip';
         MenuModule,
         MegaMenuModule,
         ChipModule,
-        TooltipModule
+        TooltipModule,
+        AvatarModule,
+        AvatarGroupModule
     ],
     exports: [AppLayoutComponent]
 })

@@ -1,5 +1,5 @@
 {
-    "apiHostUrl": "https://nodeservice-mx3q.onrender.com/",
+    "apiHostUrl": "http://localhost:2300/",
     "apiHostUrllocal": "http://localhost:2300/",
     "apiHostUrlServerlocal": "https://nodeservice-mx3q.onrender.com/",
     "nodePortNumber": 2300,
@@ -14,6 +14,12 @@
     },
     "forgotpwd": {
         "postEndPoint": "sml/validateuser"
+    },
+    "getprofilepicture": {
+        "postEndPoint": "sml/getprofilepicture"
+    },
+    "uploadProfilePicture": {
+        "postEndPoint": "sml/uploadProfilePicture"
     },
     "payment": {
         "postEndPoint": "sml/payment"
