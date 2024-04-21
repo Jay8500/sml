@@ -25,6 +25,7 @@ import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
 	declarations: [
 		CreateborrowersComponent
@@ -33,30 +34,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 		CommonModule,
 		FormsModule,
 		CreateborrowersRoutingModule,
-		AutoCompleteModule,
-		CalendarModule,
-		ChipsModule,
-		DropdownModule,
-		InputMaskModule,
-		InputNumberModule,
-		CascadeSelectModule,
-		MultiSelectModule,
-		InputTextareaModule,
-		InputTextModule,
-		TableModule,
-		SliderModule,
-		ProgressBarModule,
-		SidebarModule,
-		KeyFilterModule,
-		CascadeSelectModule,
-		FileUploadModule,
-		ImageModule,
-		InputNumberModule,
-		ToastModule,
-		KeyFilterModule,
-		AvatarModule,
-		BadgeModule,
-		ScrollTopModule
+		SharedModule
 	]
 })
 export class CreateborrowersModule { }

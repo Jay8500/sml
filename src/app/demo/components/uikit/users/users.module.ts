@@ -26,6 +26,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { DialogModule } from 'primeng/dialog';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
 	declarations: [
 		UsersComponent
@@ -34,31 +36,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 		CommonModule,
 		UsersRoutingModule,
 		FormsModule,
-		AutoCompleteModule,
-		CalendarModule,
-		ChipsModule,
-		DropdownModule,
-		InputMaskModule,
-		InputNumberModule,
-		CascadeSelectModule,
-		MultiSelectModule,
-		InputTextareaModule,
-		InputTextModule,
-		TableModule,
-		SliderModule,
-		ProgressBarModule,
-		SidebarModule,
-		KeyFilterModule,
-		CascadeSelectModule,
-		FileUploadModule,
-		ImageModule,
-		InputNumberModule,
-		ToastModule,
-		AvatarModule,
-		AvatarGroupModule,
-		CalendarModule,
-		BadgeModule,
-		ScrollTopModule
+		SharedModule
 	]
 })
 export class UsersModule { }

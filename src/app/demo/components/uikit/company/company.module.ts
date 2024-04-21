@@ -24,6 +24,8 @@ import { CompanyComponent } from './company.component';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { ScrollTop, ScrollTopModule } from 'primeng/scrolltop';
+import { DialogModule } from 'primeng/dialog';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -34,29 +36,7 @@ import { ScrollTop, ScrollTopModule } from 'primeng/scrolltop';
     CommonModule,
     FormsModule,
     CompanyRoutingModule,
-    AutoCompleteModule,
-    CalendarModule,
-    ChipsModule,
-    DropdownModule,
-    InputMaskModule,
-    InputNumberModule,
-    CascadeSelectModule,
-    MultiSelectModule,
-    InputTextareaModule,
-    InputTextModule,
-    TableModule,
-    SliderModule,
-    ProgressBarModule,
-    SidebarModule,
-    KeyFilterModule,
-    CascadeSelectModule,
-    FileUploadModule,
-    ImageModule,
-    InputNumberModule,
-    ToastModule,
-    AvatarModule,
-    BadgeModule,
-    ScrollTopModule
+    SharedModule
   ]
 })
 export class CompanyModule { }

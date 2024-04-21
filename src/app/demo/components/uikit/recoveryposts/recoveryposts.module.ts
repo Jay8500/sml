@@ -25,6 +25,7 @@ import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
 import { TabViewModule } from 'primeng/tabview';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     RecoverypostsComponent
@@ -34,28 +35,7 @@ import { TabViewModule } from 'primeng/tabview';
     RecoverypostsRoutingModule,
     CommonModule,
     FormsModule,
-    AutoCompleteModule,
-    CalendarModule,
-    TooltipModule,
-    ChipsModule,
-    DropdownModule,
-    InputMaskModule,
-    InputNumberModule,
-    CascadeSelectModule,
-    MultiSelectModule,
-    InputTextareaModule,
-    InputTextModule,
-    TableModule,
-    SliderModule,
-    ProgressBarModule,
-    SidebarModule,
-    KeyFilterModule,
-    CascadeSelectModule,
-    FileUploadModule,
-    ImageModule,
-    InputNumberModule,
-    ToastModule,
-    TabViewModule
+    SharedModule
   ]
 })
 export class RecoverypostsModule { }

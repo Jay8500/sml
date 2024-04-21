@@ -24,6 +24,7 @@ export class AppTopBarComponent implements OnInit {
 
     constructor() { }
 
+    public visibles = false;
     public Visible = false;
     public service = inject(ServicesService);
     public datePipe = inject(DatePipe)

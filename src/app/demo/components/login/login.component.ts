@@ -5,6 +5,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { ServicesService } from 'src/app/services.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +13,7 @@ import { ServicesService } from 'src/app/services.service';
   providers: [DatePipe, MessageService],
 })
 export class LoginComponent {
+ 
   public siginJson = {
     flag: 'S',
     uname: "", //DEVADMIN
@@ -47,6 +49,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
+    
     // setInterval(() => {
     //   if (![undefined, null, ''].includes(window.localStorage.getItem('userInfo'))) {
     //     // window.location.href = this._service.setPreRoutes('DASH');// '/sml/home/sml-dashboard';
@@ -104,8 +107,8 @@ export class LoginComponent {
         if (event['target']['type'] == 'password' && ![undefined, null, ''].includes(this.siginJson.password))
           this.signUpClick();
     } catch (e) {
-
     }
-
   }
+
+ 
 }

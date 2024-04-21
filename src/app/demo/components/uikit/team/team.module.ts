@@ -22,6 +22,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -31,26 +32,7 @@ import { ToastModule } from 'primeng/toast';
 		CommonModule,
 		FormsModule,
 		TeamRoutingModule,
-		AutoCompleteModule,
-		CalendarModule,
-		ChipsModule,
-		DropdownModule,
-		InputMaskModule,
-		InputNumberModule,
-		CascadeSelectModule,
-		MultiSelectModule,
-		InputTextareaModule,
-		InputTextModule,
-		TableModule,
-		SliderModule,
-		ProgressBarModule,
-		SidebarModule,
-		KeyFilterModule,
-		CascadeSelectModule,
-		FileUploadModule,
-		ImageModule,
-		InputNumberModule,
-		ToastModule
+		SharedModule
 	]
 })
 export class TeamModule { }

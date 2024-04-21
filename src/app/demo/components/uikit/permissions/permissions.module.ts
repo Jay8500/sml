@@ -28,6 +28,7 @@ import { PermissionsComponent } from './permissions.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { AccordionModule } from 'primeng/accordion';
 import { TabViewModule } from 'primeng/tabview';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     PermissionsComponent
@@ -37,31 +38,7 @@ import { TabViewModule } from 'primeng/tabview';
     PermissionsRoutingModule,
     CommonModule,
     FormsModule,
-    AutoCompleteModule,
-    CalendarModule,
-    ChipsModule,
-    DropdownModule,
-    InputMaskModule,
-    InputNumberModule,
-    CascadeSelectModule,
-    MultiSelectModule,
-    InputTextareaModule,
-    InputTextModule,
-    TableModule,
-    SliderModule,
-    ProgressBarModule,
-    SidebarModule,
-    KeyFilterModule,
-    CascadeSelectModule,
-    FileUploadModule,
-    ImageModule,
-    InputNumberModule,
-    ToastModule,
-    RadioButtonModule,
-    AccordionModule,
-    TabViewModule,
-    TableModule
-
+    SharedModule
   ]
 })
 export class PermissionsModule { }

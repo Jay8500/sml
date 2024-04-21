@@ -28,6 +28,7 @@ import { DialogModule } from 'primeng/dialog';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     DisbursementComponent
@@ -37,30 +38,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     DisbursementRoutingModule,
     CommonModule,
     FormsModule,
-    AutoCompleteModule,
-    CalendarModule,
-    ChipsModule,
-    DropdownModule,
-    InputMaskModule,
-    InputNumberModule,
-    CascadeSelectModule,
-    MultiSelectModule,
-    InputTextareaModule,
-    InputTextModule,
-    TableModule,
-    SliderModule,
-    ProgressBarModule,
-    SidebarModule,
-    KeyFilterModule,
-    CascadeSelectModule,
-    FileUploadModule,
-    ImageModule,
-    InputNumberModule,
-    ToastModule,
-    DialogModule,
-    BadgeModule,
-    AvatarModule,
-    ScrollTopModule
+    SharedModule
   ]
 })
 export class DisbursementModule { }

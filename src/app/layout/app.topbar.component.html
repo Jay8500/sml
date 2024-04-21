@@ -1,69 +1,54 @@
-<div class="layout-topbar">
-    <button pButton icon="pi pi-bars" (click)="onSideBarClick()">
+<div class="layout-topbar flex justify-content-between flex-wrap">
+    <button pButton icon="pi pi-bars" (click)="onSideBarClick()" class="flex align-items-center justify-content-center">
     </button>
 
     <div class="flex flex-row">
-        <div class="flex align-items-center justify-content-between px-4 pt-1 flex-shrink-0">
-            <span class="inline-flex align-items-center gap-2">
+        <div class="flex align-items-center justify-content-between px-1 pt-1 flex-shrink-0">
+            <span class="inline-flex align-items-center gap-1">
                 <span class="font-semibold lg:text-2xl sm:text-sm text-primary w-full">{{companyName}}</span>
             </span>
         </div>
     </div>
 
-    <button title="bar" type="button" class="p-link layout-topbar-menu-button layout-topbar-button"
-        (click)="op.show($event, targetE2)">
-        <div #targetE2>
-            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="normal"
-                shape="circle" [ngStyle]="{'margin-left': '50px'}"></p-avatar>
-        </div>
-    </button>
-
-    <div class="layout-topbar-menu" (click)="op.show($event, targetEl)">
-        <div #targetEl>
-            <p-chip [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() :
+    <div (click)="visibles=true" class="flex align-items-center justify-content-center">
+        <p-chip [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() :
                 userInfo['uname'].substring(0,5).toUpperCase()" [pTooltip]="userInfo['uname']" tooltipPosition="left"
-                styleClass="cursor-pointer" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-                alt="Avatar image"></p-chip>
-        </div>
+            styleClass="cursor-pointer " image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            alt="Avatar image"></p-chip>
     </div>
-
 </div>
 
-<p-overlayPanel #op [showCloseIcon]="false" [style]="{'margin':'10px 1px 10px 10px'}">
-    <ng-template pTemplate="content">
-        <div class="flex flex-column pb-0">
 
-            <div class="card">
-                <div class="flex flex-column justify-content-start">
-                    <div class="text-center font-light text-gray-600 m-1">
-                        Signed In
-                    </div>
-                    <div class="text-center font-light text-gray-600 m-1">
-                        {{userInfo['uname'] | uppercase}}
-                    </div>
-                    <div class="text-center font-light text-orange-600 m-1">
-                        {{userInfo['cader']}}
-                    </div>
-                    <div class="text-center font-bold text-sm">
-                        {{userInfo['loggedInTime']}}
-                    </div>
+<p-dialog header="Your profile" [(visible)]="visibles" [style]="{width: '30vw'}" blockScroll="true" modal="true"
+    closeOnEscape="true" closable="true" [breakpoints]="{ 
+        '900px': '45vw',  
+        '600px': '98vw' 
+    }" dismissableMask="true">
+    <div class="flex flex-column pb-0">
+        <div class="card">
+            <div class="flex flex-column justify-content-start">
+                <div class="text-center font-light text-green-600 m-1">
+                    Branch :- {{ branchName }}
                 </div>
-            </div>
-
-            <!-- <div class="card cursor-pointer" >
-                Edit Profile picture
-            </div> -->
-
-            <div class="text-left">
-                <div (click)="onSignOutClick()" class="no-underline cursor-pointer">
-                    <i class="pi pi-sign-out"></i>
-                    Sign Out
+                <div class="text-center font-light text-gray-600 m-1">
+                    {{userInfo['uname'] | uppercase}}
+                </div>
+                <div class="text-center font-light text-orange-600 m-1">
+                    {{userInfo['cader']}}
+                </div>
+                <div class="text-center font-bold text-sm">
+                    {{userInfo['loggedInTime']}}
                 </div>
             </div>
         </div>
-    </ng-template>
-</p-overlayPanel>
-
+        <div class="text-left">
+            <div (click)="onSignOutClick()" class="no-underline cursor-pointer">
+                <i class="pi pi-sign-out"></i>
+                Sign Out
+            </div>
+        </div>
+    </div>
+</p-dialog>
 
 <!-- <div class="card flex justify-content-center"> -->
 <p-sidebar #sidebarRef [(visible)]="Visible">

@@ -15,25 +15,16 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { FormsModule } from '@angular/forms';
 import { CreateborrowerslistComponent } from './createborrowerslist.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
-  declarations: [
-    CreateborrowerslistComponent
-  ],
-  imports: [
-    CommonModule,
-    CreateborrowerslistRoutingModule,
-    FormsModule,
-
-		AutoCompleteModule,
-		CalendarModule,
-		ChipsModule,
-		DropdownModule,
-		InputMaskModule,
-		InputNumberModule,
-		CascadeSelectModule,
-		MultiSelectModule,
-		InputTextareaModule,
-		InputTextModule
-  ]
+	declarations: [
+		CreateborrowerslistComponent
+	],
+	imports: [
+		CommonModule,
+		CreateborrowerslistRoutingModule,
+		FormsModule,
+		SharedModule
+	]
 })
 export class CreateborrowerslistModule { }

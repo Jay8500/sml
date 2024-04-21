@@ -161,14 +161,18 @@
     </div>
 </div>
 
-<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose" [styleClass]="'test'"
-    [closeOnEscape]="isCloseOnEscape">
+<p-dialog header="Create Branch" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
+    closeOnEscape="true" closable="true" [breakpoints]="{ 
+        '900px': '45vw',  
+        '600px': '98vw' 
+    }" dismissableMask="true">
+
+    <!-- <p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose" [styleClass]="'test'"
+    [closeOnEscape]="isCloseOnEscape"> -->
     <div class="grid">
-        <div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
+        <div class="col-12 col-offset-0  md:col-12 md:col-offset-0 lg:col-6  lg:col-offset-3 xl:col-6 xl:col-offset-3">
             <div class="card  p-fluid">
                 <div class="grid">
-                    <h5>Create Branch </h5>
-
                     <!-- <div class="col-12">
                    <label htmlFor="name1">Country/ State/ City</label>
                    <div class="w-5">
@@ -374,17 +378,18 @@
         </div>
     </div>
 
-</p-sidebar>
+    <!-- </p-sidebar> -->
 
-<style>
-    :host ::ng-deep .p-cascadeselect-items {
-        max-height: 100px;
-        overflow: auto;
-    }
-    :host ::ng-deep .test .p-icon {
-        color: red !important;
-    }
-</style>
+    <style>
+        :host ::ng-deep .p-cascadeselect-items {
+            max-height: 100px;
+            overflow: auto;
+        }
 
-<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
-    (onClose)="onMessageClose()"></p-toast>
+        :host ::ng-deep .test .p-icon {
+            color: red !important;
+        }
+    </style>
+
+    <p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+        (onClose)="onMessageClose()"></p-toast>

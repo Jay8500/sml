@@ -27,35 +27,14 @@ import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { ScrollerModule } from 'primeng/scroller';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		GenerateLoansRoutingModule,
-		AutoCompleteModule,
-		CalendarModule,
-		ChipsModule,
-		DropdownModule,
-		InputMaskModule,
-		InputNumberModule,
-		CascadeSelectModule,
-		MultiSelectModule,
-		InputTextareaModule,
-		InputTextModule,
-		TableModule,
-		SliderModule,
-		ProgressBarModule,
-		SidebarModule,
-		KeyFilterModule,
-		CascadeSelectModule,
-		FileUploadModule,
-		ImageModule,
-		InputNumberModule,
-		ToastModule,
-		AvatarModule,
-		BadgeModule,
-		ScrollTopModule
+		SharedModule
 	],
 	declarations: [
 		GenerateloansComponent
