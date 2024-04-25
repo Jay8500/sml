@@ -24,7 +24,6 @@ import { SharedModule } from './shared/shared.module';
         CommonModule,
         AppRoutingModule,
         FormsModule,
-        ButtonModule,
         ToastModule,
         AppLayoutModule,
         InputTextModule,

@@ -96,7 +96,16 @@ export class AppTopBarComponent implements OnInit {
                                     label: 'Home',
                                     items: [
                                         {
-                                            label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/home/sml-dashboard'], pat: '/home/sml-dashboard'
+                                            label: 'Dashboard',
+                                            icon: 'pi pi-fw pi-home',
+                                            routerLink: ['/home/sml-dashboard'],
+                                            pat: '/home/sml-dashboard'
+                                        },
+                                        {
+                                            label: 'Employee Create',
+                                            icon: 'pi pi-fw pi-home',
+                                            routerLink: ['/home/smlemployee'],
+                                            pat: '/home/smlemployee'
                                         }
                                     ]
                                 };

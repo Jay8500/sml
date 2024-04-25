@@ -4,19 +4,13 @@ import { FileUpload } from 'primeng/fileupload';
 import { Subject, takeUntil } from 'rxjs';
 import { ServicesService } from 'src/app/services.service';
 import * as _ from 'lodash';
+
 @Component({
-  selector: 'app-company',
-  templateUrl: './company.component.html',
-  providers: [MessageService, ConfirmationService]
+  selector: 'app-employeecreate',
+  templateUrl: './employeecreate.component.html',
 })
-export class CompanyComponent {
-  @ViewChild('aa', { static: false }) aa!: FileUpload;
-  @ViewChild('ab', { static: false }) ab!: FileUpload;
-  @ViewChild('ac', { static: false }) ac!: FileUpload;
-  @ViewChild('ad', { static: false }) ad!: FileUpload;
-  @ViewChild('ae', { static: false }) ae!: FileUpload;
-  @ViewChild('af', { static: false }) af!: FileUpload;
-  @ViewChild('ag', { static: false }) ag!: FileUpload;
+export class EmployeecreateComponent implements OnInit {
+
 
   public isShowForm = false;
   public isShowSidebarClose = false;
@@ -80,34 +74,41 @@ export class CompanyComponent {
   public params: any = {};
   public createMaster: any = {
     id: null,
-    cname: "",
-    cLogo: null,
-    ccode: "",
-    cadress: "",
-    city: "",
-    decs: "",
+    empid: null,
+    empname: null,
+    empcode: null,
+    qualifications: null,
+    experience: null,
+    noofyears: null,
+    previouscompany: null,
+    address: null,
+    surity: null,
+    reference: null,
+    contactno: null,
     active: true
   };
   public defaultUser = JSON.stringify(this.createMaster);
 
   public errorMessages = {
-    cname: "",
-    cadress: "",
-    city: ""
+    empname: "",
+    contactno: "",
+    experience: "",
+    noofyears: "",
+    qualifications: ""
   };
   public defErrs = JSON.stringify(this.errorMessages);
 
   getErrorMessages(ctrl: string) {
     switch (ctrl) {
       case "name":
-        this.errorMessages.cname = [undefined, null, ''].includes(this.createMaster.cname) ? 'Name is required' : "";
+        this.errorMessages.empname = [undefined, null, ''].includes(this.createMaster.empname) ? 'Name is required' : "";
         break;
 
-      case "city":
-        this.errorMessages.city = [undefined, null, ''].includes(this.createMaster.city) || typeof this.createMaster.city != 'object' ? 'City is required' : "";
+      case "contactno":
+        this.errorMessages.contactno = [undefined, null, ''].includes(this.createMaster.contactno) ? 'Contact is required' : this.createMaster.contactno.length != 10 ? 'Contact no. should have 10 digits' : "";
         break;
-      case "cadress":
-        this.errorMessages.cadress = [undefined, null, ''].includes(this.createMaster.cadress) ? 'Address is required' : "";
+      case "experience":
+        this.errorMessages.experience = [undefined, null, ''].includes(this.createMaster.experience) ? 'Address is required' : "";
         break;
     }
   }
@@ -209,17 +210,19 @@ export class CompanyComponent {
           if (data['S_CODE'] == 200) {
 
             data['DATA'].forEach((prodcuts: any, prdIn: number) => {
-              let products = {
-                label
-                  :
-                  prodcuts.bname,
-                value
-                  :
-                  prodcuts.id,
-                bcode
-                  :
-                  prodcuts.bcode,
-                clientCount: prodcuts.clientCount
+              let products: any = {
+                empid: prodcuts.empid,
+                empname: prodcuts.empname,
+                empcode: prodcuts.empcode,
+                qualifications: prodcuts.fications,
+                experience: prodcuts.xperience,
+                noofyears: prodcuts.noofyears,
+                previouscompany: prodcuts.uscompany,
+                address: prodcuts.address,
+                surity: prodcuts.surity,
+                reference: prodcuts.reference,
+                contactno: prodcuts.contactno,
+
               };
               this.branches.push(products)
             });
@@ -234,21 +237,7 @@ export class CompanyComponent {
 
     //
     this.addressList = [];
-    this._service.postApi('getAddressList', 'postEndPoint', {})
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
-          if (data['S_CODE'] == 200) {
-            this.addressList = data['DATA'][0]['data'];
-          };
-        },
-        error: (err) => {
-          // this.blocUI = false;
-          // this.myModels = [];
-          // console.log('error')
-        }
-      });
+
     this.gridData();
   }
 
@@ -271,7 +260,7 @@ export class CompanyComponent {
       }
       this.params['create_by'] = this._service.getUserInfo('_id');
       this.crudGrid = [];
-      this._service.postApi('getCompany', 'postEndPoint', {})
+      this._service.postApi('getEmployee', 'postEndPoint', {})
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (data) => {
@@ -281,36 +270,21 @@ export class CompanyComponent {
               data['DATA'].forEach((pros: any, prdIn: number) => {
                 let createCompanies: any = {
                   active: pros.active,
-                  cLogo
-                    :
-                    pros.cLogo,
-                  cadress
-                    :
-                    pros.cadress,
-                  ccode
-                    :
-                    pros.ccode,
-                  city
-                    :
-                    pros.city,
-                  cityname
-                    :
-                    pros.cityname,
-                  cname
-                    :
-                    pros.cname,
-                  countryname
-                    :
-                    pros.countryname,
+
                   create_dt
                     :
                     pros.create_dt,
-                  decs
-                    :
-                    pros.decs,
-                  state
-                    :
-                    pros.state,
+                  empid: pros.empid,
+                  empname: pros.empname,
+                  empcode: pros.empcode,
+                  qualifications: pros.qualifications,
+                  experience: pros.experience,
+                  noofyears: pros.noofyears,
+                  previouscompany: pros.previouscompany,
+                  address: pros.address,
+                  surity: pros.surity,
+                  reference: pros.reference,
+                  contactno: pros.contactno,
 
                   id
                     :
@@ -362,13 +336,7 @@ export class CompanyComponent {
       this.createMaster[ctrl] = base64;
     };
     reader.readAsDataURL(files);
-    this.aa.clear();
-    this.ab.clear();
-    this.ac.clear();
-    this.ad.clear();
-    this.ae.clear();
-    this.af.clear();
-    this.ag.clear();
+
   }
 
   fileSize = () => this._service.fileMaxSize();
@@ -383,15 +351,20 @@ export class CompanyComponent {
     if (['VIEW', 'EDIT'].includes(mode)) {
       //   this.isClicked = true;
       this.createMaster = {
-        cname: event.cname,
-        ccode: event.ccode,
-        cLogo: event.cLogo,
-        cadress: event.cadress,
-        city: { "code": event.city, "cname": event.cityname },
-        decs: event.decs,
+        create_dt: event.create_dt,
+        empid: event.empid,
+        empname: event.empname,
+        empcode: event.empcode,
+        qualifications: event.qualifications,
+        experience: event.experience,
+        noofyears: event.noofyears,
+        previouscompany: event.previouscompany,
+        address: event.address,
+        surity: event.surity,
+        reference: event.reference,
+        contactno: event.contactno,
         id: event.id,
         active: event.active ? true : false,
-
       };
     };
   }
@@ -423,38 +396,10 @@ export class CompanyComponent {
         let savePayload = JSON.parse(JSON.stringify(this.createMaster));
         savePayload['flag'] = this.mode == 'NEW' || this.mode == '' ? 'S' : 'E';
 
-        let filterCities: any[] = [];
-
-        _.forEach(this.addressList, (country) => {
-          _.forEach(country['states'], (state) => {
-            // Use _.filter on the array of cities and provide a predicate function
-            const filteredCities = _.filter(state['cities'], (city) => {
-              // Adjust the condition based on your filtering criteria
-              return city.code === this.createMaster.city.code &&
-                city.name === this.createMaster.city.name;
-            });
-
-
-            if (filteredCities.length > 0) {
-              filterCities.push({
-                country: country.name,
-                state: state.name,
-                cities: filteredCities,
-              });
-            }
-          });
-        });
-
-        // console.log(filterCities)
-        savePayload['countryname'] = filterCities[0]['country'];
-        savePayload['state'] = filterCities[0]['state'];
-        savePayload['cityname'] = filterCities[0]['cities'][0]['cname'];
-        savePayload['cityname'] = filterCities[0]['cities'][0]['cname'];
-        savePayload['city'] = this.createMaster['city']['code'];
         savePayload['create_by'] = this._service.getUserInfo('_id');
         // return;
         // this.loading = true;
-        let loginJson = this._service.postApi('createCompany', 'postEndPoint', savePayload)
+        let loginJson = this._service.postApi('createEmployee', 'postEndPoint', savePayload)
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (data) => {
@@ -497,4 +442,5 @@ export class CompanyComponent {
       this.hideDialog();
     }
   }
+
 }

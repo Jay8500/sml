@@ -1,7 +1,7 @@
 <div class="card">
     <div class="flex justify-content-between flex-wrap">
         <div class="flex align-items-center justify-content-center  font-bold border-round">
-            Company List
+            Employee List
         </div>
         <div class="flex align-items-center justify-content-center  font-bold border-round">
             <!-- 2 -->
@@ -20,7 +20,7 @@
                     <div class="flex align-items-center justify-content-start border-round">
                         <p-avatar [image]="userDetails['cLogo']" size="normal" shape="circle"></p-avatar>
                         <div class="w-full ml-3 ml-2 text-orange-400">
-                            {{userDetails.cname | uppercase}}
+                            {{userDetails.empname | uppercase}}
 
                         </div>
                     </div>
@@ -38,27 +38,50 @@
                     <div class="grid">
                         <div class="col-12">
                             <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
-                                Country
+                                Employee Code
                             </div>
                             <div class="w-full mb-1 justify-content-end">
-                                <p-badge [value]="userDetails.countryname | uppercase"></p-badge>
+                                <p-badge [value]="userDetails.empcode | uppercase"></p-badge>
                             </div>
                         </div>
-
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Contact:
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.contactno}}
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
-                                State
+                                Qualification
                             </div>
                             <div class="w-full mb-1 justify-content-end">
-                                {{userDetails.state | uppercase}}
+                                {{userDetails.qualifications | uppercase}}
                             </div>
                         </div>
                         <div class="col-12 ">
                             <div class="w-full text-cyan-500 mb-1 justify-content-start">
-                                City
+                                Experience
                             </div>
                             <div class="w-full mb-1 justify-content-end">
-                                {{userDetails.cityname | uppercase}}
+                                {{userDetails.experience | uppercase}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                No of Years:
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.noofyears}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Previous Company:
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.previouscompany}}
                             </div>
                         </div>
                         <div class="col-12">
@@ -66,17 +89,27 @@
                                 Address:
                             </div>
                             <div class="w-full justify-content-end">
-                                {{userDetails.cadress}}
+                                {{userDetails.address}}
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="w-full justify-content-start text-cyan-500">
-                                Description:
+                                Surity:
                             </div>
-                            <div class="w-full justify-content-end overflow-hidden text-overflow-ellipsis">
-                                {{userDetails.decs}}
+                            <div class="w-full justify-content-end">
+                                {{userDetails.surity}}
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="w-full justify-content-start text-cyan-500">
+                                Reference:
+                            </div>
+                            <div class="w-full justify-content-end">
+                                {{userDetails.reference}}
+                            </div>
+                        </div>
+
+
                         <div class="col-12">
                             <div class="w-full justify-content-start text-cyan-500">
                                 Status:
@@ -89,30 +122,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="grid">
-                    <div class="col-12">
-                        <div class="grid">
-                            <div class="">
-                                Cader:
-                            </div>
-                            <div class="">
-                                {{userDetails.cadername | uppercase}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="text-center   font-bold">
-                            {{userDetails.branchname | uppercase}}
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="">
-                            {{userDetails.desc | uppercase}}
-                        </div>
-                    </div>
-
-                </div> -->
-
                 </div>
             </div>
         </div>
@@ -129,7 +138,7 @@
     </div>
 </div>
 
-<p-dialog header="Create Company" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
+<p-dialog header="Create Employee" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
     closeOnEscape="true" closable="true" [breakpoints]="{ 
         '900px': '45vw',  
         '600px': '98vw' 
@@ -142,11 +151,20 @@
                     <div class="col-12">
                         <label htmlFor="name1">Name</label>
                         <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
-                            (blur)="getErrorMessages('cname')" [(ngModel)]="createMaster.cname"
+                            (blur)="getErrorMessages('empname')" [(ngModel)]="createMaster.empname"
                             [disabled]="mode=='VIEW'" class="p-2 ng-invalid ng-dirty">
-                        <small *ngIf="errorMessages.cname != ''">{{ errorMessages.cname}}</small>
+                        <small *ngIf="errorMessages.empname != ''">{{ errorMessages.empname}}</small>
                     </div>
                     <div class="col-12">
+                        <label htmlFor="name1">Contact No.</label>
+                        <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
+                            (blur)="getErrorMessages('contact_no')" [(ngModel)]="createMaster.contactno"
+                            [disabled]="mode=='VIEW'" maxlength="10" [pKeyFilter]="'num'"
+                            class="p-2 ng-invalid ng-dirty">
+                        <small *ngIf="errorMessages.contactno != ''">{{ errorMessages.contactno}}</small>
+
+                    </div>
+                    <!-- <div class="col-12">
                         <label for="firstname2">Logo</label>
                         <div class="formgrid grid">
                             <div class="field col">
@@ -164,27 +182,48 @@
                                     (click)="createMaster['cLogo'] = null"></p-button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <label htmlFor="state">Country / State/ City</label>
-                        <p-cascadeSelect [(ngModel)]="createMaster.city" [options]="addressList" [optionLabel]="'cname'"
-                            [disabled]="mode=='VIEW'" [optionGroupLabel]="'name'"
-                            [optionGroupChildren]="['states', 'cities']" class="ng-invalid ng-dirty"
-                            placeholder="Select a City" [style]="{ minWidth: '14rem' }"
-                            placeholder="Select a City"></p-cascadeSelect>
-                        <small *ngIf="errorMessages.city != ''">{{ errorMessages.city}}</small>
+                    </div> -->
 
+                    <div class="col-12">
+                        <label for="firstname2">Qualification</label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            class="p-2 ng-invalid ng-dirty" [(ngModel)]="createMaster.qualifications"></textarea>
+                        <small *ngIf="errorMessages.qualifications != ''">{{ errorMessages.qualifications}}</small>
                     </div>
                     <div class="col-12">
-                        <label for="firstname2">Location</label>
+                        <label for="firstname2">Experience</label>
                         <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
-                            class="p-2 ng-invalid ng-dirty" [(ngModel)]="createMaster.cadress"></textarea>
-                        <small *ngIf="errorMessages.cadress != ''">{{ errorMessages.cadress}}</small>
+                            class="p-2 ng-invalid ng-dirty" [(ngModel)]="createMaster.experience"></textarea>
+                        <small *ngIf="errorMessages.experience != ''">{{ errorMessages.experience}}</small>
                     </div>
                     <div class="col-12">
-                        <label htmlFor="state">Description </label>
+                        <label for="firstname2">No of years</label>
                         <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
-                            [(ngModel)]="createMaster.decs"></textarea>
+                            class="p-2 ng-invalid ng-dirty" [(ngModel)]="createMaster.noofyears"></textarea>
+                        <small *ngIf="errorMessages.noofyears != ''">{{ errorMessages.noofyears}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="state">Previous Company </label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.previouscompany"></textarea>
+                        <!-- <small>Loan amount is required.</small> -->
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="state">Address</label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.address"></textarea>
+                        <!-- <small>Loan amount is required.</small> -->
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="state">Surity </label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.surity"></textarea>
+                        <!-- <small>Loan amount is required.</small> -->
+                    </div>
+                    <div class="col-12">
+                        <label htmlFor="state">Reference </label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.reference"></textarea>
                         <!-- <small>Loan amount is required.</small> -->
                     </div>
                     <div class="col-12">
@@ -196,123 +235,24 @@
                     <div class="col-12">
                         <div class="grid">
                             <div class="col-6">
-                                <button pButton [disabled]="['',null,undefined].includes(createMaster.cadress) || 
-                                ['',null,undefined].includes(createMaster.city) || 
-                                ['',null,undefined].includes(createMaster.cname) 
+                                <button pButton [disabled]="['',null,undefined].includes(createMaster.empname) || 
+                                ['',null,undefined].includes(createMaster.contactno) || 
+                                ['',null,undefined].includes(createMaster.experience) 
                                 " pRipple label="Clear" (click)="hideDialog()" class="p-button-outlined"></button>
 
                             </div>
                             <div class="col-6">
-                                <button pButton pRipple label="Submit" [disabled]="['',null,undefined].includes(createMaster.cadress) || 
-                                ['',null,undefined].includes(createMaster.city) || 
-                                ['',null,undefined].includes(createMaster.cname) 
+                                <button pButton pRipple label="Submit" [disabled]="['',null,undefined].includes(createMaster.empname) || 
+                                ['',null,undefined].includes(createMaster.contactno) || 
+                                ['',null,undefined].includes(createMaster.experience) 
                                 " (click)="saveProduct()" [loading]="submitloading" class="p-button-success"></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- 		
-           <div class="card p-fluid">
-               <h5>Vertical Grid</h5>
-               <div class="p-formgrid grid">
-                   <div class="field col">
-                       <label htmlFor="name2">Name</label>
-                       <input pInputText id="name2" type="text" />
-                   </div>
-                   <div class="field col">
-                       <label htmlFor="email2">Email</label>
-                       <input pInputText id="email2" type="text" />
-                   </div>
-                   <div class="field col">
-                       <label htmlFor="name2">Name</label>
-                       <input pInputText id="name2" type="text" />
-                   </div>
-                   <div class="field col">
-                       <label htmlFor="email2">Email</label>
-                       <input pInputText id="email2" type="text" />
-                   </div>
-               </div>
-           </div> -->
-            <!-- </div> -->
-
-            <!-- <div class="col-12 md:col-6"> -->
-            <!-- <div class="card p-fluid">
-               <h5>Horizontal</h5>
-               <div class="field grid">
-                   <label htmlFor="name3" class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
-                   <div class="col-12 md:col-10">
-                       <input pInputText id="name3" type="text" />
-                   </div>
-               </div>
-               <div class="field grid">
-                   <label htmlFor="email3" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
-                   <div class="col-12 md:col-10">
-                       <input pInputText id="email3" type="text" />
-                   </div>
-               </div>
-           </div> -->
-
-            <!-- <div class="card">
-               <h5>Inline</h5>
-               <div class="formgroup-inline">
-                   <div class="field">
-                       <label htmlFor="firstname1" class="p-sr-only">Firstname</label>
-                       <input pInputText id="firstname1" type="text" placeholder="Firstname" />
-                   </div>
-                   <div class="field">
-                       <label htmlFor="lastname1" class="p-sr-only">Lastname</label>
-                       <input pInputText id="lastname1" type="text" placeholder="Lastname" />
-                   </div>
-                   <button pButton label="Submit"></button>
-               </div>
-           </div> -->
-
-            <!-- <div class="card">
-               <h5>Help Text</h5>
-               <div class="field p-fluid">
-                   <label htmlFor="username">Username</label>
-                   <input pInputText id="username" type="text" />
-                   <small>Enter your username to reset your password.</small>
-               </div>
-           </div> -->
-            <!-- </div>  -->
-
-            <!-- <div class="col-12">
-           <div class="card">
-               <h5>Advanced</h5>
-               <div class="p-fluid p-formgrid grid">
-                   <div class="field col-12 md:col-6">
-                       <label htmlFor="firstname2">Firstname</label>
-                       <input pInputText id="firstname2" type="text" />
-                   </div>
-                   <div class="field col-12 md:col-6">
-                       <label htmlFor="lastname2">Lastname</label>
-                       <input pInputText id="lastname2" type="text" />
-                   </div>
-                   <div class="field col-12">
-                       <label htmlFor="address">Address</label>
-                       <input pInputTextarea id="address" rows="4" />
-                   </div>
-                   <div class="field col-12 md:col-6">
-                       <label htmlFor="city">City</label>
-                       <input pInputText id="city" type="text" />
-                   </div>
-                   <div class="field col-12 md:col-3">
-                       <label htmlFor="state">State</label>
-                       <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
-                   </div>
-    
-                   <div class="field col-12 md:col-3">
-                       <label htmlFor="zip">Zip</label>
-                       <input pInputText id="zip" type="text" />
-                   </div>
-               </div>
-           </div>
-       </div> -->
         </div>
     </div>
-
 </p-dialog>
 
 <style>

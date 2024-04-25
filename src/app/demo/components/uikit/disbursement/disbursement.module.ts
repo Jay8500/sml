@@ -36,7 +36,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     DisbursementRoutingModule,
-    CommonModule,
     FormsModule,
     SharedModule
   ]

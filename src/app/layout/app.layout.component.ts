@@ -91,12 +91,12 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
         this.sessions.start();
 
         // can be manually reset.
-        this.sessions.session.reset();
+        // this.sessions.session.reset();
         // Note:when the session is expired, it's automatically disposed. 
         // To reset the counter for expired session use start method.
 
         // to dispose the session
-        this.sessions.session.dispose();
+        // this.sessions.session.dispose();
 
         // returns time left before time out
         let timeLeft = this.sessions.getTimeLeft();
