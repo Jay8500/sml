@@ -22,13 +22,13 @@ export class AppTopBarComponent implements OnInit {
     items!: MenuItem[];
     model: any[] = [];
 
-    constructor() { }
-
     public visibles = false;
     public Visible = false;
     public service = inject(ServicesService);
     public datePipe = inject(DatePipe)
     public userInfo: any = {};
+    constructor() { }
+
     ngOnInit() {
         try {
             // console.log(window.localStorage.getItem('userInfo'))
@@ -47,7 +47,8 @@ export class AppTopBarComponent implements OnInit {
                     gender: this.service.getUserInfo('gendername') == 'Male' ? 'Mr.' : 'Mrs.',
                     cader: getCaders['cdname'],
                     caderCode: getCaders['code'],
-                    loggedInTime: this.datePipe.transform(new Date(this.service.getUserInfo('loggTime') || ''), 'dd-MMM-yyyy hh:mm a')
+                    loggedInTime: this.datePipe.transform(new Date(this.service.getUserInfo('loggTime') || ''), 'dd-MMM-yyyy hh:mm a'),
+                    profilePicture: this.service.getUserInfo('A') 
                 };
             }
             // this.model = [

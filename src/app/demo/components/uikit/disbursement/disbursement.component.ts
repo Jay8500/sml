@@ -568,6 +568,7 @@ export class DisbursementComponent {
               if (data['DATA'].length > 0) {
                 data['DATA'].forEach((pros: any, prdIn: number) => {
                   let createdBorrowers: any = {
+                    OTHERS: pros.OTHERS,
                     accountname: pros.accountname,
                     accountno: pros.accountno,
                     disbursementstatus: pros.disbursementstatus,

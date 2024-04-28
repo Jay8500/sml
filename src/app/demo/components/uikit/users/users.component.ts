@@ -95,6 +95,7 @@ export class UsersComponent {
   public params: any = {};
   public createMaster: any = {
     id: null,
+    empId: null,
     master_name: "",
     password: "",
     description: "",
@@ -244,8 +245,79 @@ export class UsersComponent {
       });
 
     this.gridData();
+    this.employeesList();
   }
 
+  public employeesListInfo: any = [];
+  employeesList() {
+    try {
+      this.employeesListInfo = [];
+      this.loading = true;
+      let cader = this._service.getUserInfo('userCader');
+
+      if (cader['code'] == 'DA') {
+        this.params['code'] = 'DEV';
+      };
+
+      if (cader['code'] == 'SA') {
+        this.params['code'] = 'SA';
+      };
+
+      if (cader['code'] == 'HRPM') {
+        this.params['code'] = 'HRPM';
+      }
+      this.params['create_by'] = this._service.getUserInfo('_id');
+      this.employeesListInfo = [];
+      this._service.postApi('getEmployee', 'postEndPoint', {})
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (data) => {
+            data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+            if (data['S_CODE'] == 200) {
+              this.blocUI = false;
+              if (data['DATA'].length > 0) {
+                data['DATA'] = _.filter(data['DATA'], (fl, flIn) => fl.active == true);
+                data['DATA'].forEach((pros: any, prdIn: number) => {
+                  let createCompanies: any = {
+                    active: pros.active,
+                    create_dt: pros.create_dt,
+                    empid: pros.empid,
+                    empname: pros.empname,
+                    empcode: pros.empcode,
+                    qualifications: pros.qualifications,
+                    experience: pros.experience,
+                    noofyears: pros.noofyears,
+                    previouscompany: pros.previouscompany,
+                    address: pros.address,
+                    surity: pros.surity,
+                    reference: pros.reference,
+                    contactno: pros.contactno,
+                    A: pros.A,
+                    id: pros._id,
+                    dataKey: prdIn + 1,
+                    status: (pros.active == true ? 'Qualified' : 'Unqualified')
+
+                  };
+                  this.employeesListInfo.push(createCompanies)
+                });
+              }
+              // this.crudGrid = data['DATA'];
+              this.loading = false;
+            } else if (data['S_CODE'] == 300) {
+              this.blocUI = false;
+              this.loading = false;
+            }
+          },
+          error: (err) => {
+            this.blocUI = false;
+            // this.myModels = [];
+            // console.log('error')
+          }
+        });
+    } catch (e) {
+      this.blocUI = false;
+    }
+  }
 
   gridData() {
     try {
@@ -417,6 +489,12 @@ export class UsersComponent {
         this.submitloading = true;
         let savePayload = JSON.parse(JSON.stringify(this.createMaster));
         savePayload['flag'] = this.mode == 'NEW' || this.mode == '' ? 'S' : 'E';
+
+        savePayload['empid'] = this.createMaster.empId['id'];
+        savePayload['A'] = this.createMaster.empId['A'];
+
+        savePayload['uname'] = this.createMaster.master_name.trim();
+
         savePayload['uname'] = this.createMaster.master_name.trim();
         savePayload['password'] = this.createMaster.password;
         savePayload['cader'] = this.createMaster.cader_id;
@@ -502,5 +580,9 @@ export class UsersComponent {
     } catch (e) {
 
     }
+  }
+
+  onEmployeeSelect() {
+
   }
 }

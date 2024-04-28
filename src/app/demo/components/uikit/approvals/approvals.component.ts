@@ -591,6 +591,7 @@ export class ApprovalsComponent {
                   tenureName: ![undefined, null, ""].includes(pros.tenure) ? _.filter(this.tenureList, { value: parseInt(pros.tenure) })[0]['label'] : "",
                   _id: pros._id,
                   id: prdIn + 1,
+                  OTHERS: pros.OTHERS,
                   active: pros.active,
                   status: (pros.active == true ? 'Active' : 'Inactive')
 
@@ -614,10 +615,6 @@ export class ApprovalsComponent {
       this.blocUI = false;
     }
   }
-
-  // onClick(ctrl: string, data: any) {
-  //     this.isShowForm = true;
-  // }
 
   onSelect(event: any, ctrl: string) { // A, RC, HTR,LA, HP, PPC, OTHERS
     try {
@@ -714,8 +711,6 @@ export class ApprovalsComponent {
         let savePayload = JSON.parse(JSON.stringify(this.createMaster));
         savePayload['flag'] = 'ST';
         savePayload['create_by'] = this._service.getUserInfo('_id');
-        let filterName: any = _.filter(this.borrwoersList, { _id: this.createMaster.borrowername });
-        savePayload['borrower'] = filterName[0]['name'];
         // console.log(savePayload)
         let loginJson = this._service.postApi('generateloans', 'postEndPoint', savePayload)
           .pipe(takeUntil(this.destroy$))

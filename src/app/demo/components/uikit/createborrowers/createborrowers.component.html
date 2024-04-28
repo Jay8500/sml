@@ -12,13 +12,14 @@
         </div>
     </div>
 </div>
+
 <div class="grid">
     <ng-container *ngIf="crudGrid.length>0">
         <div class="col-12 lg:col-3 xl:col-3 md:col-4 sm:col-12" *ngFor="let userDetails of crudGrid;let userIn=index;">
             <div class="card">
                 <div class="flex justify-content-between flex-row">
                     <div class="flex align-items-center justify-content-start border-round">
-                        <p-avatar [image]="userDetails['A']" size="normal" shape="circle"></p-avatar>
+                        <p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar>
                         <div class="w-full ml-3 ml-2 text-orange-400">
                             {{userDetails.name | uppercase}}
 
@@ -130,223 +131,16 @@
     </div>
 </div>
 
-<div class="grid" *ngIf="false">
-    <div class="col-12">
-        <div class="card">
-            <div class="flex justify-content-between flex-wrap">
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    Borrowers List
-                </div>
-                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
-                    <!-- 2 -->
-                </div>
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
-                        (click)="onClick(null,'NEW')"></button>
-                </div>
-            </div>
-
-
-            <p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [paginator]="false" responsiveLayout="scroll">
-                <!-- <ng-template pTemplate="caption">
-					<div class="flex justify-content-between flex-column sm:flex-row">
-						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
-						<span class="p-input-icon-left mb-2">
-							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
-						</span>
-					</div>
-				</ng-template> -->
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="min-width: 5rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Action
-                                <!-- <p-columnFilter type="text" field="name" display="menu"
-                                    placeholder="Search by name"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Borrower Name
-                                <p-columnFilter type="text" field="name" display="menu"
-                                    placeholder="Search by name"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 6rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Logo
-                                <!-- <p-columnFilter type="text" field="name" display="menu"
-                                    placeholder="Search by name"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Aadhaar
-                                <p-columnFilter type="text" field="aadhar" display="menu"
-                                    placeholder="Search by aadhar"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Contact
-                                <p-columnFilter type="text" field="contact_no" display="menu"
-                                    placeholder="Search by contact"></p-columnFilter>
-                            </div>
-                        </th>
-                        <!-- <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Branch
-                                <p-columnFilter type="text" field="country.name" display="menu"
-                                    placeholder="Search by country"></p-columnFilter>
-                            </div>
-                        </th> -->
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Country
-                                <p-columnFilter type="text" field="countryname" display="menu"
-                                    placeholder="Search by country"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                State
-                                <p-columnFilter type="text" field="state" display="menu"
-                                    placeholder="Search by state"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                City
-                                <!-- <p-columnFilter type="text" field="city" display="menu"
-                                    placeholder="Search by country"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Pincode
-                                <p-columnFilter type="text" field="pincode" display="menu"
-                                    placeholder="Search by pincode"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Description
-                                <!-- <p-columnFilter type="text" field="country.name" display="menu"
-                                    placeholder="Search by country"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Created By
-                                <p-columnFilter type="text" field="byemployeename" display="menu"
-                                    placeholder="Search by Creator"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem; background-color: rgb(91, 91, 182);" class="text-white">
-                            <div class="flex justify-content-between align-items-center">
-                                Status
-                                <p-columnFilter type="text" field="active" display="menu"
-                                    placeholder="Search by Status"></p-columnFilter>
-                            </div>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-customer>
-                    <tr>
-                        <td>
-                            <div class="flex justify-content-center flex-wrap">
-                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
-                                    <i class="pi pi-eye"></i>
-                                </div>
-                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'EDIT')">
-                                    <i class="pi pi-file-edit"></i>
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            {{customer.name}}
-                        </td>
-                        <td>
-                            <img [src]="customer['A']" width="32" style="vertical-align: middle" />
-                            <!-- <span class="image-text ml-2">{{customer.representative.name}}</span> -->
-                        </td>
-                        <td>
-                            {{customer.aadhar}}
-                        </td>
-                        <td>
-                            {{customer.contact_no}}
-                        </td>
-                        <!-- <td> {{customer.branch_name}}
-
-                        </td> -->
-
-                        <td>
-                            {{customer.countryname}}
-                        </td>
-                        <td>
-                            {{customer.state}}
-                        </td>
-                        <td>
-                            {{customer.cityname}}
-                        </td>
-
-                        <td>
-                            {{customer.pincode}}
-                        </td>
-                        <td>
-                            {{customer.description}}
-                        </td>
-                        <td>
-                            {{customer.byemployeename}}
-                        </td>
-                        <td>
-
-                            <span *ngIf="customer.active == true"
-                                [class]="'customer-badge status-qualified'">Active</span>
-                            <span *ngIf="customer.active == false"
-                                [class]="'customer-badge status-unqualified'">Inactive</span>
-
-                        </td>
-
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="9">No Borrowers found.</td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="loadingbody">
-                    <tr>
-                        <td colspan="9">Loading Borrowers data. Please wait.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-
-    </div>
-</div>
-
-
-<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose" [styleClass]="'test'"
-    [closeOnEscape]="isCloseOnEscape">
+<p-dialog header="Create User" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
+    closeOnEscape="true" closable="true" [breakpoints]="{ 
+        '900px': '45vw',  
+        '600px': '98vw' 
+    }" dismissableMask="true">
     <div class="grid">
         <div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
             <div class="card  p-fluid">
                 <div class="grid">
                     <h5>Create Borrower </h5>
-
-                    <!-- <div class="col-12">
-                   <label htmlFor="name1">Country/ State/ City</label>
-                   <div class="w-5">
-                       
-                       <p-cascadeSelect [(ngModel)]="selectedCity" [options]="countries" optionLabel="cname" optionGroupLabel="name" [optionGroupChildren]="['states', 'cities']" [style]="{ minWidth: '14rem' }" placeholder="Select a City"></p-cascadeSelect>
-                       <small>Country/ State/ City is required.</small>
-                   </div>
-                   
-               </div> -->
                     <div class="col-12">
                         <label htmlFor="name1">Name</label>
                         <input id="firstname2" type="text" pInputText [autocomplete]="'off'"
@@ -523,7 +317,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="Others">Others</label>
+                        <label for="Others">Profile Photo</label>
                         <div class="formgrid grid">
                             <div class="field col">
                                 <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*" #ag
@@ -575,8 +369,7 @@
         <!-- <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="400" icon="pi pi-arrow-up">
         </p-scrollTop> -->
     </div>
-</p-sidebar>
-
+</p-dialog>
 <style>
     :host ::ng-deep .p-cascadeselect-items {
         max-height: 100px;

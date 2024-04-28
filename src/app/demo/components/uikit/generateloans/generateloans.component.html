@@ -18,7 +18,7 @@
 			<div class="card">
 				<div class="flex justify-content-between flex-row">
 					<div class="flex align-items-center justify-content-start border-round">
-						<p-avatar [image]="userDetails['A']" size="normal" shape="circle"></p-avatar>
+						<p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar>
 						<div class="w-full ml-3 ml-2 text-orange-400">
 							{{userDetails.borrower | uppercase}}
 
@@ -29,7 +29,7 @@
                         <i class="pi pi-eye"></i>
                     </div> -->
 						<div (click)="onClick(userDetails, 'EDIT')" class="cursor-pointer"
-						*ngIf="userDetails.approvalstatus != 'A'">
+							*ngIf="userDetails.approvalstatus != 'A'">
 							<i class="pi pi-file-edit"></i>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 				<div class="flex  flex-row">
 					<div class="grid">
 						<div class="col-12">
-							<div class="w-full mt-2 mb-1 justify-content-start text-cyan-500" >
+							<div class="w-full mt-2 mb-1 justify-content-start text-cyan-500">
 								Approved by
 							</div>
 							<div class="w-full mb-1 justify-content-end">
@@ -235,24 +235,41 @@
 			<div class="grid">
 				<div class="col-12 text-center">
 					No data found...
-				</div> 
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<p-sidebar [(visible)]="isShowForm" [fullScreen]="true" [showCloseIcon]="isShowSidebarClose"
-	[closeOnEscape]="isCloseOnEscape">
+<p-dialog header="Generate Loan" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
+	closeOnEscape="true" closable="true" [breakpoints]="{ 
+        '900px': '45vw',  
+        '600px': '98vw' 
+    }" dismissableMask="true">
 	<div class="grid">
-		<div class="col-12 col-offset-0  md:col-6 md:col-offset-3 lg:col-4  lg:col-offset-4 xl:col-4 xl:col-offset-4">
+		<div class="col-12 col-offset-0  md:col-12 md:col-offset-0 lg:col-6  lg:col-offset-3 xl:col-6 xl:col-offset-3">
 			<div class="card  p-fluid">
 				<div class="grid">
-					<h5>Generate Loan </h5>
 					<div class="col-12">
 						<label htmlFor="state">Borrower</label>
 						<p-dropdown [options]="borrwoersList" [(ngModel)]="createMaster.borrowername"
-							placeholder="Select Borrower" optionLabel="name" class="ng-invalid ng-dirty"
-							optionValue="_id" [filter]="true" [disabled]="mode=='VIEW' "></p-dropdown>
+							placeholder="Select Borrower" class="ng-invalid ng-dirty" [filter]="true"
+							[disabled]="mode=='VIEW' ">
+							<ng-template pTemplate="selectedItem">
+								<div class="flex align-items-center gap-2" *ngIf="createMaster.borrowername">
+									<p-avatar [image]="createMaster['borrowername']['OTHERS']" styleClass="mr-2"
+										size="large" shape="circle"></p-avatar>
+									<div>{{ createMaster['borrowername']['name'] }}</div>
+								</div>
+							</ng-template>
+							<ng-template let-borrowers pTemplate="item">
+								<div class="flex align-items-center gap-2">
+									<p-avatar [image]="borrowers['OTHERS']" styleClass="mr-2" size="large"
+										shape="circle"></p-avatar>
+									<div>{{ borrowers.name }}</div>
+								</div>
+							</ng-template>
+						</p-dropdown>
 						<small *ngIf="createMaster.borrowername != ''">
 							{{ errorMessages.borrowername}}
 						</small>
@@ -401,8 +418,7 @@
 			</div>
 		</div>
 	</div>
-</p-sidebar>
-
+</p-dialog>
 
 
 

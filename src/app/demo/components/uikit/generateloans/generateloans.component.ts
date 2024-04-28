@@ -55,12 +55,7 @@ export class GenerateloansComponent implements OnInit {
         { label: 'Proposal', value: 'proposal' }
     ];
 
-    public borrwoersList = [
-        {
-            label: 'Select borrowers',
-            value: null
-        }
-    ]
+    public borrwoersList: any = [];
     public branches = [
         {
             label: "Select Branches",
@@ -450,12 +445,9 @@ export class GenerateloansComponent implements OnInit {
                 next: (data) => {
                     data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
                     if (data['S_CODE'] == 200) {
-                        this.borrwoersList = [{
-                            label: "Select Branches",
-                            value: null
-                        }];
+                        this.borrwoersList = [];
                         if (data['DATA'].length > 0) {
-                            this.borrwoersList = data['DATA']
+                            this.borrwoersList = [...data['DATA']];
                         }
                     };
                 },
@@ -535,6 +527,7 @@ export class GenerateloansComponent implements OnInit {
                             this.blocUI = false;
                             data['DATA'].forEach((pros: any, prdIn: number) => {
                                 let createdBorrowers: any = {
+                                    OTHERS: pros.OTHERS,
                                     accountname: pros.accountname,
                                     accountno: pros.accountno,
                                     approvalby: _.filter(this.usersList || [], { id: pros.approvalby }).length > 0 ? _.filter(this.usersList || [], { id: pros.approvalby || '' })[0]['uname'] : "",
@@ -710,8 +703,10 @@ export class GenerateloansComponent implements OnInit {
                 let savePayload = JSON.parse(JSON.stringify(this.createMaster));
                 savePayload['flag'] = this.mode == 'NEW' || this.mode == '' ? 'S' : 'E';
                 savePayload['create_by'] = this._service.getUserInfo('_id');
-                let filterName: any = _.filter(this.borrwoersList, { _id: this.createMaster.borrowername });
-                savePayload['borrower'] = filterName[0]['name'];
+                // let filterName: any = _.filter(this.borrwoersList, { _id: this.createMaster.borrowername });
+                savePayload['borrower'] = this.createMaster.borrowername['id'];
+                savePayload['borrowername'] = this.createMaster.borrowername['name'];
+                savePayload['OTHERS'] = this.createMaster.borrowername['OTHERS'];
                 // console.log(savePayload)
                 let loginJson = this._service.postApi('generateloans', 'postEndPoint', savePayload)
                     .pipe(takeUntil(this.destroy$))

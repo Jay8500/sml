@@ -33,6 +33,12 @@
     "getproducsts": {
         "postEndPoint": "sml/getproducsts"
     },
+    "getAllDocuments": {
+        "postEndPoint": "sml/getAllDocuments"
+    },
+    "documentssave": {
+        "postEndPoint": "sml/documentssave"
+    },
     "historypayments": {
         "postEndPoint": "sml/historypayments"
     },

@@ -20,6 +20,8 @@ export class CreateborrowersComponent implements OnInit {
     @ViewChild('af', { static: false }) af!: FileUpload;
     @ViewChild('ag', { static: false }) ag!: FileUpload;
 
+    public image: any = [];
+
     public isShowForm = false;
     public isShowSidebarClose = false;
     public isCloseOnEscape = false;
@@ -411,13 +413,23 @@ export class CreateborrowersComponent implements OnInit {
         }
     }
 
+    // public imageFile: File | null = null;
     onSelect(event: any, ctrl: string) { // A, RC, HTR,LA, HP, PPC, OTHERS
         try {
             if (![undefined, null, ''].includes(event)) {
                 if (Object.keys(event.files).length > 0) {
-                    const files = event.files[0];
-                    console.log("files", files)
-                    if (files) this.uploadFile(files, ctrl)
+                    // console.log(event.target.files)
+                    event.files[0]['ctrl'] = ctrl;
+                    this.image.push({ ctrl: ctrl, files: event.files[0] })
+                    this.createMaster[ctrl] = event.files[0]['name'];
+                    // if (files) this.uploadFile(files, ctrl)
+                    this.aa.clear();
+                    this.ab.clear();
+                    this.ac.clear();
+                    this.ad.clear();
+                    this.ae.clear();
+                    this.af.clear();
+                    this.ag.clear();
                 };
             }
         } catch (e) {
@@ -427,8 +439,9 @@ export class CreateborrowersComponent implements OnInit {
     uploadFile(files: File, ctrl: string): void {
         let reader = new FileReader();
         reader.onload = (e: any) => {
+            // console.log("files", files)
             let base64 = e.target.result;
-            this.createMaster[ctrl] = base64;
+
             // this.createMaster[ctrl] = {
             //     name: files.name,
             //     file_folder: ""
@@ -539,7 +552,18 @@ export class CreateborrowersComponent implements OnInit {
                 savePayload['city'] = this.createMaster['city']['code'];
 
                 // console.log(savePayload)
-                let loginJson = this._service.postApi('createBorrowers', 'postEndPoint', savePayload)
+
+                const formData = new FormData();
+                formData.append('secure', JSON.stringify(savePayload));
+                if (this.image.length > 0) {
+
+                    this.image.forEach((item: any, index: number) => {
+                        formData.append('image', item.files);
+                        // formData.append(`image-${index}`, );
+                    });
+                };
+               
+                let loginJson = this._service.formpostApi('createBorrowers', 'postEndPoint', formData)
                     .pipe(takeUntil(this.destroy$))
                     .subscribe({
                         next: (data) => {

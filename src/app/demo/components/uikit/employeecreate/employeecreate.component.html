@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="flex justify-content-between flex-row">
                     <div class="flex align-items-center justify-content-start border-round">
-                        <p-avatar [image]="userDetails['cLogo']" size="normal" shape="circle"></p-avatar>
+                        <p-avatar [image]="userDetails['A']" size="normal" shape="circle"></p-avatar>
                         <div class="w-full ml-3 ml-2 text-orange-400">
                             {{userDetails.empname | uppercase}}
 
@@ -154,6 +154,22 @@
                             (blur)="getErrorMessages('empname')" [(ngModel)]="createMaster.empname"
                             [disabled]="mode=='VIEW'" class="p-2 ng-invalid ng-dirty">
                         <small *ngIf="errorMessages.empname != ''">{{ errorMessages.empname}}</small>
+                    </div>
+                    <div class="col-12">
+                        <div class="field col">
+                            <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*" #aa
+                                [disabled]="mode=='VIEW'" [maxFileSize]="fileSize()" (onSelect)="onSelect($event,'A')"
+                                [fileLimit]="2"></p-fileUpload>
+                        </div>
+                        <div class="field col">
+                            <p-image [src]="createMaster['A']" alt="Image" width="50" height="50"
+                                *ngIf="createMaster['A'] != null" [preview]="true"></p-image>
+                        </div>
+                        <div class="field col">
+                            <p-button icon="pi pi-trash" severity="danger"
+                                *ngIf="createMaster['A'] != null && mode != 'VIEW'"
+                                (click)="createMaster['A'] = null"></p-button>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label htmlFor="name1">Contact No.</label>

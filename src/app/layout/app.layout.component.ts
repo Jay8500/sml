@@ -85,7 +85,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
             // console.log(`${timeLeft} ms left`);/
         };
         this.sessions.onTimeOut = () => {
-            this.autoLogout()
+            // this.autoLogout()
             // You can call your logout function or perform any action here
         };
         this.sessions.start();

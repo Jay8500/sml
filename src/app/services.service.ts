@@ -56,6 +56,27 @@ export class ServicesService {
       );
   }
 
+  formpostApi(mstrApiParentKey: string, srvcApiChildKey: string, postData: any): Observable<any> {
+    let createHdrs: any = {
+      // 'Content-Type': 'application/json', // Example content type
+      'isCrypto': this._configClone['isCrypto']
+    };
+
+    const httpHeaders = new HttpHeaders(createHdrs);
+    let apiHostUrl = this._configClone['apiHostUrl'] +
+      this._configClone[mstrApiParentKey][srvcApiChildKey];
+    return this._httpClient.post<any>(apiHostUrl,
+      postData
+      , { headers: httpHeaders })
+      .pipe(
+        timeout(10000), // Set timeout to 10 seconds
+        catchError((error) => {
+          return of('NETOWRK_ISSUE');
+        })
+
+      );
+  }
+
   startTimer(): void {
     this.timer = setTimeout(() => {
       this._router.navigate(['/sml-signin'])
@@ -95,6 +116,7 @@ export class ServicesService {
         let decryptData: any = this.decrypt(getUserInfo);
         // console.log("getUserInfo", decryptData);
         getUserInfo = decryptData[keyName];
+        console.log(getUserInfo)
 
       };
     } catch (e) {

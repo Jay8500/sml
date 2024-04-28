@@ -1,33 +1,95 @@
 <p-tabView styleClass="tabview-custom">
-    <!-- <p-tabPanel>
+    <p-tabPanel *ngIf="false">
         <ng-template pTemplate="header">
             <i class="pi pi-cog"></i>
-            <span class="ml-1"> Alter Permission</span>
+            <span class="ml-1"> Documents</span>
         </ng-template>
-        <div class="grid">
-            <div class="col-12">
-                <div class="card">
-                    {{permissions | json}}
-                    <p-table [value]="permissions" [columns]="roles">
-                        <ng-template pTemplate="header" let-columns>
-                          <tr>
-                            <th>Pages</th>
-                            <th *ngFor="let col of columns.slice(1)">{{ col.header }}</th>
-                          </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-page let-columns="columns">
-                          <tr>
-                            <td>{{ page.name }}</td>
-                            <td *ngFor="let col of columns.slice(1)">
-                              <input type="checkbox" [ngModel]="page['permissions'][col.field]" >
-                            </td>
-                          </tr>
-                        </ng-template>
-                      </p-table>
-                </div>
-            </div>
+        <div class="card">
+            <p-table [value]="documentsJSON" dataKey="pid" editMode="row" styleClass="p-datatable-striped"
+                [paginator]="true" [rows]="8" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5, 10, 20]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:20%">SNO.</th>
+                        <th style="width:20%">Document Name</th>
+                        <th style="width:20%">Route</th>
+                        <th style="width:20%">Description</th>
+                        <th style="width:20%">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-documentsProps let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="documentsProps">
+                        <td>
+                            {{ri + 1}}
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <!-- [pKeyFilter]="'alpha'" -->
+                                    <input pInputText type="text" [(ngModel)]="documentsProps.documentName">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{documentsProps.documentName}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <!-- [pKeyFilter]="'alphanum'" -->
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="documentsProps.route" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{documentsProps.route}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <!-- [pKeyFilter]="'alpha'" -->
+                                    <input pInputText type="text" [(ngModel)]="documentsProps.description">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{documentsProps.description}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <div class="flex align-items-start justify-content-start gap-1">
+                                <!---EDIT-->
+                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
+                                    icon="pi pi-pencil" (click)="onRowEditInitDoc(documentsProps)"
+                                    class="p-button-rounded p-button-text"></button>
+                                <!---SAVE-->
+                                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
+                                    icon="pi pi-check" (click)="onRowEditSaveDoc(documentsProps)"
+                                    class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                                <!---CANCEL-->
+                                <button *ngIf="ri != 0 || (ri==0 && documentsJSON.length > 1) &&  editing" pButton
+                                    pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                                    (click)="onRowEditCancelDoc(documentsProps,ri)"
+                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                                <!---ADD-->
+                                <button *ngIf=" (ri ==  documentsJSON.length-1  ) && !editing " pButton pRipple
+                                    type="button" pCancelEditableRow icon="pi pi-plus"
+                                    (click)="onRowNewCancelDoc(documentsProps)"
+                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                    <!-- <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button> -->
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                    <!-- <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button> -->
+                </ng-template>
+            </p-table>
         </div>
-    </p-tabPanel> -->
+    </p-tabPanel>
+
     <p-tabPanel>
         <ng-template pTemplate="header">
             <i class="pi pi-cog"></i>
@@ -76,6 +138,46 @@
         </div>
 
     </p-tabPanel>
+    <!-- <p-tabPanel>
+        <ng-template pTemplate="header">
+            <i class="pi pi-cog"></i>
+            <span class="ml-1">Manage Permission</span>
+        </ng-template>
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <div class="grid">
+                        <div class="col-12">
+                            <div class="flex flex-row justify-content-center">
+                                <p-dropdown [options]="caders" optionLabel="label" optionValue="value"
+                                    [(ngModel)]="slectedItem" placeholder="Select a Cader" [filter]="true"
+                                    [style]="{'width':'100%'}" (onChange)="changePages()"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-4" #dashboardContent
+                            *ngFor="let documentsPrp of documentsJSON;">
+                            <div class="card mb-0">
+                                <div class="flex flex-row justify-content-between">
+                                    <div>
+                                        {{documentsPrp['documentName']}}
+                                    </div>
+                                    <div>
+                                        <p-button icon="pi pi-check" [rounded]="true" [outlined]="false"></p-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button pButton pRipple label="Save" icon="pi pi-check" class="" [disabled]="showSubmit"
+                            [loading]="loading" styleClass="p-button-rounded " (click)="saveProduct()"></button> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+
+    <!-- </p-tabPanel>  -->
+
     <p-tabPanel>
         <ng-template pTemplate="header">
             <i class="pi pi-cog"></i>
@@ -83,7 +185,10 @@
         </ng-template>
         <div class="card">
             <p-toast></p-toast>
-            <p-table [value]="products" dataKey="pid" editMode="row" [tableStyle]="{'min-width': '50rem'}">
+            <p-table [value]="products" dataKey="pid" editMode="row" [paginator]="true" [rows]="8"
+                styleClass="p-datatable-striped" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5, 10, 20]">
                 <ng-template pTemplate="header">
                     <tr>
                         <th style="width:20%">Category</th>
@@ -143,7 +248,7 @@
                         <td>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
-                                    <input pInputText type="text" [(ngModel)]="product.roi" [pKeyFilter]="'alpha'">
+                                    <input pInputText type="text" [(ngModel)]="product.roi" [pKeyFilter]="'int'">
                                 </ng-template>
                                 <ng-template pTemplate="output">
                                     {{product.roi}}
@@ -161,7 +266,7 @@
                             </p-cellEditor>
                         </td>
                         <td>
-                            <div class="flex align-items-center justify-content-center gap-2">
+                            <div class="flex align-items-start justify-content-start gap-2">
 
                                 <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
                                     icon="pi pi-pencil" (click)="onRowEditInit(product)"
@@ -183,6 +288,12 @@
                         </td>
                     </tr>
                 </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                    <!-- <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button> -->
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                    <!-- <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button> -->
+                </ng-template>
             </p-table>
         </div>
     </p-tabPanel>
@@ -193,6 +304,16 @@
     (onClose)="onMessageClose()"></p-toast>
 
 <style>
+    /* .pi-check-circle:before */
+    .assigned {
+        content: "\e90a";
+        color: blue;
+    }
+
+    .notassigned {
+        content: "\e90a";
+    }
+
     .main_crt_mstrs {
         margin-top: 10px;
         display: flex;

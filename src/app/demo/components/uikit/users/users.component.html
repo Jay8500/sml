@@ -18,8 +18,7 @@
             <div class="card">
                 <div class="flex justify-content-between flex-row">
                     <div class="flex align-items-center justify-content-start border-round">
-                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-                            size="normal" shape="circle"></p-avatar>
+                        <p-avatar [image]="userDetails['A']" size="normal" shape="circle"></p-avatar>
                         <div class="w-full ml-3 ml-2 text-orange-400">
                             {{userDetails.uname | uppercase}}
 
@@ -124,145 +123,6 @@
     </div>
 </div>
 
-<div class="grid" *ngIf=false>
-    <div class="col-12">
-        <div class="card">
-            <div class="flex justify-content-between flex-wrap">
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    Users List
-                </div>
-                <div class="flex align-items-center justify-content-center w-0rem h-0 font-bold border-round m-1">
-                    <!-- 2 -->
-                </div>
-                <div class="flex align-items-center justify-content-center w-10rem h-2rem font-bold border-round m-2">
-                    <button pButton pRipple label="Add new" [loading]=false class="p-button-success"
-                        (click)="onClick(null,'NEW')"></button>
-                </div>
-            </div>
-
-
-            <p-table #dt1 [value]="crudGrid" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
-                styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
-                <!-- <ng-template pTemplate="caption">
-					<div class="flex justify-content-between flex-column sm:flex-row">
-						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
-						<span class="p-input-icon-left mb-2">
-							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
-						</span>
-					</div>
-				</ng-template> -->
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="min-width: 5rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Action
-                                <!-- <p-columnFilter type="text" field="name" display="menu"
-                                    placeholder="Search by name"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 18rem">
-                            <div class="flex justify-content-between align-items-center">
-                                User Name
-                                <p-columnFilter type="text" field="uname" display="menu"
-                                    placeholder="Search by name"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 4rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Gender
-                                <p-columnFilter type="text" field="gendername" display="menu"
-                                    placeholder="Search by gender"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Cadre
-                                <p-columnFilter type="text" field="cadername" display="menu"
-                                    placeholder="Search by Cadre"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Branch
-                                <p-columnFilter type="text" field="branchname" display="menu"
-                                    placeholder="Search by Cadre"></p-columnFilter>
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Description
-                                <!-- <p-columnFilter type="text" field="desc" display="menu"
-                                    placeholder="Search by contact"></p-columnFilter> -->
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                Status
-                                <!-- <p-columnFilter type="text" field="status" display="menu"
-                                    placeholder="Search by status"></p-columnFilter> -->
-                            </div>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-customer>
-                    <tr>
-                        <td>
-                            <div class="flex justify-content-center flex-wrap">
-                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'VIEW')">
-                                    <i class="pi pi-eye"></i>
-                                </div>
-                                <div class="flex align-items-center  ml-1" (click)="onClick(customer, 'EDIT')">
-                                    <i class="pi pi-file-edit"></i>
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            {{customer.uname}}
-                        </td>
-
-                        <td>
-                            {{customer.gendername}}
-                        </td>
-                        <td>
-                            {{customer.cadername}}
-                        </td>
-                        <td>
-                            {{customer.branchname}}
-                        </td>
-
-                        <td>
-                            {{customer.desc}}
-                        </td>
-
-                        <td>
-
-                            <span *ngIf="customer.active == true"
-                                [class]="'customer-badge status-qualified'">Active</span>
-                            <span *ngIf="customer.active == false"
-                                [class]="'customer-badge status-unqualified'">Inactive</span>
-
-                        </td>
-
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="6">No Users found.</td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="loadingbody">
-                    <tr>
-                        <td colspan="6">Loading Users data. Please wait.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-
-    </div>
-</div>
-
 <p-dialog header="Create User" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
     closeOnEscape="true" closable="true" [breakpoints]="{ 
         '900px': '45vw',  
@@ -272,6 +132,28 @@
         <div class="col-12 col-offset-0  md:col-12 md:col-offset-0 lg:col-6  lg:col-offset-3 xl:col-6 xl:col-offset-3">
             <div class="card  p-fluid">
                 <div class="grid">
+
+                    <div class="col-12">
+                        <label htmlFor="name1">Employee</label>
+                        <p-dropdown [options]="employeesListInfo" [(ngModel)]="createMaster.empId"
+                            placeholder="Select a Employee" [filter]="true" [style]="{'width':'100%'}"
+                            (onChange)="onEmployeeSelect()">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="createMaster.empId">
+                                    <p-avatar [image]="createMaster['empId']['A']" styleClass="mr-2" size="large"
+                                        shape="circle"></p-avatar>
+                                    <div>{{ createMaster['empId']['empname'] }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-empInfo pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <p-avatar [image]="empInfo['A']" styleClass="mr-2" size="large"
+                                        shape="circle"></p-avatar>
+                                    <div>{{ empInfo.empname }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
 
                     <div class="col-12">
                         <label htmlFor="name1">User Name</label>

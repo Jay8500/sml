@@ -10,8 +10,7 @@ import * as _ from 'lodash';
   templateUrl: './employeecreate.component.html',
 })
 export class EmployeecreateComponent implements OnInit {
-
-
+  @ViewChild('aa', { static: false }) aa!: FileUpload;
   public isShowForm = false;
   public isShowSidebarClose = false;
   public isCloseOnEscape = false;
@@ -75,6 +74,7 @@ export class EmployeecreateComponent implements OnInit {
   public createMaster: any = {
     id: null,
     empid: null,
+    A: null,
     empname: null,
     empcode: null,
     qualifications: null,
@@ -222,7 +222,6 @@ export class EmployeecreateComponent implements OnInit {
                 surity: prodcuts.surity,
                 reference: prodcuts.reference,
                 contactno: prodcuts.contactno,
-
               };
               this.branches.push(products)
             });
@@ -270,10 +269,7 @@ export class EmployeecreateComponent implements OnInit {
               data['DATA'].forEach((pros: any, prdIn: number) => {
                 let createCompanies: any = {
                   active: pros.active,
-
-                  create_dt
-                    :
-                    pros.create_dt,
+                  create_dt: pros.create_dt,
                   empid: pros.empid,
                   empname: pros.empname,
                   empcode: pros.empcode,
@@ -285,10 +281,8 @@ export class EmployeecreateComponent implements OnInit {
                   surity: pros.surity,
                   reference: pros.reference,
                   contactno: pros.contactno,
-
-                  id
-                    :
-                    pros._id,
+                  A: pros.A,
+                  id: pros._id,
                   dataKey: prdIn + 1,
                   status: (pros.active == true ? 'Qualified' : 'Unqualified')
 
@@ -316,13 +310,19 @@ export class EmployeecreateComponent implements OnInit {
   // onClick(ctrl: string, data: any) {
   //     this.isShowForm = true;
   // }
-
+  public image: any = [];
   onSelect(event: any, ctrl: string) { // A, RC, HTR,LA, HP, PPC, OTHERS
     try {
       if (![undefined, null, ''].includes(event)) {
         if (Object.keys(event.files).length > 0) {
           const files = event.files[0];
-          if (files) this.uploadFile(files, ctrl)
+          if (files) {
+            event.files[0]['ctrl'] = ctrl;
+            this.image.push({ ctrl: ctrl, files: event.files[0] })
+            this.createMaster[ctrl] = event.files[0]['name'];
+            // if (files) this.uploadFile(files, ctrl)
+            this.aa.clear();
+          }
         };
       }
     } catch (e) {
@@ -397,9 +397,17 @@ export class EmployeecreateComponent implements OnInit {
         savePayload['flag'] = this.mode == 'NEW' || this.mode == '' ? 'S' : 'E';
 
         savePayload['create_by'] = this._service.getUserInfo('_id');
-        // return;
-        // this.loading = true;
-        let loginJson = this._service.postApi('createEmployee', 'postEndPoint', savePayload)
+
+        const formData = new FormData();
+        formData.append('secure', JSON.stringify(savePayload));
+        if (this.image.length > 0) {
+
+          this.image.forEach((item: any, index: number) => {
+            formData.append('image', item.files);
+            // formData.append(`image-${index}`, );
+          });
+        };
+        let loginJson = this._service.formpostApi('createEmployee', 'postEndPoint', formData)
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (data) => {

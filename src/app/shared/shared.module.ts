@@ -41,6 +41,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TabPanel, TabViewModule } from 'primeng/tabview';
+import { CardModule } from 'primeng/card';
 @NgModule({
   declarations: [],
   imports: [
@@ -48,14 +49,14 @@ import { TabPanel, TabViewModule } from 'primeng/tabview';
     InputSwitchModule, ConfirmDialogModule, ButtonModule, ToastModule, PasswordModule, OverlayPanelModule, AvatarModule, AvatarGroupModule, InputTextModule,
     CascadeSelectModule, ChartModule, TableModule, StyleClassModule, PanelMenuModule, SkeletonModule, DividerModule, PanelModule, AutoCompleteModule,
     CalendarModule, DropdownModule, ChipsModule, InputMaskModule, InputNumberModule, MultiSelectModule, InputTextareaModule, KeyFilterModule, ScrollTopModule,
-    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule
+    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule, CardModule
   ],
   exports: [
     FormsModule, MenuModule, MegaMenuModule, ChipModule, TooltipModule, RippleModule, DialogModule, BadgeModule, SidebarModule, RadioButtonModule,
     InputSwitchModule, ConfirmDialogModule, ButtonModule, ToastModule, PasswordModule, OverlayPanelModule, AvatarModule, AvatarGroupModule, InputTextModule,
     CascadeSelectModule, ChartModule, TableModule, StyleClassModule, PanelMenuModule, SkeletonModule, DividerModule, PanelModule, AutoCompleteModule,
     CalendarModule, DropdownModule, ChipsModule, InputMaskModule, InputNumberModule, MultiSelectModule, InputTextareaModule, KeyFilterModule, ScrollTopModule,
-    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule
+    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule, CardModule
   ]
 })
 export class SharedModule { }

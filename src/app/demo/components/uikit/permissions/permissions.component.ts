@@ -20,9 +20,12 @@ export class PermissionsComponent implements OnInit {
     { header: 'User', field: 'User' }
   ];
   public permissions: any = [];
-
   public products: any = [];
-
+  public clonedProducts: any = {};
+  public documentsJSON: any = [];
+  public clonedDocuments: any = {};
+  public isOk = false;
+  public loadings = false;
   public usersList: any = [
   ];
   public createMaster = {
@@ -35,12 +38,42 @@ export class PermissionsComponent implements OnInit {
   public showSubmit: boolean = true;
   public permissionJSON: any = [];
   public userApprovals: any = [];
+  public slectedItem: any;
+  public caders = [{ label: "Select Cadre", value: null }];
 
   ngOnInit(): void {
     this.permissions = [];
+    this.products = [];
+    this.documentsJSON = [];
+    this._service.postApi('getAllCaders', 'postEndPoint', {})
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data['S_CODE'] == 200) {
+            this.caders = [{
+              label: "Select Cadre",
+              value: null
+            }];
+            data['DATA'].forEach((prodcuts: any, prdIn: number) => {
+              let products = {
+                label: prodcuts.cdname,
+                value: prodcuts._id,
+                code : prodcuts.code
+              };
+              this.caders.push(products)
+            });
+          };
+        },
+        error: (err) => {
+          // this.blocUI = false;
+          // this.myModels = [];
+          // console.log('error')
+        }
+      });
 
 
-    // Pages array
+
     this.permissions = [
       {
         name: 'Dashboard',
@@ -68,9 +101,6 @@ export class PermissionsComponent implements OnInit {
       },
       // Add more pages as needed
     ];
-
-
-    this.products = [];
     this.products.push(
       {
         _id: 0,
@@ -83,7 +113,17 @@ export class PermissionsComponent implements OnInit {
         repayment: "",
         flag: 'S'
       }
-    )
+    );
+    this.documentsJSON.push(
+      {
+        _id: 0,
+        pid: 0,
+        documentName: "",
+        route: "",
+        description: "",
+        flag: 'S'
+      }
+    );
 
     this._service.postApi('smlgetusers', 'postEndPoint', {
       code: 'HRPM',
@@ -116,11 +156,42 @@ export class PermissionsComponent implements OnInit {
         }
       });
 
-
+    this.getAllDocuments();
     this.getPermissions();
     this.getAllProducts();
   }
 
+  async getAllDocuments() {
+    this._service.postApi('getAllDocuments', 'postEndPoint', {
+    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data['S_CODE'] == 200) {
+            if (data['DATA'].length > 0) {
+              this.documentsJSON = [];
+              _.forEach(data['DATA'], (us, uIn) => {
+                let getAllDocuments: any = {
+                  _id: us._id,
+                  pid: parseInt(us.pid),
+                  documentName: us.documentName,
+                  route: us.route,
+                  description: us.description,
+                  flag: 'E'
+                };
+                this.documentsJSON.push(getAllDocuments)
+              });
+            };
+          };
+        },
+        error: (err) => {
+          // this.blocUI = false;
+          // this.myModels = [];
+          // console.log('error')
+        }
+      });
+  }
 
   async getAllProducts() {
 
@@ -755,7 +826,7 @@ export class PermissionsComponent implements OnInit {
     }
   }
 
-  public isOk = false;
+
   saveProduct() {
     // this.loading = true;
     let permissionSave: any = [];
@@ -795,7 +866,7 @@ export class PermissionsComponent implements OnInit {
         }
       });
   }
-  public loadings = false;
+
   savePermissionProduct() {
     // this.loading = true;
     let permissionSave: any = [];
@@ -849,8 +920,6 @@ export class PermissionsComponent implements OnInit {
 
   }
 
-  public clonedProducts: any = {};
-  // public editing = false;
   onRowEditInit(product: any) {
     // product['flag'] = 'E';
     this.clonedProducts[product.pid as string] = { ...product };
@@ -907,10 +976,68 @@ export class PermissionsComponent implements OnInit {
     newProduct['tenure'] = null;
     newProduct['roi'] = null;
     newProduct['repayment'] = null;
-    // newProduct['flag'] = 'S';
     newProduct['_id'] = 0;
     newProduct['active'] = true;
 
     this.products.splice(this.products.length, 0, newProduct);
+  }
+
+  onRowEditInitDoc(Documents: any) {
+    this.clonedDocuments[Documents.pid as string] = { ...Documents };
+  }
+
+  onRowEditSaveDoc(Documents: any) {
+    let savePayload = JSON.parse(JSON.stringify(Documents));
+    savePayload['flag'] = savePayload['_id'] == 0 ? 'S' : 'E';
+    let loginJson = this._service.postApi('documentssave', 'postEndPoint', savePayload)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data.S_CODE == 200) {
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
+            // this.isOk = true;
+            // this.loadings = false;
+            this.getAllDocuments();
+          } else if (data.S_CODE == 300) {
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
+            // this.isOk = true;
+            // // this.loading = false;
+            // //  this.isShowSidebarClose = false;
+            // this.loadings = false;
+          }
+        },
+        error: (err) => {
+          this.loadings = false;
+          // this.loading = false;
+        }
+      });
+  }
+
+  onRowEditCancelDoc(Documents: any, ri: number) {
+    Documents['active'] = false;
+    if (Documents['_id'] == 0) {
+      Documents['flag'] = 'S';
+      this.documentsJSON[ri] = this.clonedDocuments[Documents.pid as string];
+      delete this.clonedDocuments[Documents.pid as string];
+    } else {
+      Documents['flag'] = 'E';
+      this.onRowEditSave(Documents);
+    };
+  }
+
+  onRowNewCancelDoc(product: any) {
+    let newDocument = JSON.parse(JSON.stringify(product));
+    newDocument['pid'] = product['pid'] + 1;
+    newDocument['documentName'] = 'New';
+    newDocument['route'] = null;
+    newDocument['description'] = null;
+    newDocument['_id'] = 0;
+    newDocument['active'] = true;
+    this.documentsJSON.splice(this.products.length, 0, newDocument);
+  }
+
+  changePages() {
+    console.log('pages', this.slectedItem)
   }
 }

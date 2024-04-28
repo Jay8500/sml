@@ -13,7 +13,7 @@
     <div (click)="visibles=true" class="flex align-items-center justify-content-center">
         <p-chip [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() :
                 userInfo['uname'].substring(0,5).toUpperCase()" [pTooltip]="userInfo['uname']" tooltipPosition="left"
-            styleClass="cursor-pointer " image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            styleClass="cursor-pointer" [image]="userInfo['profilePicture']"
             alt="Avatar image"></p-chip>
     </div>
 </div>
