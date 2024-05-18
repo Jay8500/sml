@@ -157,5 +157,11 @@
     "getEmployee": {
         "postEndPoint": "sml/employeeslist"
     },
+    "newCreatePagePermissionsList": {
+        "postEndPoint": "sml/create-pagePermissionsList"
+    },
+    "getnewPagePermissionsList": {
+        "postEndPoint": "sml/getnewPagePermissionsList"
+    },
     "tokenSecretKey": "smlsecret"
 }

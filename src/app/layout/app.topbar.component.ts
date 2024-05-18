@@ -48,7 +48,7 @@ export class AppTopBarComponent implements OnInit {
                     cader: getCaders['cdname'],
                     caderCode: getCaders['code'],
                     loggedInTime: this.datePipe.transform(new Date(this.service.getUserInfo('loggTime') || ''), 'dd-MMM-yyyy hh:mm a'),
-                    profilePicture: this.service.getUserInfo('A') 
+                    profilePicture: this.service.getUserInfo('A')
                 };
             }
             // this.model = [
@@ -85,7 +85,7 @@ export class AppTopBarComponent implements OnInit {
             this.model = [];
             // this.loading = true;
             let cader = this._service.getUserInfo('userCader');
-            this._service.postApi('onlyPages', 'postEndPoint', { code: cader['code'] })
+            this._service.postApi('getnewPagePermissionsList', 'postEndPoint', { code: cader['code'] })
                 .pipe(takeUntil(this.destroy$))
                 .subscribe({
                     next: (data) => {
@@ -93,23 +93,23 @@ export class AppTopBarComponent implements OnInit {
                         if (data['S_CODE'] == 200) {
                             // this.blocUI = false;
                             if (data['DATA'].length > 0) {
-                                let dashboardData = {
-                                    label: 'Home',
-                                    items: [
-                                        {
-                                            label: 'Dashboard',
-                                            icon: 'pi pi-fw pi-home',
-                                            routerLink: ['/home/sml-dashboard'],
-                                            pat: '/home/sml-dashboard'
-                                        },
-                                        {
-                                            label: 'Employee Create',
-                                            icon: 'pi pi-fw pi-home',
-                                            routerLink: ['/home/smlemployee'],
-                                            pat: '/home/smlemployee'
-                                        }
-                                    ]
-                                };
+                                // let dashboardData = {
+                                //     label: 'Home',
+                                //     items: [
+                                //         {
+                                //             label: 'Dashboard',
+                                //             icon: 'pi pi-fw pi-home',
+                                //             routerLink: ['/home/sml-dashboard'],
+                                //             pat: '/home/sml-dashboard'
+                                //         },
+                                //         {
+                                //             label: 'Employee Create',
+                                //             icon: 'pi pi-fw pi-home',
+                                //             routerLink: ['/home/smlemployee'],
+                                //             pat: '/home/smlemployee'
+                                //         }
+                                //     ]
+                                // };
                                 let moduleList: any = {
                                     label: 'Modules',
                                     items: [
@@ -124,18 +124,17 @@ export class AppTopBarComponent implements OnInit {
                                         {
                                             // label: "Modules",
                                             // items: []
-                                            pat: p.path.replace('/uikit/', '/'),
+                                            pat: p.path,
                                             label: p.name,
                                             icon: 'pi pi-fw pi-id-card',
                                             routerLink: []
                                         };
-                                        p.path = p.path.replace('/uikit/', '/');
                                         createPages.routerLink.push(p.path);
                                         moduleList.items.push(createPages)
                                         // this.model.push(dashboardData, { label: 'Modules', items: [createPages] })
                                         // this.model[1]['items'].push(createPages);
                                     });
-                                    this.model.push(dashboardData, moduleList)
+                                    this.model.push(moduleList)
                                 };
 
                                 // isCanDo

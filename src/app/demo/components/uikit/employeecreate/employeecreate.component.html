@@ -156,19 +156,21 @@
                         <small *ngIf="errorMessages.empname != ''">{{ errorMessages.empname}}</small>
                     </div>
                     <div class="col-12">
-                        <div class="field col">
-                            <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*" #aa
-                                [disabled]="mode=='VIEW'" [maxFileSize]="fileSize()" (onSelect)="onSelect($event,'A')"
-                                [fileLimit]="2"></p-fileUpload>
-                        </div>
-                        <div class="field col">
-                            <p-image [src]="createMaster['A']" alt="Image" width="50" height="50"
-                                *ngIf="createMaster['A'] != null" [preview]="true"></p-image>
-                        </div>
-                        <div class="field col">
-                            <p-button icon="pi pi-trash" severity="danger"
-                                *ngIf="createMaster['A'] != null && mode != 'VIEW'"
-                                (click)="createMaster['A'] = null"></p-button>
+                        <div class="flex justify-content-between">
+                            <div>
+                                <p-fileUpload mode="basic" chooseLabel="Upload Photo" name="demo[]" accept="image/*" #aa
+                                    [disabled]="mode=='VIEW'" [maxFileSize]="fileSize()"
+                                    (onSelect)="onSelect($event,'A1')" [fileLimit]="2"></p-fileUpload>
+                            </div>
+                            <div>
+                                <p-image [src]="createMaster['A1']" alt="Image" width="50" height="50"
+                                    *ngIf="createMaster['A1'] != null" [preview]="true"></p-image>
+                            </div>
+                            <div>
+                                <p-button icon="pi pi-trash" severity="danger"
+                                    *ngIf="createMaster['A'] != null && mode != 'VIEW'"
+                                    (click)="createMaster['A'] = null"></p-button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12">
@@ -178,28 +180,7 @@
                             [disabled]="mode=='VIEW'" maxlength="10" [pKeyFilter]="'num'"
                             class="p-2 ng-invalid ng-dirty">
                         <small *ngIf="errorMessages.contactno != ''">{{ errorMessages.contactno}}</small>
-
                     </div>
-                    <!-- <div class="col-12">
-                        <label for="firstname2">Logo</label>
-                        <div class="formgrid grid">
-                            <div class="field col">
-                                <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*" #aa
-                                    [disabled]="mode=='VIEW'" [previewWidth]="30" [maxFileSize]="fileSize()"
-                                    (onSelect)="onSelect($event,'cLogo')" [fileLimit]="1"></p-fileUpload>
-                            </div>
-                            <div class="field col">
-                                <p-image [src]="createMaster['cLogo']" alt="Image" width="50" height="50"
-                                    *ngIf="createMaster['cLogo'] != null" [preview]="true"></p-image>
-                            </div>
-                            <div class="field col">
-                                <p-button icon="pi pi-trash" severity="danger"
-                                    *ngIf="createMaster['cLogo'] != null&& mode != 'VIEW'"
-                                    (click)="createMaster['cLogo'] = null"></p-button>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="col-12">
                         <label for="firstname2">Qualification</label>
                         <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
@@ -279,6 +260,10 @@
 
     :host ::ng-deep .test .p-icon {
         color: red !important;
+    }
+
+    :host ::ng-deep .p-fluid .p-button {
+        width: 100%;
     }
 </style>
 

@@ -93,6 +93,49 @@
     <p-tabPanel>
         <ng-template pTemplate="header">
             <i class="pi pi-cog"></i>
+            <span class="ml-1">Manage Permission</span>
+        </ng-template>
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <div class="grid">
+                        <div class="col-12">
+                            <div class="flex flex-row justify-content-center">
+                                <p-dropdown [options]="caders" optionLabel="label" optionValue="code"
+                                    [(ngModel)]="slectedItem" placeholder="Select a Cader" [filter]="true"
+                                    [style]="{'width':'100%'}" (onChange)="changePages()"></p-dropdown>
+
+                                <button pButton pRipple label="Save" icon="pi pi-check" class="" [loading]="loading"
+                                    styleClass="p-button-rounded " (click)="onChangeSave()"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-4" #dashboardContent
+                            *ngFor="let documentsPrp of activeDocumentPermissions;">
+                            <div class="card mb-0" [ngStyle]="{'background-color' : documentsPrp['isCanDo'] ? '#C7F6C7' : 'white'}">
+                                <div class="flex flex-row justify-content-between">
+                                    <div>
+                                        {{documentsPrp['documentName']}}
+                                    </div>
+                                    <div>
+                                        <p-checkbox [(ngModel)]="documentsPrp['isCanDo']" [binary]="true"
+                                            inputId="binary" [disabled]="slectedItem==null" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </p-tabPanel>
+
+    <p-tabPanel *ngIf="false">
+        <ng-template pTemplate="header">
+            <i class="pi pi-cog"></i>
             <span class="ml-1"> Alter Permission</span>
         </ng-template>
         <div class="grid">
@@ -138,45 +181,6 @@
         </div>
 
     </p-tabPanel>
-    <!-- <p-tabPanel>
-        <ng-template pTemplate="header">
-            <i class="pi pi-cog"></i>
-            <span class="ml-1">Manage Permission</span>
-        </ng-template>
-        <div class="grid">
-            <div class="col-12">
-                <div class="card">
-                    <div class="grid">
-                        <div class="col-12">
-                            <div class="flex flex-row justify-content-center">
-                                <p-dropdown [options]="caders" optionLabel="label" optionValue="value"
-                                    [(ngModel)]="slectedItem" placeholder="Select a Cader" [filter]="true"
-                                    [style]="{'width':'100%'}" (onChange)="changePages()"></p-dropdown>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid">
-                        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-4" #dashboardContent
-                            *ngFor="let documentsPrp of documentsJSON;">
-                            <div class="card mb-0">
-                                <div class="flex flex-row justify-content-between">
-                                    <div>
-                                        {{documentsPrp['documentName']}}
-                                    </div>
-                                    <div>
-                                        <p-button icon="pi pi-check" [rounded]="true" [outlined]="false"></p-button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <button pButton pRipple label="Save" icon="pi pi-check" class="" [disabled]="showSubmit"
-                            [loading]="loading" styleClass="p-button-rounded " (click)="saveProduct()"></button> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-
-    <!-- </p-tabPanel>  -->
 
     <p-tabPanel>
         <ng-template pTemplate="header">

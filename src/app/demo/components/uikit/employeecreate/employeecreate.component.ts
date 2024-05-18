@@ -74,6 +74,7 @@ export class EmployeecreateComponent implements OnInit {
   public createMaster: any = {
     id: null,
     empid: null,
+    A1: null,
     A: null,
     empname: null,
     empcode: null,
@@ -318,8 +319,10 @@ export class EmployeecreateComponent implements OnInit {
           const files = event.files[0];
           if (files) {
             event.files[0]['ctrl'] = ctrl;
+            console.log("event.files",files)
             this.image.push({ ctrl: ctrl, files: event.files[0] })
-            this.createMaster[ctrl] = event.files[0]['name'];
+            this.createMaster[ctrl] = files.objectURL // event.files[0]['name'];
+            this.createMaster['A'] =  event.files[0]['name'];
             // if (files) this.uploadFile(files, ctrl)
             this.aa.clear();
           }
@@ -364,6 +367,8 @@ export class EmployeecreateComponent implements OnInit {
         reference: event.reference,
         contactno: event.contactno,
         id: event.id,
+        A1 : event.A,
+        A : event.A,
         active: event.active ? true : false,
       };
     };

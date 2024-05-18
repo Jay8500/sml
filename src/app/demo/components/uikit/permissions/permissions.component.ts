@@ -26,6 +26,7 @@ export class PermissionsComponent implements OnInit {
   public clonedDocuments: any = {};
   public isOk = false;
   public loadings = false;
+  public blockUi = false;
   public usersList: any = [
   ];
   public createMaster = {
@@ -42,6 +43,7 @@ export class PermissionsComponent implements OnInit {
   public caders = [{ label: "Select Cadre", value: null }];
 
   ngOnInit(): void {
+    this.blockUi = true;
     this.permissions = [];
     this.products = [];
     this.documentsJSON = [];
@@ -59,7 +61,7 @@ export class PermissionsComponent implements OnInit {
               let products = {
                 label: prodcuts.cdname,
                 value: prodcuts._id,
-                code : prodcuts.code
+                code: prodcuts.code
               };
               this.caders.push(products)
             });
@@ -159,7 +161,11 @@ export class PermissionsComponent implements OnInit {
     this.getAllDocuments();
     this.getPermissions();
     this.getAllProducts();
+
+    // this.blockUi = false;
   }
+
+  public activeDocumentPermissions: any = [];
 
   async getAllDocuments() {
     this._service.postApi('getAllDocuments', 'postEndPoint', {
@@ -178,10 +184,13 @@ export class PermissionsComponent implements OnInit {
                   documentName: us.documentName,
                   route: us.route,
                   description: us.description,
-                  flag: 'E'
+                  flag: 'E',
+                  active: us.active,
+                  isCanDo: false
                 };
                 this.documentsJSON.push(getAllDocuments)
               });
+              this.activeDocumentPermissions = _.filter(this.documentsJSON, (fm, fl) => fm.active == true);
             };
           };
         },
@@ -826,7 +835,6 @@ export class PermissionsComponent implements OnInit {
     }
   }
 
-
   saveProduct() {
     // this.loading = true;
     let permissionSave: any = [];
@@ -898,7 +906,6 @@ export class PermissionsComponent implements OnInit {
         }
       });
   }
-
 
   onMessageClose() {
     try {
@@ -1038,6 +1045,91 @@ export class PermissionsComponent implements OnInit {
   }
 
   changePages() {
-    console.log('pages', this.slectedItem)
+    try {
+      // this.loading = true;
+      if (this.slectedItem == null) {
+        this.activeDocumentPermissions = _.filter(this.documentsJSON, (fm, fl) => fm.active == true);
+      } else {
+        this._service.postApi('getnewPagePermissionsList', 'postEndPoint', { code: this.slectedItem })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (data) => {
+              data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+              if (data['S_CODE'] == 200) {
+                if (data['DATA'].length > 0) {
+                  this.activeDocumentPermissions = [];
+                  _.forEach(data['DATA'][0]['modules'], (edit, edin) => {
+                    let createEditDocuments = {
+                      _id: edit._id,
+                      documentName: edit.name,
+                      route: edit.path,
+                      isCanDo: edit.isCanDo == 'Y' ? true : false
+                    };
+                    this.activeDocumentPermissions.push(createEditDocuments)
+                  })
+                } else {
+                  this.activeDocumentPermissions = _.filter(this.documentsJSON, (fm, fl) => fm.active == true);
+                }
+              } else if (data['S_CODE'] == 300) {
+                // this.blocUI = false;
+                // this.loading = false;
+              }
+            },
+            error: () => {
+
+            }
+          });
+      }
+
+    } catch (e) {
+      // this.blocUI = false;
+    }
+  }
+
+  onChangeSave() {
+    // console.log(" getNewPagePermissions", this.activeDocumentPermissions)
+    let createNew: any = [];
+    let copyactiveDocumentPermissions = JSON.parse(JSON.stringify(this.activeDocumentPermissions));
+    _.forEach(copyactiveDocumentPermissions, (prp, prpIn) => {
+      let createNewInstance = {
+        _id: prp._id, // document id
+        name: prp.documentName,
+        isCanDo: prp.isCanDo ? 'Y' : 'N',
+        path: prp.route
+      };
+      createNew.push(createNewInstance)
+    });
+
+    let newPermissionsSchema: any = {
+      code: this.slectedItem,
+      modules: createNew
+    }
+    // console.log(' newPermissionsSchema', newPermissionsSchema);
+    // return
+
+    let loginJson = this._service.postApi('newCreatePagePermissionsList', 'postEndPoint', newPermissionsSchema)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+          if (data.S_CODE == 200) {
+            // this.getPermissions();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
+            this.isOk = true;
+            this.loading = false;
+
+          } else if (data.S_CODE == 300) {
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
+            this.isOk = true;
+            // this.loading = false;
+            //  this.isShowSidebarClose = false;
+            this.loading = false;
+          }
+        },
+        error: (err) => {
+          this.loading = false;
+          // this.loading = false;
+        }
+      });
   }
 }
