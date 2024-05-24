@@ -43,6 +43,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { TabPanel, TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
+import { BlockUIModule } from 'primeng/blockui';
 
 @NgModule({
   declarations: [],
@@ -51,14 +52,14 @@ import { CheckboxModule } from 'primeng/checkbox';
     InputSwitchModule, ConfirmDialogModule, ButtonModule, ToastModule, PasswordModule, OverlayPanelModule, AvatarModule, AvatarGroupModule, InputTextModule,
     CascadeSelectModule, ChartModule, TableModule, StyleClassModule, PanelMenuModule, SkeletonModule, DividerModule, PanelModule, AutoCompleteModule,
     CalendarModule, DropdownModule, ChipsModule, InputMaskModule, InputNumberModule, MultiSelectModule, InputTextareaModule, KeyFilterModule, ScrollTopModule,
-    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule, CardModule, CheckboxModule
+    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule, CardModule, CheckboxModule,BlockUIModule
   ],
   exports: [
     FormsModule, MenuModule, MegaMenuModule, ChipModule, TooltipModule, RippleModule, DialogModule, BadgeModule, SidebarModule, RadioButtonModule,
     InputSwitchModule, ConfirmDialogModule, ButtonModule, ToastModule, PasswordModule, OverlayPanelModule, AvatarModule, AvatarGroupModule, InputTextModule,
     CascadeSelectModule, ChartModule, TableModule, StyleClassModule, PanelMenuModule, SkeletonModule, DividerModule, PanelModule, AutoCompleteModule,
     CalendarModule, DropdownModule, ChipsModule, InputMaskModule, InputNumberModule, MultiSelectModule, InputTextareaModule, KeyFilterModule, ScrollTopModule,
-    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule, CardModule, CheckboxModule
+    ImageModule, FileUploadModule, TabViewModule, ProgressSpinnerModule, CardModule, CheckboxModule,BlockUIModule
   ]
 })
 export class SharedModule { }

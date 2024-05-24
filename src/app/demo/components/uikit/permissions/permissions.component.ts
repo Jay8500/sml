@@ -933,6 +933,7 @@ export class PermissionsComponent implements OnInit {
   }
 
   onRowEditSave(product: any) {
+    this.loadings = true;
     let savePayload = JSON.parse(JSON.stringify(product));
     savePayload['flag'] = savePayload['_id'] == 0 ? 'S' : 'E';
     let loginJson = this._service.postApi('producstssave', 'postEndPoint', savePayload)
@@ -943,7 +944,7 @@ export class PermissionsComponent implements OnInit {
           if (data.S_CODE == 200) {
             this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
             // this.isOk = true;
-            // this.loadings = false;
+            this.loadings = false;
             this.getAllProducts();
           } else if (data.S_CODE == 300) {
             this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
@@ -1087,6 +1088,7 @@ export class PermissionsComponent implements OnInit {
   }
 
   onChangeSave() {
+    this.loading = true;
     // console.log(" getNewPagePermissions", this.activeDocumentPermissions)
     let createNew: any = [];
     let copyactiveDocumentPermissions = JSON.parse(JSON.stringify(this.activeDocumentPermissions));
@@ -1131,5 +1133,6 @@ export class PermissionsComponent implements OnInit {
           // this.loading = false;
         }
       });
+      // this.loading = false;
   }
 }
