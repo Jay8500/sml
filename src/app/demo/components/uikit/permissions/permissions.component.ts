@@ -190,6 +190,7 @@ export class PermissionsComponent implements OnInit {
                 };
                 this.documentsJSON.push(getAllDocuments)
               });
+              console.log(" this.documentsJSON", this.documentsJSON)
               this.activeDocumentPermissions = _.filter(this.documentsJSON, (fm, fl) => fm.active == true);
             };
           };
@@ -1042,22 +1043,25 @@ export class PermissionsComponent implements OnInit {
     newDocument['description'] = null;
     newDocument['_id'] = 0;
     newDocument['active'] = true;
-    this.documentsJSON.splice(this.products.length, 0, newDocument);
+    this.documentsJSON.splice(this.documentsJSON.length, 0, newDocument);
   }
 
   changePages() {
     try {
-      // this.loading = true;
+      this.loading = true;
       if (this.slectedItem == null) {
         this.activeDocumentPermissions = _.filter(this.documentsJSON, (fm, fl) => fm.active == true);
       } else {
+        console.log(" this.activeDocumentPermissions", this.activeDocumentPermissions);
         this._service.postApi('getnewPagePermissionsList', 'postEndPoint', { code: this.slectedItem })
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (data) => {
               data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
               if (data['S_CODE'] == 200) {
+                this.loading = false;
                 if (data['DATA'].length > 0) {
+
                   this.activeDocumentPermissions = [];
                   _.forEach(data['DATA'][0]['modules'], (edit, edin) => {
                     let createEditDocuments = {
@@ -1066,18 +1070,18 @@ export class PermissionsComponent implements OnInit {
                       route: edit.path,
                       isCanDo: edit.isCanDo == 'Y' ? true : false
                     };
-                    this.activeDocumentPermissions.push(createEditDocuments)
-                  })
+                    this.activeDocumentPermissions.push(createEditDocuments);
+                  });
+                  
                 } else {
                   this.activeDocumentPermissions = _.filter(this.documentsJSON, (fm, fl) => fm.active == true);
                 }
               } else if (data['S_CODE'] == 300) {
-                // this.blocUI = false;
-                // this.loading = false;
+                this.loading = false;
               }
             },
             error: () => {
-
+              this.loading = false;
             }
           });
       }
@@ -1087,7 +1091,7 @@ export class PermissionsComponent implements OnInit {
     }
   }
 
-  onChangeSave() {
+  async onChangeSave() {
     this.loading = true;
     // console.log(" getNewPagePermissions", this.activeDocumentPermissions)
     let createNew: any = [];
@@ -1105,34 +1109,30 @@ export class PermissionsComponent implements OnInit {
     let newPermissionsSchema: any = {
       code: this.slectedItem,
       modules: createNew
-    }
-    // console.log(' newPermissionsSchema', newPermissionsSchema);
-    // return
-
+    };
     let loginJson = this._service.postApi('newCreatePagePermissionsList', 'postEndPoint', newPermissionsSchema)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (data) => {
+        next: async (data) => {
           data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
           if (data.S_CODE == 200) {
-            // this.getPermissions();
             this.MessageService.add({ severity: 'success', summary: 'Success', detail: `${data['S_MSG']}` });
             this.isOk = true;
-            this.loading = false;
 
+            this.slectedItem = null;
+            this.changePages();
+            await this.getAllDocuments();
+            this.loading = false;
           } else if (data.S_CODE == 300) {
             this.MessageService.add({ severity: 'error', summary: 'Error', detail: `${data['S_MSG']}` });
             this.isOk = true;
-            // this.loading = false;
-            //  this.isShowSidebarClose = false;
             this.loading = false;
           }
         },
         error: (err) => {
           this.loading = false;
-          // this.loading = false;
         }
       });
-      // this.loading = false;
+    // this.loading = false;
   }
 }

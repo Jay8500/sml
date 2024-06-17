@@ -2,22 +2,22 @@
     <button pButton icon="pi pi-bars" (click)="onSideBarClick()" class="flex align-items-center justify-content-center">
     </button>
 
-    <div class="flex flex-row">
+    <div class="flex flex-column">
         <div class="flex align-items-center justify-content-between px-1 pt-1 flex-shrink-0">
-            <span class="inline-flex align-items-center gap-1">
-                <span class="font-semibold lg:text-2xl sm:text-sm text-primary w-full">{{companyName}}</span>
-            </span>
+            <span class="font-semibold lg:text-base sm:text-sm text-primary w-full">{{companyName}}</span>
+        </div>
+        <div class="flex align-items-center justify-content-between px-1 pt-1 flex-shrink-0">
+            <span class="font-semibold lg:text-base sm:text-sm text-primary w-full">{{branchName}}</span>
         </div>
     </div>
 
     <div (click)="visibles=true" class="flex align-items-center justify-content-center">
+        <!-- [image]="userInfo['profilePicture']" -->
         <p-chip [label]="userInfo['uname'].length > 5 ? userInfo['uname'].substring(0,5).toUpperCase() :
                 userInfo['uname'].substring(0,5).toUpperCase()" [pTooltip]="userInfo['uname']" tooltipPosition="left"
-            styleClass="cursor-pointer" [image]="userInfo['profilePicture']"
-            alt="Avatar image"></p-chip>
+            styleClass="cursor-pointer" alt="Avatar image"></p-chip>
     </div>
 </div>
-
 
 <p-dialog header="Your profile" [(visible)]="visibles" [style]="{width: '30vw'}" blockScroll="true" modal="true"
     closeOnEscape="true" closable="true" [breakpoints]="{ 
@@ -50,7 +50,6 @@
     </div>
 </p-dialog>
 
-<!-- <div class="card flex justify-content-center"> -->
 <p-sidebar #sidebarRef [(visible)]="Visible">
     <ng-template pTemplate="headless">
         <div class="flex flex-column h-full">
@@ -64,20 +63,16 @@
                 </span>
             </div>
             <div class="overflow-y-auto">
-                <ul class="list-none p-1 m-0" *ngFor="let tab of model">
+                <ul class="list-none p-2 mt-3" *ngFor="let tab of model">
                     <li>
-                        <div pRipple pStyleClass="@next" enterFromClass="hidden" enterActiveClass="slidedown"
-                            leaveToClass="hidden" leaveActiveClass="slideup"
-                            class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple">
-                            <span class="font-medium">{{ tab.label}}</span>
-                            <!-- <i class="pi pi-chevron-down"></i> -->
+                        <div class="p-3 flex align-items-center justify-content-between text-600  p-ripple">
+                            <span class="font-bold text-lg">{{ tab.label}}</span>
                         </div>
-                        <ul class="list-none p-0 m-0 overflow-hidden">
-                            <li pRipple pButton *ngFor="let tabs of tab.items" [label]="tabs.label" class="text-white flex align-items-center cursor-pointer p-3 border-round text-700 
-                            p-ripple
-                            m-1" styleClass="p-button-rounded" (click)="onClick(tabs)">
-                            </li>
-                        </ul>
+                        <div class="cursor-pointer ml-3 p-2 text-blue-900" *ngFor="let tabs of tab.items"
+                            (click)="onClick(tabs)">
+
+                            <span class="text-lg">{{tabs.label}} </span>
+                        </div>
                     </li>
                 </ul>
             </div>

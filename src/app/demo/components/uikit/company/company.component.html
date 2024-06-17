@@ -18,7 +18,8 @@
             <div class="card">
                 <div class="flex justify-content-between flex-row">
                     <div class="flex align-items-center justify-content-start border-round">
-                        <p-avatar [image]="userDetails['cLogo']" size="normal" shape="circle"></p-avatar>
+                        <p-avatar [label]="userDetails.cname.slice(0,3).toUpperCase()" styleClass="mr-2"
+                            size="xlarge" />
                         <div class="w-full ml-3 ml-2 text-orange-400">
                             {{userDetails.cname | uppercase}}
 

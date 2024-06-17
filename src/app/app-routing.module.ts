@@ -36,6 +36,10 @@ import { FgpwdComponent } from './demo/components/fgpwd/fgpwd.component';
                     { path: 'loandisbursement', loadChildren: () => import('../app/demo/components/uikit/disbursement/disbursement.module').then(m => m.DisbursementModule) },
                     { path: 'recoverypostings', loadChildren: () => import('../app/demo/components/uikit/recoveryposts/recoveryposts.module').then(m => m.RecoverypostsModule) },
                     { path: 'smlemployee', loadChildren: () => import('../app/demo/components/uikit/employeecreate/employeecreate.module').then(m => m.EmployeecreateModule) },
+                    { path: 'village', loadChildren: () => import('../app/demo/components/uikit/village/village.module').then(m => m.VillageModule) },
+                    { path: 'center', loadChildren: () => import('../app/demo/components/uikit/center/center.module').then(m => m.CenterModule) },
+                    { path: 'group', loadChildren: () => import('../app/demo/components/uikit/group/group.module').then(m => m.GroupModule) },
+                    { path: 'searchemployees', loadChildren: () => import('../app/demo/components/uikit/searchemployees/searchemployees.module').then(m => m.SearchemployeesModule) },
                 ]
             },
             { path: '**', redirectTo: 'sml-signin' },

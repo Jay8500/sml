@@ -18,9 +18,10 @@
 			<div class="card">
 				<div class="flex justify-content-between flex-row">
 					<div class="flex align-items-center justify-content-start border-round">
-						<p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar>
+						<p-avatar [label]="userDetails.borrowername.slice(0,3).toUpperCase()" styleClass="mr-2" size="xlarge" />
+						<!-- <p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar> -->
 						<div class="w-full ml-3 ml-2 text-orange-400">
-							{{userDetails.borrower | uppercase}}
+							{{userDetails.borrowername | uppercase}}
 
 						</div>
 					</div>
@@ -419,8 +420,6 @@
 		</div>
 	</div>
 </p-dialog>
-
-
 
 <style>
 	:host ::ng-deep .p-cascadeselect-items {

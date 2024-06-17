@@ -114,10 +114,7 @@ export class ServicesService {
       getUserInfo = window.localStorage.getItem('userInfo');
       if (![undefined, null].includes(getUserInfo)) {
         let decryptData: any = this.decrypt(getUserInfo);
-        // console.log("getUserInfo", decryptData);
         getUserInfo = decryptData[keyName];
-        console.log(getUserInfo)
-
       };
     } catch (e) {
     }

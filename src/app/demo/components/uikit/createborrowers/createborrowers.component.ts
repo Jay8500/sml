@@ -92,7 +92,7 @@ export class CreateborrowersComponent implements OnInit {
         description: null,
         cityId: null,
         district: null,
-        city: '',
+        city: null,
         contact_no: null,
         state: null,
         pincode: null,
@@ -146,7 +146,7 @@ export class CreateborrowersComponent implements OnInit {
                 this.errorMessages.aadhar = [undefined, null, ''].includes(this.createMaster.aadhar) ? 'Aadhar is required' : this.createMaster.aadhar.length != 12 ? "" : 'Aadhar should have 12 digit';
                 break;
             case "city":
-                this.errorMessages.city = [undefined, null, ''].includes(this.createMaster.city) || typeof this.createMaster.city != 'object' ? 'City is required' : "";
+                this.errorMessages.city = [undefined, null, ''].includes(this.createMaster.city) ? 'City is required' : "";
                 break;
             case "contact_no":
                 this.errorMessages.contact_no = [undefined, null, ''].includes(this.createMaster.contact_no) ? 'Contact is required' : this.createMaster.contact_no.length != 10 ? 'Contact no. should have 10 digits' : "";
@@ -158,80 +158,80 @@ export class CreateborrowersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.countries = [
-            {
-                name: 'Australia',
-                code: 'AU',
-                states: [
-                    {
-                        name: 'New South Wales',
-                        cities: [
-                            { cname: 'Sydney', code: 'A-SY' },
-                            { cname: 'Newcastle', code: 'A-NE' },
-                            { cname: 'Wollongong', code: 'A-WO' }
-                        ]
-                    },
-                    {
-                        name: 'Queensland',
-                        cities: [
-                            { cname: 'Brisbane', code: 'A-BR' },
-                            { cname: 'Townsville', code: 'A-TO' }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: 'Canada',
-                code: 'CA',
-                states: [
-                    {
-                        name: 'Quebec',
-                        cities: [
-                            { cname: 'Montreal', code: 'C-MO' },
-                            { cname: 'Quebec City', code: 'C-QU' }
-                        ]
-                    },
-                    {
-                        name: 'Ontario',
-                        cities: [
-                            { cname: 'Ottawa', code: 'C-OT' },
-                            { cname: 'Toronto', code: 'C-TO' }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: 'United States',
-                code: 'US',
-                states: [
-                    {
-                        name: 'California',
-                        cities: [
-                            { cname: 'Los Angeles', code: 'US-LA' },
-                            { cname: 'San Diego', code: 'US-SD' },
-                            { cname: 'San Francisco', code: 'US-SF' }
-                        ]
-                    },
-                    {
-                        name: 'Florida',
-                        cities: [
-                            { cname: 'Jacksonville', code: 'US-JA' },
-                            { cname: 'Miami', code: 'US-MI' },
-                            { cname: 'Tampa', code: 'US-TA' },
-                            { cname: 'Orlando', code: 'US-OR' }
-                        ]
-                    },
-                    {
-                        name: 'Texas',
-                        cities: [
-                            { cname: 'Austin', code: 'US-AU' },
-                            { cname: 'Dallas', code: 'US-DA' },
-                            { cname: 'Houston', code: 'US-HO' }
-                        ]
-                    }
-                ]
-            }
-        ];
+        // this.countries = [
+        //     {
+        //         name: 'Australia',
+        //         code: 'AU',
+        //         states: [
+        //             {
+        //                 name: 'New South Wales',
+        //                 cities: [
+        //                     { cname: 'Sydney', code: 'A-SY' },
+        //                     { cname: 'Newcastle', code: 'A-NE' },
+        //                     { cname: 'Wollongong', code: 'A-WO' }
+        //                 ]
+        //             },
+        //             {
+        //                 name: 'Queensland',
+        //                 cities: [
+        //                     { cname: 'Brisbane', code: 'A-BR' },
+        //                     { cname: 'Townsville', code: 'A-TO' }
+        //                 ]
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         name: 'Canada',
+        //         code: 'CA',
+        //         states: [
+        //             {
+        //                 name: 'Quebec',
+        //                 cities: [
+        //                     { cname: 'Montreal', code: 'C-MO' },
+        //                     { cname: 'Quebec City', code: 'C-QU' }
+        //                 ]
+        //             },
+        //             {
+        //                 name: 'Ontario',
+        //                 cities: [
+        //                     { cname: 'Ottawa', code: 'C-OT' },
+        //                     { cname: 'Toronto', code: 'C-TO' }
+        //                 ]
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         name: 'United States',
+        //         code: 'US',
+        //         states: [
+        //             {
+        //                 name: 'California',
+        //                 cities: [
+        //                     { cname: 'Los Angeles', code: 'US-LA' },
+        //                     { cname: 'San Diego', code: 'US-SD' },
+        //                     { cname: 'San Francisco', code: 'US-SF' }
+        //                 ]
+        //             },
+        //             {
+        //                 name: 'Florida',
+        //                 cities: [
+        //                     { cname: 'Jacksonville', code: 'US-JA' },
+        //                     { cname: 'Miami', code: 'US-MI' },
+        //                     { cname: 'Tampa', code: 'US-TA' },
+        //                     { cname: 'Orlando', code: 'US-OR' }
+        //                 ]
+        //             },
+        //             {
+        //                 name: 'Texas',
+        //                 cities: [
+        //                     { cname: 'Austin', code: 'US-AU' },
+        //                     { cname: 'Dallas', code: 'US-DA' },
+        //                     { cname: 'Houston', code: 'US-HO' }
+        //                 ]
+        //             }
+        //         ]
+        //     }
+        // ];
         let cader = this._service.getUserInfo('userCader');
 
         if (cader['code'] == 'DA') {
@@ -483,7 +483,7 @@ export class CreateborrowersComponent implements OnInit {
                 aadhar: event.aadhar,
                 ccode: event.ccode,
                 description: event.description,
-                city: { "code": event.city, "cname": event.cityname },
+                city: event.city,
                 contact_no: event.contact_no,
                 pincode: event.pincode,
                 byemployee: event.byemployee,
@@ -524,32 +524,32 @@ export class CreateborrowersComponent implements OnInit {
                 savePayload.byemployee = this._service.getUserInfo('_id');
                 savePayload.byemployeename = this._service.getUserInfo('uname');
                 savePayload['create_by'] = this._service.getUserInfo('_id');
-                let filterCities: any[] = [];
-                _.forEach(this.addressList, (country: any) => {
-                    _.forEach(country['states'], (state: any) => {
-                        // Use _.filter on the array of cities and provide a predicate function
-                        const filteredCities = _.filter(state['cities'], (city: any) => {
-                            // Adjust the condition based on your filtering criteria
-                            return city.code === this.createMaster.city.code &&
-                                city.name === this.createMaster.city.name;
-                        });
+                // let filterCities: any[] = [];
+                // _.forEach(this.addressList, (country: any) => {
+                //     _.forEach(country['states'], (state: any) => {
+                //         // Use _.filter on the array of cities and provide a predicate function
+                //         const filteredCities = _.filter(state['cities'], (city: any) => {
+                //             // Adjust the condition based on your filtering criteria
+                //             return city.code === this.createMaster.city.code &&
+                //                 city.name === this.createMaster.city.name;
+                //         });
 
 
-                        if (filteredCities.length > 0) {
-                            filterCities.push({
-                                country: country.name,
-                                state: state.name,
-                                cities: filteredCities,
-                            });
-                        }
-                    });
-                });
+                //         if (filteredCities.length > 0) {
+                //             filterCities.push({
+                //                 country: country.name,
+                //                 state: state.name,
+                //                 cities: filteredCities,
+                //             });
+                //         }
+                //     });
+                // });
 
-                savePayload['countryname'] = filterCities[0]['country'];
-                savePayload['state'] = filterCities[0]['state'];
-                savePayload['cityname'] = filterCities[0]['cities'][0]['cname'];
-                savePayload['cityname'] = filterCities[0]['cities'][0]['cname'];
-                savePayload['city'] = this.createMaster['city']['code'];
+                // savePayload['countryname'] = filterCities[0]['country'];
+                // savePayload['state'] = filterCities[0]['state'];
+                // savePayload['cityname'] = filterCities[0]['cities'][0]['cname'];
+                // savePayload['cityname'] = filterCities[0]['cities'][0]['cname'];
+                // savePayload['city'] = this.createMaster['city']['code'];
 
                 // console.log(savePayload)
 
@@ -562,7 +562,7 @@ export class CreateborrowersComponent implements OnInit {
                         // formData.append(`image-${index}`, );
                     });
                 };
-               
+
                 let loginJson = this._service.formpostApi('createBorrowers', 'postEndPoint', formData)
                     .pipe(takeUntil(this.destroy$))
                     .subscribe({

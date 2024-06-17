@@ -163,5 +163,26 @@
     "getnewPagePermissionsList": {
         "postEndPoint": "sml/getnewPagePermissionsList"
     },
+    "getToCreateUsersEmployeeList": {
+        "postEndPoint": "sml/getToCreateUsersEmployeeList"
+    },
+    "villagelist": {
+        "postEndPoint": "sml/villagelist"
+    },
+    "create-village": {
+        "postEndPoint": "sml/create-village"
+    },
+    "centerlist": {
+        "postEndPoint": "sml/centerlist"
+    },
+    "create-center": {
+        "postEndPoint": "sml/create-center"
+    },
+    "grouplist": {
+        "postEndPoint": "sml/grouplist"
+    },
+    "create-group": {
+        "postEndPoint": "sml/create-group"
+    },
     "tokenSecretKey": "smlsecret"
 }

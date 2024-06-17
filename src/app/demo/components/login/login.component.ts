@@ -13,7 +13,7 @@ import { ServicesService } from 'src/app/services.service';
   providers: [DatePipe, MessageService],
 })
 export class LoginComponent {
- 
+
   public siginJson = {
     flag: 'S',
     uname: "", //DEVADMIN
@@ -49,7 +49,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    
+    this.loading = false;
     // setInterval(() => {
     //   if (![undefined, null, ''].includes(window.localStorage.getItem('userInfo'))) {
     //     // window.location.href = this._service.setPreRoutes('DASH');// '/sml/home/sml-dashboard';
@@ -85,6 +85,7 @@ export class LoginComponent {
           if (res.S_CODE == 200) {
             localStorage.setItem('userInfo', this._service.encrypt(JSON.stringify(res.DATA[0]['userInfo'])));
             this.router.navigate(['/home/sml-dashboard']);
+            this.loading = false;
           } else if (res.S_CODE == 300) {
             this.MessageService.add({ severity: 'error', summary: 'Sign In Error', detail: `${res['S_MSG']}` });
             this.loading = false;
@@ -110,5 +111,5 @@ export class LoginComponent {
     }
   }
 
- 
+
 }

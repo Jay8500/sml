@@ -19,10 +19,9 @@
             <div class="card">
                 <div class="flex justify-content-between flex-row">
                     <div class="flex align-items-center justify-content-start border-round">
-                        <p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar>
+                        <p-avatar [label]="userDetails.name.slice(0,3).toUpperCase()" styleClass="mr-2" size="xlarge" />
                         <div class="w-full ml-3 ml-2 text-orange-400">
                             {{userDetails.name | uppercase}}
-
                         </div>
                     </div>
                     <div class="flex align-items-center justify-content-end">
@@ -54,7 +53,7 @@
                                 {{userDetails.contact_no | uppercase}}
                             </div>
                         </div>
-                        <div class="col-12 ">
+                        <!-- <div class="col-12 ">
                             <div class="w-full text-cyan-500 mb-1 justify-content-start">
                                 Country
                             </div>
@@ -69,13 +68,13 @@
                             <div class="w-full mb-1 justify-content-end">
                                 {{userDetails.state | uppercase}}
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12 ">
                             <div class="w-full text-cyan-500 mb-1 justify-content-start">
                                 City
                             </div>
                             <div class="w-full mb-1 justify-content-end">
-                                {{userDetails.cityname | uppercase}}
+                                {{userDetails.city | uppercase}}
                             </div>
                         </div>
                         <div class="col-12 ">
@@ -170,7 +169,13 @@
                         <small *ngIf="errorMessages.contact_no != ''">{{ errorMessages.contact_no}}</small>
                         <!-- <small>Enter your username to reset your password.</small> -->
                     </div>
-                    <div class="col-6">
+                    <div class="col-12">
+                        <label htmlFor="state">City </label>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="mode=='VIEW'"
+                            [(ngModel)]="createMaster.city"></textarea>
+                        <small *ngIf="errorMessages.city != ''">{{ errorMessages.city}}</small>
+                    </div>
+                    <!-- <div class="col-6">
                         <label htmlFor="state">Country / State/ City</label>
                         <p-cascadeSelect [(ngModel)]="createMaster.city" [options]="addressList" [optionLabel]="'cname'"
                             [disabled]="mode=='VIEW'" [optionGroupLabel]="'name'"
@@ -179,7 +184,7 @@
                             placeholder="Select a City"></p-cascadeSelect>
                         <small *ngIf="errorMessages.city != ''">{{ errorMessages.city}}</small>
 
-                    </div>
+                    </div> -->
                     <div class="col-12">
                         <label htmlFor="state">Pincode</label>
                         <p-inputNumber [(ngModel)]="createMaster.pincode" mode="decimal" inputId="withoutgrouping"

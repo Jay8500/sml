@@ -4,14 +4,15 @@
         <div style="border-radius:10px;
              padding:0.4rem; 
              background: linear-gradient(50deg, var(--primary-color) 0%, rgba(12, 95, 150, 0) 20%);">
-            <div class="w-19rem surface-card p-5" style="border-radius:20px;">
+            <!-- <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" /> -->
+            <div class="surface-card p-5" style="border-radius:20px;">
                 <div class="text-center mb-2">
                     <img src="assets/layout/images/sml" alt="Sakai logo" class=" w-6rem flex-shrink-0" height="50">
                 </div>
                 <div class="text-center mb-4">
                     <h5 class="text-blue-400">Sign in to continue</h5>
                 </div>
-                <div class="flex flex-column align-items-center">
+                <div class="flex flex-column align-items-center" #pnl>
                     <div class="mb-3 w-full">
                         <label for="email1" class="block mb-1">Employee Name</label>
                         <input id="email1" placeholder="Enter Employee Name" pInputText [autocomplete]="'off'"
@@ -57,4 +58,13 @@
     :host(.p-password > .p-inputtext) {
         width: 172px;
     }
+
+    ::ng-deep .p-icon {
+        color: black !important;
+    }
 </style>
+
+
+<p-blockUI [target]="pnl" [blocked]="loading">
+    <i class="pi pi-spin pi-spinner-dotted" style="font-size: 2rem"></i>
+</p-blockUI>

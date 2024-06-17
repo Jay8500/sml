@@ -36,6 +36,7 @@ export class UsersComponent {
     { name: 'Ohio', code: 'Ohio' },
     { name: 'Washington', code: 'Washington' }
   ];
+  public employeesListInfo: any = [];
 
   dropdownItems = [
     { name: 'Option 1', code: 'Option 1' },
@@ -89,7 +90,8 @@ export class UsersComponent {
   city2: any = null;
   public mode = "";
   public addressList: any = [];
-
+  public isOk = false;
+  public submitloading = false;
   public loading = false;
   public crudGrid: any = [];
   public params: any = {};
@@ -248,77 +250,6 @@ export class UsersComponent {
     this.employeesList();
   }
 
-  public employeesListInfo: any = [];
-  employeesList() {
-    try {
-      this.employeesListInfo = [];
-      this.loading = true;
-      let cader = this._service.getUserInfo('userCader');
-
-      if (cader['code'] == 'DA') {
-        this.params['code'] = 'DEV';
-      };
-
-      if (cader['code'] == 'SA') {
-        this.params['code'] = 'SA';
-      };
-
-      if (cader['code'] == 'HRPM') {
-        this.params['code'] = 'HRPM';
-      }
-      this.params['create_by'] = this._service.getUserInfo('_id');
-      this.employeesListInfo = [];
-      this._service.postApi('getEmployee', 'postEndPoint', {})
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: (data) => {
-            data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
-            if (data['S_CODE'] == 200) {
-              this.blocUI = false;
-              if (data['DATA'].length > 0) {
-                data['DATA'] = _.filter(data['DATA'], (fl, flIn) => fl.active == true);
-                data['DATA'].forEach((pros: any, prdIn: number) => {
-                  let createCompanies: any = {
-                    active: pros.active,
-                    create_dt: pros.create_dt,
-                    empid: pros.empid,
-                    empname: pros.empname,
-                    empcode: pros.empcode,
-                    qualifications: pros.qualifications,
-                    experience: pros.experience,
-                    noofyears: pros.noofyears,
-                    previouscompany: pros.previouscompany,
-                    address: pros.address,
-                    surity: pros.surity,
-                    reference: pros.reference,
-                    contactno: pros.contactno,
-                    A: pros.A,
-                    id: pros._id,
-                    dataKey: prdIn + 1,
-                    status: (pros.active == true ? 'Qualified' : 'Unqualified')
-
-                  };
-                  this.employeesListInfo.push(createCompanies)
-                });
-              }
-              // this.crudGrid = data['DATA'];
-              this.loading = false;
-            } else if (data['S_CODE'] == 300) {
-              this.blocUI = false;
-              this.loading = false;
-            }
-          },
-          error: (err) => {
-            this.blocUI = false;
-            // this.myModels = [];
-            // console.log('error')
-          }
-        });
-    } catch (e) {
-      this.blocUI = false;
-    }
-  }
-
   gridData() {
     try {
       this.loading = true;
@@ -363,6 +294,7 @@ export class UsersComponent {
                     gendername
                       :
                       pros.gendername,
+                    empid: pros.empid,
                     id
                       :
                       pros.id,
@@ -383,7 +315,7 @@ export class UsersComponent {
                   };
                   this.crudGrid.push(createdBorrowers)
                 });
-                this.crudGrid = data['DATA'];
+                // this.crudGrid = data['DATA'];
               };
               this.loading = false;
             } else if (data['S_CODE'] == 300) {
@@ -397,6 +329,77 @@ export class UsersComponent {
             // console.log('error')
           }
         });
+    } catch (e) {
+      this.blocUI = false;
+    }
+  }
+
+  employeesList() {
+    try {
+      this.employeesListInfo = [];
+      this.loading = true;
+      let cader = this._service.getUserInfo('userCader');
+
+      if (cader['code'] == 'DA') {
+        this.params['code'] = 'DEV';
+      };
+
+      if (cader['code'] == 'SA') {
+        this.params['code'] = 'SA';
+      };
+
+      if (cader['code'] == 'HRPM') {
+        this.params['code'] = 'HRPM';
+      }
+      this.params['create_by'] = this._service.getUserInfo('_id');
+      this.employeesListInfo = [];
+
+      this._service.postApi('getToCreateUsersEmployeeList', 'postEndPoint', {})
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (data) => {
+            data = this._service.enableCryptoForResponse() ? this._service.decrypt(data) : data;
+            if (data['S_CODE'] == 200) {
+              this.blocUI = false;
+              if (data['DATA'].length > 0) {
+                data['DATA'] = _.filter(data['DATA'], (fl, flIn) => fl.active == true);
+                data['DATA'].forEach((pros: any, prdIn: number) => {
+                  let createCompanies: any = {
+                    active: pros.active,
+                    create_dt: pros.create_dt,
+                    empid: pros.empid,
+                    empname: pros.empname,
+                    empcode: pros.empcode,
+                    qualifications: pros.qualifications,
+                    experience: pros.experience,
+                    noofyears: pros.noofyears,
+                    previouscompany: pros.previouscompany,
+                    address: pros.address,
+                    surity: pros.surity,
+                    reference: pros.reference,
+                    contactno: pros.contactno,
+                    A: pros.A,
+                    id: pros._id,
+                    dataKey: prdIn + 1,
+                    status: (pros.active == true ? 'Qualified' : 'Unqualified')
+
+                  };
+                  this.employeesListInfo.push(createCompanies)
+                });
+              }
+              this.loading = false;
+            } else if (data['S_CODE'] == 300) {
+              this.blocUI = false;
+              this.loading = false;
+            }
+          },
+          error: (err) => {
+            this.blocUI = false;
+            // this.myModels = [];
+            // console.log('error')
+          }
+        });
+
     } catch (e) {
       this.blocUI = false;
     }
@@ -435,7 +438,7 @@ export class UsersComponent {
   }
 
   fileSize = () => this._service.fileMaxSize();
-  public isOk = false;
+
   onClick(event: any, mode: any) {
     this.submitloading = false;
     this.isShowForm = true;
@@ -461,8 +464,6 @@ export class UsersComponent {
     };
   }
 
-
-  public submitloading = false;
 
   saveProduct() {
 

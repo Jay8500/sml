@@ -15,7 +15,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { SharedModule } from './shared/shared.module';
-
+import { ProgressBarModule } from 'primeng/progressbar';
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent, LoginComponent, FgpwdComponent
@@ -32,7 +32,8 @@ import { SharedModule } from './shared/shared.module';
         OverlayPanelModule,
         AvatarModule,
         AvatarGroupModule,
-        SharedModule
+        SharedModule,
+        ProgressBarModule
     ],
     providers: [
         // { provide: LocationStrategy, useClass: HashLocationStrategy },

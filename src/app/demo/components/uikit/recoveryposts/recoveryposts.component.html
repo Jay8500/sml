@@ -137,14 +137,14 @@
                                         </span>
                                     </td>
                                     <td class="text-pink-500 text-xl">
-                                        {{customer.borrower}}
+                                        {{customer.borrowername}}
                                     </td>
 
                                     <td>
                                         {{customer.tenureName}}
                                         <i class="pi pi-info-circle"
                                             [pTooltip]="'Payments Count ' + customer.paymentcnt"
-                                            (click)="historyLookup(customer)" *ngIf="customer.paymentcnt>=1"></i>
+                                             *ngIf="customer.paymentcnt>=1"></i>
                                     </td>
                                     <td class="text-green-500 text-xl ">
                                         {{customer.loanscheduleName}}

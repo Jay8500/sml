@@ -13,7 +13,9 @@
             <div class="card">
                 <div class="flex justify-content-between flex-row">
                     <div class="flex align-items-center justify-content-start border-round">
-                        <p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar>
+                        <p-avatar [label]="userDetails.borrowername.slice(0,3).toUpperCase()" styleClass="mr-2"
+                            size="xlarge" />
+                        <!-- <p-avatar [image]="userDetails['OTHERS']" size="normal" shape="circle"></p-avatar> -->
                         <div class="w-full ml-3 ml-2 text-orange-400">
                             {{userDetails.borrowername | uppercase}}
 
@@ -196,8 +198,8 @@
     </div>
 </div>
 
-<p-dialog [header]="'Disbursement'" [(visible)]="isShowForm" [style]="{width: '70vw'}"
-    blockScroll="true" modal="true" closeOnEscape="true" closable="true" [breakpoints]="{ 
+<p-dialog [header]="'Disbursement'" [(visible)]="isShowForm" [style]="{width: '70vw'}" blockScroll="true" modal="true"
+    closeOnEscape="true" closable="true" [breakpoints]="{ 
         '900px': '45vw',  
         '600px': '98vw' 
     }" dismissableMask="true">
